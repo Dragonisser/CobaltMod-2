@@ -20,6 +20,7 @@ public class CMWorldProvider extends WorldProvider {
 		// this.biomeProvider = new BiomeProviderSingle(CMBiomeGenBase.biomeforest);
 		this.setDimension(CMMain.cobaltdimension);
 		this.setAllowedSpawnTypes(false, false);
+		this.hasSkyLight = false;
 	}
 
 	@Override
@@ -29,7 +30,7 @@ public class CMWorldProvider extends WorldProvider {
 	}
 
 	public BiomeProvider getBiomeProvider() {
-		return new CMBiomeProvider(this.world.getWorldInfo());
+		return new CMBiomeProvider(this.world);
 		// return this.biomeProvider = new
 		// BiomeProviderSingle(BiomeGenBaseCobalt.biomeplains);
 	}
