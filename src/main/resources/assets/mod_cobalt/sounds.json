@@ -1,0 +1,4 @@
+{
+	"bbhurt": {"category": "master","sounds": [{"name": "bbhurt","stream": false}]},
+	"bbdeath": {"category": "master","sounds": [{"name": "bbdeath","stream": false}]}
+}
