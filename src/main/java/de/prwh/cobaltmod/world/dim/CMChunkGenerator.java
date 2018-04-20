@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import de.prwh.cobaltmod.core.api.CMContent;
+import de.prwh.cobaltmod.world.gen.feature.MapGenCMCaves;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
@@ -23,7 +24,6 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.gen.ChunkProviderSettings;
 import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.MapGenCaves;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.feature.WorldGenDungeons;
@@ -52,7 +52,7 @@ public class CMChunkGenerator implements IChunkGenerator {
 	private ChunkProviderSettings settings;
 	private IBlockState oceanBlock = Blocks.WATER.getDefaultState();
 	private double[] depthBuffer = new double[256];
-	private MapGenBase caveGenerator = new MapGenCaves();
+	private MapGenBase caveGenerator = new MapGenCMCaves();
 	private MapGenStronghold strongholdGenerator = new MapGenStronghold();
 	private MapGenVillage villageGenerator = new MapGenVillage();
 	private MapGenMineshaft mineshaftGenerator = new MapGenMineshaft();
@@ -189,9 +189,11 @@ public class CMChunkGenerator implements IChunkGenerator {
 		this.biomesForGeneration = this.world.getBiomeProvider().getBiomes(this.biomesForGeneration, x * 16, z * 16, 16, 16);
 		this.replaceBiomeBlocks(x, z, chunkprimer, this.biomesForGeneration);
 
+		//System.out.println("I wanna put down some caves");
+		
 		if (this.settings.useCaves) {
-			// TODO MIGHT FIXED IT
-			// this.caveGenerator.generate(this.world, x, z, chunkprimer);
+			//System.out.println("YAY CAVES");
+			this.caveGenerator.generate(this.world, x, z, chunkprimer);
 		}
 
 		Chunk chunk = new Chunk(this.world, chunkprimer, x, z);

@@ -7,7 +7,7 @@ public class BiomeGenCobaltMountains extends CMBiomeGenBase {
 	public BiomeGenCobaltMountains(BiomeProperties properties) {
 		super(properties);
 		properties.setBaseBiome("Higherlands");
-		properties.setBaseHeight(1.0F);
+		properties.setBaseHeight(2.0F);
 		properties.setHeightVariation(0.5F);
 		properties.setRainDisabled();
 		this.topBlock = CMContent.COBALT_GRASS.getDefaultState();
