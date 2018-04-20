@@ -2,14 +2,12 @@ package de.prwh.cobaltmod.world.dim;
 
 import de.prwh.cobaltmod.core.CMMain;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
@@ -23,21 +21,16 @@ public class CMWorldProvider extends WorldProvider {
 		this.hasSkyLight = false;
 	}
 
-	@Override
-	public IChunkGenerator createChunkGenerator() {
-		return new CMChunkProvider(this.world, this.world.getSeed(), this.world.getWorldInfo().isMapFeaturesEnabled(),
-				"");
-	}
-
-	public BiomeProvider getBiomeProvider() {
-		return new CMBiomeProvider(this.world);
-		// return this.biomeProvider = new
-		// BiomeProviderSingle(BiomeGenBaseCobalt.biomeplains);
-	}
-
-	public Biome getBiomeGenForCoords(BlockPos pos) {
-		return Biomes.VOID;
-	}
+//	@Override
+//	public IChunkGenerator createChunkGenerator() {
+//		return new CMChunkGenerator(this.world, "");
+//	}
+//
+//	public BiomeProvider getBiomeProvider() {
+//		return new CMBiomeProvider(this.world);
+//		// return this.biomeProvider = new
+//		// BiomeProviderSingle(BiomeGenBaseCobalt.biomeplains);
+//	}
 
 	@Override
 	public boolean canRespawnHere() {

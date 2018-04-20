@@ -12,11 +12,13 @@ import de.prwh.cobaltmod.handler.AchievementHandler;
 import de.prwh.cobaltmod.handler.RecipeHandler;
 import de.prwh.cobaltmod.world.biome.CMBiomeGenBase;
 import de.prwh.cobaltmod.world.dim.CMWorldProvider;
+import de.prwh.cobaltmod.world.dim.CMWorldType;
 import de.prwh.cobaltmod.world.gen.WorldGeneratorDim;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.world.DimensionType;
+import net.minecraft.world.WorldType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.EnumHelper;
@@ -43,6 +45,7 @@ public class CMMain {
 	// public static ArmorMaterial CobaltBackpackArmor;
 
 	// Dimension
+	public static final WorldType COBALT_WORLD_TYPE = new CMWorldType();
 	public static DimensionType type_cobaltdimension = null;
 	public static int cobaltdimension;
 	public static int cobaltdimension1;
@@ -60,11 +63,11 @@ public class CMMain {
 	// public static IRenderHandler skyRenderer;
 
 	// Biome
-//	public static int biomeplainsid;
-//	public static int biomehillsid;
-//	public static int biomeswampid;
-//	public static int biometallid;
-//	public static int biomemountainsid;
+	// public static int biomeplainsid;
+	// public static int biomehillsid;
+	// public static int biomeswampid;
+	// public static int biometallid;
+	// public static int biomemountainsid;
 
 	public static int biomecavesid;
 
@@ -73,8 +76,8 @@ public class CMMain {
 	// public static boolean templeenabled;
 
 	private static String GENERATION = "Generation";
-	//private static String BLOCKS = "Blocks";
-	//private static String ITEMS = "Items";
+	// private static String BLOCKS = "Blocks";
+	// private static String ITEMS = "Items";
 
 	@SidedProxy(clientSide = "de.prwh.cobaltmod.core.ClientProxyCobalt", serverSide = "de.prwh.cobaltmod.core.CommonProxyCobalt")
 	public static CommonProxyCobalt proxy;
@@ -132,14 +135,15 @@ public class CMMain {
 		// config.get("Development", "Dev Enabled", false).comment = "To enable
 		// the Development Items/Blocks.";
 		//
-		config.setCategoryComment(GENERATION,"Change the Ids here if it conflicts with others. If you have large stone biomes, like highlands without grass and such, there is a possible id conflict with other mods.");
-		
-//		biomehillsid = config.get(GENERATION, "Blue Hills", 180).getInt();
-//		biomeplainsid = config.get(GENERATION, "Cobalt Plains",181).getInt();
-//		biomeswampid = config.get(GENERATION, "Deep Swamp", 182).getInt();
-//		biometallid = config.get(GENERATION, "Tall Forest", 183).getInt();
-//		biomemountainsid = config.get(GENERATION, "Highlands", 184).getInt();
-//		biomecavesid = config.get(GENERATION, "Cobalt Caves", 185).getInt();
+		config.setCategoryComment(GENERATION,
+				"Change the Ids here if it conflicts with others. If you have large stone biomes, like highlands without grass and such, there is a possible id conflict with other mods.");
+
+		// biomehillsid = config.get(GENERATION, "Blue Hills", 180).getInt();
+		// biomeplainsid = config.get(GENERATION, "Cobalt Plains",181).getInt();
+		// biomeswampid = config.get(GENERATION, "Deep Swamp", 182).getInt();
+		// biometallid = config.get(GENERATION, "Tall Forest", 183).getInt();
+		// biomemountainsid = config.get(GENERATION, "Highlands", 184).getInt();
+		// biomecavesid = config.get(GENERATION, "Cobalt Caves", 185).getInt();
 		//
 		// templeenabled = config.get(GENERATION, "Temple Enabled",
 		// true).getBoolean(true);
@@ -157,8 +161,7 @@ public class CMMain {
 		// FluidRegistry.registerFluid(CMContent.darkwater_fluid);
 
 		// EnumMaterial
-		CMContent.COBALT_ARMOR = EnumHelper.addArmorMaterial("COBALT_ARMOR", CMMain.MODID + ":cobalt_armor", 50, new int[] { 4, 9, 7, 4 }, 7,
-				SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0);
+		CMContent.COBALT_ARMOR = EnumHelper.addArmorMaterial("COBALT_ARMOR", CMMain.MODID + ":cobalt_armor", 50, new int[] { 4, 9, 7, 4 }, 7, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0);
 		// this.BackpackArmor = EnumHelper.addArmorMaterial("Backpack Armor",
 		// -1, new int[] { 0, 1, 0, 0 }, 0);
 		// this.CobaltBackpackArmor = EnumHelper.addArmorMaterial("Cobalt
@@ -180,7 +183,7 @@ public class CMMain {
 		CMReplace.addBlocks(Blocks.LOG, CMContent.COBEX_LOG);
 		CMReplace.addBlocks(Blocks.LOG2, CMContent.COBEX_LOG);
 		CMReplace.addBlocks(Blocks.TALLGRASS, CMContent.BLUE_TALL_GRASS);
-		
+
 		CMReplace.addFlowers(CMContent.CLEMATIS_FLOWER);
 		CMReplace.addFlowers(CMContent.BELL_FLOWER);
 		CMReplace.addFlowers(CMContent.GLOW_FLOWER);
@@ -215,7 +218,7 @@ public class CMMain {
 		CMBiomeGenBase.init();
 
 		// Dimension
-		type_cobaltdimension = DimensionType.register("CM", "_cobalt", cobaltdimension, CMWorldProvider.class, false);
+		type_cobaltdimension = DimensionType.register("CM", "_cobalt", cobaltdimension, CMWorldProvider.class, true);
 		DimensionManager.registerDimension(cobaltdimension, type_cobaltdimension);
 		//
 		// DimensionManager.registerProviderType(cobaltdimension1,
@@ -316,7 +319,7 @@ public class CMMain {
 		// Neutralizer
 		// GameRegistry.registerTileEntity(TileEntityNeutralizer.class,
 		// "tileentityneutralizer");
-		
+
 		// Dimension
 		GameRegistry.registerTileEntity(TileEntityDimension.class, "entityDim");
 
