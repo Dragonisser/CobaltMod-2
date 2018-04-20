@@ -32,13 +32,9 @@ public class WorldGeneratorDim implements IWorldGenerator {
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
 
-		System.out.println(world.getWorldType().getName() + "- Current Worldtype");
-		System.out.println(CMMain.COBALT_WORLD_TYPE.getName() + "- Should be Worldtype");
-		
 		if (world.provider.getDimension() == 0 && !world.getWorldType().getName().equals(CMMain.COBALT_WORLD_TYPE.getName())) {
 			generateSurface(world, random, chunkX * 16, chunkZ * 16);
 		} else if (world.provider.getDimension() == CMMain.cobaltdimension || world.getWorldType().getName().equals(CMMain.COBALT_WORLD_TYPE.getName())) {
-			//System.out.println("Trying to decorate chunks");
 			generateCobaltis(world, random, chunkX * 16, chunkZ * 16);
 		}
 	}
@@ -117,13 +113,11 @@ public class WorldGeneratorDim implements IWorldGenerator {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	public void generateSurface(World worldIn, Random rand, int x, int z) {
 
 		int RandPosX = x + rand.nextInt(16) + 8;
 		int RandPosZ = z + rand.nextInt(16) + 8;
-		@SuppressWarnings("unused")
 		int height = worldIn.getHeight(RandPosX, RandPosZ);
-
 	}
-
 }

@@ -82,7 +82,7 @@ public class CMMain {
 	@SidedProxy(clientSide = "de.prwh.cobaltmod.core.ClientProxyCobalt", serverSide = "de.prwh.cobaltmod.core.CommonProxyCobalt")
 	public static CommonProxyCobalt proxy;
 	public static final String MODID = "mod_cobalt";
-	public static final String VERSION = "2.0.1.8";
+	public static final String VERSION = "2.0.1.8.1";
 
 	private static final Logger log = LogManager.getLogger(MODID.toUpperCase());
 
