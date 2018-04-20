@@ -10,7 +10,6 @@ import de.prwh.cobaltmod.world.gen.feature.MapGenCMCaves;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -26,8 +25,6 @@ import net.minecraft.world.gen.ChunkProviderSettings;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
-import net.minecraft.world.gen.feature.WorldGenDungeons;
-import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.structure.MapGenMineshaft;
 import net.minecraft.world.gen.structure.MapGenScatteredFeature;
 import net.minecraft.world.gen.structure.MapGenStronghold;
@@ -189,10 +186,10 @@ public class CMChunkGenerator implements IChunkGenerator {
 		this.biomesForGeneration = this.world.getBiomeProvider().getBiomes(this.biomesForGeneration, x * 16, z * 16, 16, 16);
 		this.replaceBiomeBlocks(x, z, chunkprimer, this.biomesForGeneration);
 
-		//System.out.println("I wanna put down some caves");
-		
+		// System.out.println("I wanna put down some caves");
+
 		if (this.settings.useCaves) {
-			//System.out.println("YAY CAVES");
+			// System.out.println("YAY CAVES");
 			this.caveGenerator.generate(this.world, x, z, chunkprimer);
 		}
 
@@ -327,56 +324,10 @@ public class CMChunkGenerator implements IChunkGenerator {
 
 		net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(true, this, this.world, this.rand, x, z, flag);
 
-		if (biome != Biomes.DESERT && biome != Biomes.DESERT_HILLS && this.settings.useWaterLakes && !flag && this.rand.nextInt(this.settings.waterLakeChance) == 0)
-			if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, flag, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE)) {
-				int i1 = this.rand.nextInt(16) + 8;
-				int j1 = this.rand.nextInt(256);
-				int k1 = this.rand.nextInt(16) + 8;
-				(new WorldGenLakes(Blocks.WATER)).generate(this.world, this.rand, blockpos.add(i1, j1, k1));
-			}
-
-		if (!flag && this.rand.nextInt(this.settings.lavaLakeChance / 10) == 0 && this.settings.useLavaLakes)
-			if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, flag, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAVA)) {
-				int i2 = this.rand.nextInt(16) + 8;
-				int l2 = this.rand.nextInt(this.rand.nextInt(248) + 8);
-				int k3 = this.rand.nextInt(16) + 8;
-
-				if (l2 < this.world.getSeaLevel() || this.rand.nextInt(this.settings.lavaLakeChance / 8) == 0) {
-					(new WorldGenLakes(Blocks.LAVA)).generate(this.world, this.rand, blockpos.add(i2, l2, k3));
-				}
-			}
-
-		if (this.settings.useDungeons)
-			if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, flag, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.DUNGEON)) {
-				for (int j2 = 0; j2 < this.settings.dungeonChance; ++j2) {
-					int i3 = this.rand.nextInt(16) + 8;
-					int l3 = this.rand.nextInt(256);
-					int l1 = this.rand.nextInt(16) + 8;
-					(new WorldGenDungeons()).generate(this.world, this.rand, blockpos.add(i3, l3, l1));
-				}
-			}
-
 		biome.decorate(this.world, this.rand, new BlockPos(i, 0, j));
 		if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, flag, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS))
 			WorldEntitySpawner.performWorldGenSpawning(this.world, biome, i + 8, j + 8, 16, 16, this.rand);
 		blockpos = blockpos.add(8, 0, 8);
-
-		if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, flag, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ICE)) {
-			for (int k2 = 0; k2 < 16; ++k2) {
-				for (int j3 = 0; j3 < 16; ++j3) {
-					BlockPos blockpos1 = this.world.getPrecipitationHeight(blockpos.add(k2, 0, j3));
-					BlockPos blockpos2 = blockpos1.down();
-
-					if (this.world.canBlockFreezeWater(blockpos2)) {
-						this.world.setBlockState(blockpos2, Blocks.ICE.getDefaultState(), 2);
-					}
-
-					if (this.world.canSnowAt(blockpos1, true)) {
-						this.world.setBlockState(blockpos1, Blocks.SNOW_LAYER.getDefaultState(), 2);
-					}
-				}
-			}
-		} // Forge: End ICE
 
 		net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(false, this, this.world, this.rand, x, z, flag);
 

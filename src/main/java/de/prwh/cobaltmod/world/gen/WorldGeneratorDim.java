@@ -50,10 +50,19 @@ public class WorldGeneratorDim implements IWorldGenerator {
 		for (int k = 0; k < 5; k++) // How often it tries to spawn in a chunk
 		{
 			int oreXCoord = x + rand.nextInt(16) + 8;
-			int oreYCoord = rand.nextInt(20) + 40; // Ebene 0 - 25
+			int oreYCoord = rand.nextInt(20) + 20; // Ebene 0 - 25
 			int oreZCoord = z + rand.nextInt(16) + 8;
 
 			new WorldGenCobaltMineable(CMContent.COBALT_ORE.getDefaultState(), 4).generate(worldIn, rand, new BlockPos(oreXCoord, oreYCoord, oreZCoord));
+		}
+		
+		for (int k = 0; k < 2; k++) // How often it tries to spawn in a chunk
+		{
+			int oreXCoord = x + rand.nextInt(16) + 8;
+			int oreYCoord = rand.nextInt(70); // Ebene 0 - 25
+			int oreZCoord = z + rand.nextInt(16) + 8;
+
+			new WorldGenCobaltMineable(CMContent.COBALT_STONE.getDefaultState(), 4).generate(worldIn, rand, new BlockPos(oreXCoord, oreYCoord, oreZCoord));
 		}
 
 		for (int l2 = 0; l2 < CMBiomeGenBase.getBiomeDecorator().flowersPerChunk; ++l2) {
