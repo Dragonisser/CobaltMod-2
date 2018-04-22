@@ -16,10 +16,7 @@ import net.minecraft.world.gen.MapGenBase;
 
 public class MapGenCMCaves extends MapGenBase {
 
-	protected static final IBlockState BLK_LAVA = Blocks.LAVA.getDefaultState();
 	protected static final IBlockState BLK_AIR = Blocks.AIR.getDefaultState();
-	protected static final IBlockState BLK_SANDSTONE = Blocks.SANDSTONE.getDefaultState();
-	protected static final IBlockState BLK_RED_SANDSTONE = Blocks.RED_SANDSTONE.getDefaultState();
 
 	protected void addRoom(long p_180703_1_, int p_180703_3_, int p_180703_4_, ChunkPrimer p_180703_5_, double p_180703_6_, double p_180703_8_, double p_180703_10_) {
 		this.addTunnel(p_180703_1_, p_180703_3_, p_180703_4_, p_180703_5_, p_180703_6_, p_180703_8_, p_180703_10_, 1.0F + this.rand.nextFloat() * 6.0F, 0.0F, 0.0F, -1, -1, 0.5D);
@@ -138,7 +135,8 @@ public class MapGenCMCaves extends MapGenBase {
 					}
 
 					if (!flag3) {
-						//BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+						// BlockPos.MutableBlockPos blockpos$mutableblockpos = new
+						// BlockPos.MutableBlockPos();
 
 						for (int j3 = k2; j3 < k; ++j3) {
 							double d10 = ((double) (j3 + p_180702_3_ * 16) + 0.5D - p_180702_6_) / d2;
@@ -194,11 +192,11 @@ public class MapGenCMCaves extends MapGenBase {
 			double d0 = (double) (chunkX * 16 + this.rand.nextInt(16));
 			double d1 = (double) this.rand.nextInt(this.rand.nextInt(120) + 8);
 			double d2 = (double) (chunkZ * 16 + this.rand.nextInt(16));
-			
-//			System.out.println(d0);
-//			System.out.println(d1);
-//			System.out.println(d2);
-			
+
+			// System.out.println(d0);
+			// System.out.println(d1);
+			// System.out.println(d2);
+
 			int k = 1;
 
 			if (this.rand.nextInt(4) == 0) {
@@ -274,6 +272,7 @@ public class MapGenCMCaves extends MapGenBase {
 
 		if (this.canReplaceBlock(state, up) || state.getBlock() == top.getBlock() || state.getBlock() == filler.getBlock()) {
 			if (y - 1 < 10) {
+				data.setBlockState(x, y, z, BLK_AIR);
 				// data.setBlockState(x, y, z, BLK_LAVA);
 			} else {
 				data.setBlockState(x, y, z, BLK_AIR);

@@ -6,10 +6,10 @@ import org.apache.logging.log4j.Logger;
 import de.prwh.cobaltmod.core.api.CMContent;
 import de.prwh.cobaltmod.core.api.CMReplace;
 import de.prwh.cobaltmod.core.blocks.CMBlocks;
-import de.prwh.cobaltmod.core.entity.TileEntityDimension;
 import de.prwh.cobaltmod.core.items.CMItems;
 import de.prwh.cobaltmod.handler.AchievementHandler;
 import de.prwh.cobaltmod.handler.RecipeHandler;
+import de.prwh.cobaltmod.handler.event.CMLivingUpdateEventHandler;
 import de.prwh.cobaltmod.world.biome.CMBiomeGenBase;
 import de.prwh.cobaltmod.world.dim.CMWorldProvider;
 import de.prwh.cobaltmod.world.dim.CMWorldType;
@@ -20,6 +20,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.Mod;
@@ -199,8 +200,7 @@ public class CMMain {
 
 		// MinecraftForge.EVENT_BUS.register(new
 		// CobaltBlockBreakEventHandler());
-		// MinecraftForge.EVENT_BUS.register(new
-		// CobaltLivingUpdateEventHandler());
+		MinecraftForge.EVENT_BUS.register(new CMLivingUpdateEventHandler());
 		// MinecraftForge.EVENT_BUS.register(new HurtBlocksHandler());
 
 		// Fluid
@@ -319,9 +319,6 @@ public class CMMain {
 		// Neutralizer
 		// GameRegistry.registerTileEntity(TileEntityNeutralizer.class,
 		// "tileentityneutralizer");
-
-		// Dimension
-		GameRegistry.registerTileEntity(TileEntityDimension.class, "entityDim");
 
 		// Worldgenerator Registration
 		// GameRegistry.registerWorldGenerator(new WorldGeneratorDim(), 0);

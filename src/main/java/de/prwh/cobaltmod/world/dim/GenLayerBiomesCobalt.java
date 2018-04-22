@@ -7,8 +7,7 @@ import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerBiomesCobalt extends GenLayer {
 
-	protected Biome[] allowedBiomes = {CMBiomeGenBase.biomeforest,
-			CMBiomeGenBase.biomemountains, CMBiomeGenBase.biomehills, CMBiomeGenBase.biomeswamp, CMBiomeGenBase.biometall};
+	protected Biome[] allowedBiomes = { CMBiomeGenBase.biomeforest, CMBiomeGenBase.biomemountains, CMBiomeGenBase.biomehills, CMBiomeGenBase.biomeswamp, CMBiomeGenBase.biometall };
 
 	public GenLayerBiomesCobalt(long seed, GenLayer genlayer) {
 		super(seed);

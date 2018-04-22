@@ -1,13 +1,15 @@
 package de.prwh.cobaltmod.core.blocks;
 
+import java.lang.reflect.Field;
 import java.util.Random;
 
 import javax.annotation.Nullable;
 
 import com.google.common.cache.LoadingCache;
 
+import de.prwh.cobaltmod.core.CMMain;
 import de.prwh.cobaltmod.core.api.CMContent;
-import de.prwh.cobaltmod.core.entity.TileEntityDimension;
+import de.prwh.cobaltmod.world.dim.CMTeleporter;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPortal;
 import net.minecraft.block.material.Material;
@@ -22,6 +24,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -29,6 +32,8 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -37,11 +42,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockPortalCobalt extends BlockPortal {
 
 	public static String name;
-	public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.<EnumFacing.Axis>create("axis",
-			EnumFacing.Axis.class, new EnumFacing.Axis[] { EnumFacing.Axis.X, EnumFacing.Axis.Z });
+	public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.<EnumFacing.Axis>create("axis", EnumFacing.Axis.class, new EnumFacing.Axis[] { EnumFacing.Axis.X, EnumFacing.Axis.Z });
 	protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 1.0D, 0.625D);
 	protected static final AxisAlignedBB Z_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 1.0D, 1.0D);
 	protected static final AxisAlignedBB Y_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1.0D, 0.625D);
+	protected int portalCounter;
 
 	public BlockPortalCobalt() {
 		super();
@@ -116,23 +121,20 @@ public class BlockPortalCobalt extends BlockPortal {
 		if (enumfacing$axis == EnumFacing.Axis.X) {
 			BlockPortalCobalt.Size blockportal$size = new BlockPortalCobalt.Size(worldIn, pos, EnumFacing.Axis.X);
 
-			if (!blockportal$size.isValid()
-					|| blockportal$size.portalBlockCount < blockportal$size.width * blockportal$size.height) {
+			if (!blockportal$size.isValid() || blockportal$size.portalBlockCount < blockportal$size.width * blockportal$size.height) {
 				worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
 			}
 		} else if (enumfacing$axis == EnumFacing.Axis.Z) {
 			BlockPortalCobalt.Size blockportal$size1 = new BlockPortalCobalt.Size(worldIn, pos, EnumFacing.Axis.Z);
 
-			if (!blockportal$size1.isValid()
-					|| blockportal$size1.portalBlockCount < blockportal$size1.width * blockportal$size1.height) {
+			if (!blockportal$size1.isValid() || blockportal$size1.portalBlockCount < blockportal$size1.width * blockportal$size1.height) {
 				worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
 			}
 		}
 	}
 
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
-			EnumFacing side) {
+	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
 		pos = pos.offset(side);
 		EnumFacing.Axis enumfacing$axis = null;
 
@@ -152,19 +154,13 @@ public class BlockPortalCobalt extends BlockPortal {
 			}
 		}
 
-		boolean flag = blockAccess.getBlockState(pos.west()).getBlock() == this
-				&& blockAccess.getBlockState(pos.west(2)).getBlock() != this;
-		boolean flag1 = blockAccess.getBlockState(pos.east()).getBlock() == this
-				&& blockAccess.getBlockState(pos.east(2)).getBlock() != this;
-		boolean flag2 = blockAccess.getBlockState(pos.north()).getBlock() == this
-				&& blockAccess.getBlockState(pos.north(2)).getBlock() != this;
-		boolean flag3 = blockAccess.getBlockState(pos.south()).getBlock() == this
-				&& blockAccess.getBlockState(pos.south(2)).getBlock() != this;
+		boolean flag = blockAccess.getBlockState(pos.west()).getBlock() == this && blockAccess.getBlockState(pos.west(2)).getBlock() != this;
+		boolean flag1 = blockAccess.getBlockState(pos.east()).getBlock() == this && blockAccess.getBlockState(pos.east(2)).getBlock() != this;
+		boolean flag2 = blockAccess.getBlockState(pos.north()).getBlock() == this && blockAccess.getBlockState(pos.north(2)).getBlock() != this;
+		boolean flag3 = blockAccess.getBlockState(pos.south()).getBlock() == this && blockAccess.getBlockState(pos.south(2)).getBlock() != this;
 		boolean flag4 = flag || flag1 || enumfacing$axis == EnumFacing.Axis.X;
 		boolean flag5 = flag2 || flag3 || enumfacing$axis == EnumFacing.Axis.Z;
-		return flag4 && side == EnumFacing.WEST ? true
-				: (flag4 && side == EnumFacing.EAST ? true
-						: (flag5 && side == EnumFacing.NORTH ? true : flag5 && side == EnumFacing.SOUTH));
+		return flag4 && side == EnumFacing.WEST ? true : (flag4 && side == EnumFacing.EAST ? true : (flag5 && side == EnumFacing.NORTH ? true : flag5 && side == EnumFacing.SOUTH));
 	}
 
 	/**
@@ -176,14 +172,93 @@ public class BlockPortalCobalt extends BlockPortal {
 
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
 
-		if ((entityIn.getRidingEntity() == null) && ((entityIn instanceof EntityPlayerMP))) {
+		if (!entityIn.isRiding() && !entityIn.isBeingRidden() && entityIn.isNonBoss() && (entityIn instanceof EntityPlayerMP)) {
+			MinecraftServer mcServer = entityIn.getServer();
+			EntityPlayerMP player = (EntityPlayerMP) entityIn;
 
-			EntityPlayerMP player1 = (EntityPlayerMP) entityIn;
+			if (!pos.equals(getLastPortalPos(player))) {
 
-			TileEntityDimension.tele(player1);
+				if (player.timeUntilPortal == 0) {
+					if (player.getEntityData().getInteger("CM_UNTILPORTAL") > 0) {
+						player.getEntityData().setInteger("CM_UNTILPORTAL", player.getEntityData().getInteger("CM_UNTILPORTAL") - 1);
+						// System.out.println(player.getDisplayName() + ": " +
+						// player.getEntityData().getInteger("CM_UNTILPORTAL"));
+					} else {
+						player.getEntityData().setInteger("CM_UNTILPORTAL", 300);
+					}
+				}
+
+				System.out.println(player.timeUntilPortal);
+				System.out.println(player.getEntityData().getInteger("CM_UNTILPORTAL"));
+
+				if (player.timeUntilPortal > 0) {
+					player.timeUntilPortal = 15;
+				} else if (player.capabilities.isCreativeMode || player.getEntityData().getInteger("CM_UNTILPORTAL") <= 0) {
+					System.out.println("---------------------------------");
+					System.out.println(player.timeUntilPortal);
+					System.out.println(player.getEntityData().getInteger("CM_UNTILPORTAL"));
+					if (setPortalInformation(player)) {
+						if (player.dimension != CMMain.cobaltdimension) {
+							mcServer.getPlayerList().transferPlayerToDimension(player, CMMain.cobaltdimension, new CMTeleporter(mcServer.worldServerForDimension(CMMain.cobaltdimension)));
+							player.getEntityData().setInteger("CM_UNTILPORTAL", 300);
+							player.timeUntilPortal = 15;
+						} else {
+							mcServer.getPlayerList().transferPlayerToDimension(player, 0, new CMTeleporter(mcServer.worldServerForDimension(0)));
+							player.getEntityData().setInteger("CM_UNTILPORTAL", 300);
+							player.timeUntilPortal = 15;
+						}
+					}
+
+				}
+			}
 
 		}
+	}
 
+	private BlockPos getLastPortalPos(Entity entity) {
+		Field lastPortalPos;
+		try {
+			lastPortalPos = Entity.class.getDeclaredField("lastPortalPos");
+			lastPortalPos.setAccessible(true);
+
+			return (BlockPos) lastPortalPos.get(entity);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private boolean setPortalInformation(Entity entity) {
+
+		Field lastPortalPos;
+		Field lastPortalVec;
+		Field teleportDirection;
+
+		try {
+			lastPortalPos = Entity.class.getDeclaredField("lastPortalPos");
+			lastPortalVec = Entity.class.getDeclaredField("lastPortalVec");
+			teleportDirection = Entity.class.getDeclaredField("teleportDirection");
+
+			lastPortalPos.setAccessible(true);
+			lastPortalVec.setAccessible(true);
+			teleportDirection.setAccessible(true);
+
+			BlockPos entityPos = entity.getPosition();
+			BlockPattern.PatternHelper blockpattern$patternhelper = CMContent.PORTAL_COBALT.createPatternHelper(entity.world, entityPos);
+			double d0 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? (double) blockpattern$patternhelper.getFrontTopLeft().getZ() : (double) blockpattern$patternhelper.getFrontTopLeft().getX();
+			double d1 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? entity.posZ : entity.posX;
+			d1 = Math.abs(MathHelper.pct(d1 - (double) (blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE ? 1 : 0), d0, d0 - (double) blockpattern$patternhelper.getWidth()));
+			double d2 = MathHelper.pct(entity.posY - 1.0D, (double) blockpattern$patternhelper.getFrontTopLeft().getY(), (double) (blockpattern$patternhelper.getFrontTopLeft().getY() - blockpattern$patternhelper.getHeight()));
+
+			lastPortalPos.set(entity, entity.getPosition());
+			lastPortalVec.set(entity, new Vec3d(d1, d2, 0.0D));
+			teleportDirection.set(entity, blockpattern$patternhelper.getForwards());
+
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Nullable
@@ -206,9 +281,8 @@ public class BlockPortalCobalt extends BlockPortal {
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		if (rand.nextInt(100) == 0) {
-			worldIn.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D,
-					SoundEvents.BLOCK_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.4F + 0.8F,
-					false);
+			worldIn.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5F,
+					rand.nextFloat() * 0.4F + 0.8F, false);
 		}
 
 		for (int i = 0; i < 4; ++i) {
@@ -220,8 +294,7 @@ public class BlockPortalCobalt extends BlockPortal {
 			double d5 = ((double) rand.nextFloat() - 0.5D) * 0.5D;
 			int j = rand.nextInt(2) * 2 - 1;
 
-			if (worldIn.getBlockState(pos.west()).getBlock() != this
-					&& worldIn.getBlockState(pos.east()).getBlock() != this) {
+			if (worldIn.getBlockState(pos.west()).getBlock() != this && worldIn.getBlockState(pos.east()).getBlock() != this) {
 				d0 = (double) pos.getX() + 0.5D + 0.25D * (double) j;
 				d3 = (double) (rand.nextFloat() * 2.0F * (float) j);
 			} else {
@@ -229,7 +302,7 @@ public class BlockPortalCobalt extends BlockPortal {
 				d5 = (double) (rand.nextFloat() * 2.0F * (float) j);
 			}
 
-			worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5, new int[0]); //TODO CHANGE THAT
+			worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5, new int[0]); // TODO CHANGE THAT
 		}
 	}
 
@@ -286,17 +359,14 @@ public class BlockPortalCobalt extends BlockPortal {
 
 			for (EnumFacing.AxisDirection enumfacing$axisdirection : EnumFacing.AxisDirection.values()) {
 				BlockPattern.PatternHelper blockpattern$patternhelper = new BlockPattern.PatternHelper(
-						enumfacing.getAxisDirection() == enumfacing$axisdirection ? blockpos
-								: blockpos.offset(blockportal$size.rightDir, blockportal$size.getWidth() - 1),
-						EnumFacing.getFacingFromAxis(enumfacing$axisdirection, enumfacing$axis), EnumFacing.UP,
-						loadingcache, blockportal$size.getWidth(), blockportal$size.getHeight(), 1);
+						enumfacing.getAxisDirection() == enumfacing$axisdirection ? blockpos : blockpos.offset(blockportal$size.rightDir, blockportal$size.getWidth() - 1),
+						EnumFacing.getFacingFromAxis(enumfacing$axisdirection, enumfacing$axis), EnumFacing.UP, loadingcache, blockportal$size.getWidth(), blockportal$size.getHeight(), 1);
 
 				for (int i = 0; i < blockportal$size.getWidth(); ++i) {
 					for (int j = 0; j < blockportal$size.getHeight(); ++j) {
 						BlockWorldState blockworldstate = blockpattern$patternhelper.translateOffset(i, j, 1);
 
-						if (blockworldstate.getBlockState() != null
-								&& blockworldstate.getBlockState().getMaterial() != Material.AIR) {
+						if (blockworldstate.getBlockState() != null && blockworldstate.getBlockState().getMaterial() != Material.AIR) {
 							++aint[enumfacing$axisdirection.ordinal()];
 						}
 					}
@@ -311,11 +381,8 @@ public class BlockPortalCobalt extends BlockPortal {
 				}
 			}
 
-			return new BlockPattern.PatternHelper(
-					enumfacing.getAxisDirection() == enumfacing$axisdirection1 ? blockpos
-							: blockpos.offset(blockportal$size.rightDir, blockportal$size.getWidth() - 1),
-					EnumFacing.getFacingFromAxis(enumfacing$axisdirection1, enumfacing$axis), EnumFacing.UP,
-					loadingcache, blockportal$size.getWidth(), blockportal$size.getHeight(), 1);
+			return new BlockPattern.PatternHelper(enumfacing.getAxisDirection() == enumfacing$axisdirection1 ? blockpos : blockpos.offset(blockportal$size.rightDir, blockportal$size.getWidth() - 1),
+					EnumFacing.getFacingFromAxis(enumfacing$axisdirection1, enumfacing$axis), EnumFacing.UP, loadingcache, blockportal$size.getWidth(), blockportal$size.getHeight(), 1);
 		}
 	}
 
@@ -342,8 +409,7 @@ public class BlockPortalCobalt extends BlockPortal {
 			}
 
 			for (BlockPos blockpos = p_i45694_2_; p_i45694_2_.getY() > blockpos.getY() - 21 && p_i45694_2_.getY() > 0
-					&& this.isEmptyBlock(
-							worldIn.getBlockState(p_i45694_2_.down()).getBlock()); p_i45694_2_ = p_i45694_2_.down()) {
+					&& this.isEmptyBlock(worldIn.getBlockState(p_i45694_2_.down()).getBlock()); p_i45694_2_ = p_i45694_2_.down()) {
 				;
 			}
 
@@ -370,8 +436,7 @@ public class BlockPortalCobalt extends BlockPortal {
 			for (i = 0; i < 22; ++i) {
 				BlockPos blockpos = p_180120_1_.offset(p_180120_2_, i);
 
-				if (!this.isEmptyBlock(this.world.getBlockState(blockpos).getBlock())
-						|| this.world.getBlockState(blockpos.down()).getBlock() != CMContent.PORTAL_FRAME) {
+				if (!this.isEmptyBlock(this.world.getBlockState(blockpos).getBlock()) || this.world.getBlockState(blockpos.down()).getBlock() != CMContent.PORTAL_FRAME) {
 					break;
 				}
 			}
@@ -422,8 +487,7 @@ public class BlockPortalCobalt extends BlockPortal {
 			}
 
 			for (int j = 0; j < this.width; ++j) {
-				if (this.world.getBlockState(this.bottomLeft.offset(this.rightDir, j).up(this.height))
-						.getBlock() != CMContent.PORTAL_FRAME) {
+				if (this.world.getBlockState(this.bottomLeft.offset(this.rightDir, j).up(this.height)).getBlock() != CMContent.PORTAL_FRAME) {
 					this.height = 0;
 					break;
 				}
@@ -441,13 +505,11 @@ public class BlockPortalCobalt extends BlockPortal {
 
 		@SuppressWarnings("deprecation")
 		protected boolean isEmptyBlock(Block blockIn) {
-			return blockIn.getMaterial(null) == Material.AIR || blockIn == CMContent.BLUE_FIRE
-					|| blockIn == CMContent.PORTAL_COBALT;
+			return blockIn.getMaterial(null) == Material.AIR || blockIn == CMContent.BLUE_FIRE || blockIn == CMContent.PORTAL_COBALT;
 		}
 
 		public boolean isValid() {
-			return this.bottomLeft != null && this.width >= 2 && this.width <= 21 && this.height >= 3
-					&& this.height <= 21;
+			return this.bottomLeft != null && this.width >= 2 && this.width <= 21 && this.height >= 3 && this.height <= 21;
 		}
 
 		public void placePortalBlocks() {
@@ -455,9 +517,7 @@ public class BlockPortalCobalt extends BlockPortal {
 				BlockPos blockpos = this.bottomLeft.offset(this.rightDir, i);
 
 				for (int j = 0; j < this.height; ++j) {
-					this.world.setBlockState(blockpos.up(j),
-							CMContent.PORTAL_COBALT.getDefaultState().withProperty(BlockPortalCobalt.AXIS, this.axis),
-							2);
+					this.world.setBlockState(blockpos.up(j), CMContent.PORTAL_COBALT.getDefaultState().withProperty(BlockPortalCobalt.AXIS, this.axis), 2);
 				}
 			}
 		}

@@ -47,7 +47,7 @@ public class WorldGeneratorDim implements IWorldGenerator {
 		this.chunkPos = new BlockPos(RandPosX, 0, RandPosZ);
 		Biome biome = worldIn.getBiome(pos);
 
-		for (int k = 0; k < 5; k++) // How often it tries to spawn in a chunk
+		for (int k = 0; k < 3; k++) // How often it tries to spawn in a chunk
 		{
 			int oreXCoord = x + rand.nextInt(16) + 8;
 			int oreYCoord = rand.nextInt(20) + 20; // Ebene 0 - 25
@@ -56,7 +56,7 @@ public class WorldGeneratorDim implements IWorldGenerator {
 			new WorldGenCobaltMineable(CMContent.COBALT_ORE.getDefaultState(), 4).generate(worldIn, rand, new BlockPos(oreXCoord, oreYCoord, oreZCoord));
 		}
 		
-		for (int k = 0; k < 2; k++) // How often it tries to spawn in a chunk
+		for (int k = 0; k < 5; k++) // How often it tries to spawn in a chunk
 		{
 			int oreXCoord = x + rand.nextInt(16) + 8;
 			int oreYCoord = rand.nextInt(70); // Ebene 0 - 25
