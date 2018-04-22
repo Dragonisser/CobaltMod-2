@@ -3,9 +3,10 @@ package de.prwh.cobaltmod.world.dim;
 import java.util.Random;
 
 import de.prwh.cobaltmod.core.api.CMContent;
+import de.prwh.cobaltmod.core.blocks.BlockPortalCobalt;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
-import net.minecraft.block.BlockPortal;
+import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
@@ -20,20 +21,18 @@ import net.minecraft.world.WorldServer;
 
 public class CMTeleporter extends Teleporter {
 
-	public int dme;
 	private final WorldServer worldServerInstance;
+	/** A private Random() function in Teleporter */
 	private final Random random;
 	private final Long2ObjectMap<CMTeleporter.PortalPosition> destinationCoordinateCache = new Long2ObjectOpenHashMap<PortalPosition>(4096);
 
 	public CMTeleporter(WorldServer worldIn) {
-
 		super(worldIn);
 		this.worldServerInstance = worldIn;
 		this.random = new Random(worldIn.getSeed());
 	}
 
 	public void placeInPortal(Entity entityIn, float rotationYaw) {
-
 		if (this.worldServerInstance.provider.getDimensionType().getId() != 1) {
 			if (!this.placeInExistingPortal(entityIn, rotationYaw)) {
 				this.makePortal(entityIn);
@@ -51,7 +50,7 @@ public class CMTeleporter extends Teleporter {
 						int j2 = j + l1;
 						int k2 = k + k1 * 0 - j1 * 1;
 						boolean flag = l1 < 0;
-						this.worldServerInstance.setBlockState(new BlockPos(i2, j2, k2), flag ? CMContent.PORTAL_COBALT.getDefaultState() : Blocks.AIR.getDefaultState());
+						this.worldServerInstance.setBlockState(new BlockPos(i2, j2, k2), flag ? CMContent.PORTAL_FRAME.getDefaultState() : Blocks.AIR.getDefaultState());
 					}
 				}
 			}
@@ -61,7 +60,6 @@ public class CMTeleporter extends Teleporter {
 			entityIn.motionY = 0.0D;
 			entityIn.motionZ = 0.0D;
 		}
-
 	}
 
 	public boolean placeInExistingPortal(Entity entityIn, float rotationYaw) {
@@ -114,29 +112,20 @@ public class CMTeleporter extends Teleporter {
 			double d7 = (double) blockpos.getZ() + 0.5D;
 			BlockPattern.PatternHelper blockpattern$patternhelper = CMContent.PORTAL_COBALT.createPatternHelper(this.worldServerInstance, blockpos);
 			boolean flag1 = blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE;
-			double d2 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? (double) blockpattern$patternhelper.getFrontTopLeft().getZ() : (double) blockpattern$patternhelper.getFrontTopLeft().getX();
-			double d6 = (double) (blockpattern$patternhelper.getFrontTopLeft().getY() + 1) - 1 * (double) blockpattern$patternhelper.getHeight();
-			if (entityIn.getLastPortalVec() != null) {
-				d6 = (double) (blockpattern$patternhelper.getFrontTopLeft().getY() + 1) - entityIn.getLastPortalVec().yCoord * (double) blockpattern$patternhelper.getHeight();
-			}
+			double d2 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? (double) blockpattern$patternhelper.getFrontTopLeft().getZ()
+					: (double) blockpattern$patternhelper.getFrontTopLeft().getX();
+			double d6 = (double) (blockpattern$patternhelper.getFrontTopLeft().getY() + 1) - entityIn.getLastPortalVec().yCoord * (double) blockpattern$patternhelper.getHeight();
 
 			if (flag1) {
 				++d2;
 			}
 
 			if (blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X) {
-				if (entityIn.getLastPortalVec() != null) {
-					d7 = d2 + (1.0D - entityIn.getLastPortalVec().xCoord) * (double) blockpattern$patternhelper.getWidth() * (double) blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
-				} else {
-					return false;
-				}
+				d7 = d2 + (1.0D - entityIn.getLastPortalVec().xCoord) * (double) blockpattern$patternhelper.getWidth()
+						* (double) blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
 			} else {
-				if (entityIn.getLastPortalVec() != null) {
-					d5 = d2 + (1.0D - entityIn.getLastPortalVec().xCoord) * (double) blockpattern$patternhelper.getWidth() * (double) blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
-				} else {
-					return false;
-				}
-
+				d5 = d2 + (1.0D - entityIn.getLastPortalVec().xCoord) * (double) blockpattern$patternhelper.getWidth()
+						* (double) blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
 			}
 
 			float f = 0.0F;
@@ -144,23 +133,25 @@ public class CMTeleporter extends Teleporter {
 			float f2 = 0.0F;
 			float f3 = 0.0F;
 
-			if (entityIn.getTeleportDirection() != null) {
-				if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection()) {
-					f = 1.0F;
-					f1 = 1.0F;
-				} else if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection().getOpposite()) {
-					f = -1.0F;
-					f1 = -1.0F;
-				} else if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection().rotateY()) {
-					f2 = 1.0F;
-					f3 = -1.0F;
-				} else {
-					f2 = -1.0F;
-					f3 = 1.0F;
-				}
-			} else {
+			System.out.println("Portal: " + blockpattern$patternhelper.getForwards());
+			System.out.println("Player: " + entityIn.getTeleportDirection());
+			
+			if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection()) {
+				System.out.println("1");
 				f = 1.0F;
 				f1 = 1.0F;
+			} else if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection().getOpposite()) {
+				System.out.println("2");
+				f = -1.0F;
+				f1 = -1.0F;
+			} else if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection().rotateY()) {
+				System.out.println("3");
+				f2 = 1.0F;
+				f3 = -1.0F;
+			} else {
+				System.out.println("4");
+				f2 = -1.0F;
+				f3 = 1.0F;
 			}
 
 			double d3 = entityIn.motionX;
@@ -168,10 +159,17 @@ public class CMTeleporter extends Teleporter {
 			entityIn.motionX = d3 * (double) f + d4 * (double) f3;
 			entityIn.motionZ = d3 * (double) f2 + d4 * (double) f1;
 			entityIn.rotationYaw = rotationYaw - (float) (entityIn.getTeleportDirection().getOpposite().getHorizontalIndex() * 90) + (float) (blockpattern$patternhelper.getForwards().getHorizontalIndex() * 90);
+			
+			
+			System.out.println("Player: " + entityIn.motionX);
+			System.out.println("Player: " + entityIn.motionZ);
+			System.out.println("Player: " + entityIn.rotationYaw);
 
 			if (entityIn instanceof EntityPlayerMP) {
+				System.out.println("PlayerMP: Placing player");
 				((EntityPlayerMP) entityIn).connection.setPlayerLocation(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
 			} else {
+				System.out.println("Something: Placing something");
 				entityIn.setLocationAndAngles(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
 			}
 
@@ -182,8 +180,6 @@ public class CMTeleporter extends Teleporter {
 	}
 
 	public boolean makePortal(Entity entityIn) {
-		@SuppressWarnings("unused")
-		int i = 16;
 		double d0 = -1.0D;
 		int j = MathHelper.floor(entityIn.posX);
 		int k = MathHelper.floor(entityIn.posY);
@@ -321,13 +317,12 @@ public class CMTeleporter extends Teleporter {
 						int k11 = k6 + (l7 - 1) * i3 - j7 * l6;
 						boolean flag = k8 < 0;
 						this.worldServerInstance.setBlockState(new BlockPos(k9, k10, k11), flag ? CMContent.PORTAL_FRAME.getDefaultState() : Blocks.AIR.getDefaultState());
-
 					}
 				}
 			}
 		}
 
-		IBlockState iblockstate = CMContent.PORTAL_COBALT.getDefaultState().withProperty(BlockPortal.AXIS, l6 == 0 ? EnumFacing.Axis.Z : EnumFacing.Axis.X);
+		IBlockState iblockstate = CMContent.PORTAL_COBALT.getDefaultState().withProperty(BlockPortalCobalt.AXIS, l6 == 0 ? EnumFacing.Axis.Z : EnumFacing.Axis.X);
 
 		for (int i8 = 0; i8 < 4; ++i8) {
 			for (int l8 = 0; l8 < 4; ++l8) {
@@ -337,7 +332,6 @@ public class CMTeleporter extends Teleporter {
 					int k12 = k6 + (l8 - 1) * i3;
 					boolean flag1 = l8 == 0 || l8 == 3 || l9 == -1 || l9 == 3;
 					this.worldServerInstance.setBlockState(new BlockPos(l10, l11, k12), flag1 ? CMContent.PORTAL_FRAME.getDefaultState() : iblockstate, 2);
-					entityIn.setLocationAndAngles(l10, l11, k12, entityIn.rotationYaw, entityIn.rotationPitch);
 				}
 			}
 
@@ -348,7 +342,6 @@ public class CMTeleporter extends Teleporter {
 					int l12 = k6 + (i9 - 1) * i3;
 					BlockPos blockpos = new BlockPos(i11, i12, l12);
 					this.worldServerInstance.notifyNeighborsOfStateChange(blockpos, this.worldServerInstance.getBlockState(blockpos).getBlock(), false);
-
 				}
 			}
 		}
@@ -356,8 +349,23 @@ public class CMTeleporter extends Teleporter {
 		return true;
 	}
 
-	public Long2ObjectMap<CMTeleporter.PortalPosition> getDestinationCoordinateCache() {
-		return destinationCoordinateCache;
+	/**
+	 * called periodically to remove out-of-date portal locations from the cache
+	 * list. Argument par1 is a WorldServer.getTotalWorldTime() value.
+	 */
+	public void removeStalePortalLocations(long worldTime) {
+		if (worldTime % 100L == 0L) {
+			long i = worldTime - 300L;
+			ObjectIterator<CMTeleporter.PortalPosition> objectiterator = this.destinationCoordinateCache.values().iterator();
+
+			while (objectiterator.hasNext()) {
+				CMTeleporter.PortalPosition teleporter$portalposition = (CMTeleporter.PortalPosition) objectiterator.next();
+
+				if (teleporter$portalposition == null || teleporter$portalposition.lastUpdateTime < i) {
+					objectiterator.remove();
+				}
+			}
+		}
 	}
 
 	public class PortalPosition extends BlockPos {
@@ -369,5 +377,4 @@ public class CMTeleporter extends Teleporter {
 			this.lastUpdateTime = lastUpdate;
 		}
 	}
-
 }
