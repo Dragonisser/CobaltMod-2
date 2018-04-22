@@ -188,22 +188,28 @@ public class BlockPortalCobalt extends BlockPortal {
 					}
 				}
 
-				System.out.println(player.timeUntilPortal);
-				System.out.println(player.getEntityData().getInteger("CM_UNTILPORTAL"));
+//				System.out.println(player.timeUntilPortal);
+//				System.out.println(player.getEntityData().getInteger("CM_UNTILPORTAL"));
 
 				if (player.timeUntilPortal > 0) {
 					player.timeUntilPortal = 15;
 				} else if (player.capabilities.isCreativeMode || player.getEntityData().getInteger("CM_UNTILPORTAL") <= 0) {
 					System.out.println("---------------------------------");
-					System.out.println(player.timeUntilPortal);
-					System.out.println(player.getEntityData().getInteger("CM_UNTILPORTAL"));
+
+					getPortalInformation(player);
+					
 					if (setPortalInformation(player)) {
+						
+						getPortalInformation(player);
+						
 						if (player.dimension != CMMain.cobaltdimension) {
 							mcServer.getPlayerList().transferPlayerToDimension(player, CMMain.cobaltdimension, new CMTeleporter(mcServer.worldServerForDimension(CMMain.cobaltdimension)));
+							getPortalInformation(player);
 							player.getEntityData().setInteger("CM_UNTILPORTAL", 300);
 							player.timeUntilPortal = 15;
 						} else {
 							mcServer.getPlayerList().transferPlayerToDimension(player, 0, new CMTeleporter(mcServer.worldServerForDimension(0)));
+							getPortalInformation(player);
 							player.getEntityData().setInteger("CM_UNTILPORTAL", 300);
 							player.timeUntilPortal = 15;
 						}
@@ -258,6 +264,33 @@ public class BlockPortalCobalt extends BlockPortal {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	private void getPortalInformation(Entity entity) {
+		Field lastPortalPos;
+		Field lastPortalVec;
+		Field teleportDirection;
+
+		try {
+			lastPortalPos = Entity.class.getDeclaredField("lastPortalPos");
+			lastPortalVec = Entity.class.getDeclaredField("lastPortalVec");
+			teleportDirection = Entity.class.getDeclaredField("teleportDirection");
+
+			lastPortalPos.setAccessible(true);
+			lastPortalVec.setAccessible(true);
+			teleportDirection.setAccessible(true);
+
+			System.out.println(lastPortalPos.get(entity));
+			System.out.println(lastPortalVec.get(entity));
+			System.out.println(teleportDirection.get(entity));
+			System.out.println("---------------------------------------");
+
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
 		}
 	}
 
