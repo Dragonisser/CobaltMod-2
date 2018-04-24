@@ -181,30 +181,17 @@ public class BlockPortalCobalt extends BlockPortal {
 				if (player.timeUntilPortal == 0) {
 					if (player.getEntityData().getInteger("CM_UNTILPORTAL") > 0) {
 						player.getEntityData().setInteger("CM_UNTILPORTAL", player.getEntityData().getInteger("CM_UNTILPORTAL") - 1);
-						// System.out.println(player.getDisplayName() + ": " +
-						// player.getEntityData().getInteger("CM_UNTILPORTAL"));
 					} else {
 						player.getEntityData().setInteger("CM_UNTILPORTAL", 300);
 					}
 				}
 
-//				System.out.println(player.timeUntilPortal);
-//				System.out.println(player.getEntityData().getInteger("CM_UNTILPORTAL"));
-
 				if (player.timeUntilPortal > 0) {
-					player.timeUntilPortal = 15;
+					player.timeUntilPortal = 10;
 				} else if (player.capabilities.isCreativeMode || player.getEntityData().getInteger("CM_UNTILPORTAL") <= 0) {
-					System.out.println("---------------------------------");
-
-					getPortalInformation(player);
-					
-					if (setPortalInformation(player)) {
-						
-						getPortalInformation(player);
-						
+					if (setPortalInformation(player, pos)) {
 						if (player.dimension != CMMain.cobaltdimension) {
 							mcServer.getPlayerList().transferPlayerToDimension(player, CMMain.cobaltdimension, new CMTeleporter(mcServer.worldServerForDimension(CMMain.cobaltdimension)));
-							getPortalInformation(player);
 							player.getEntityData().setInteger("CM_UNTILPORTAL", 300);
 							player.timeUntilPortal = 15;
 						} else {
@@ -234,7 +221,7 @@ public class BlockPortalCobalt extends BlockPortal {
 		return null;
 	}
 
-	private boolean setPortalInformation(Entity entity) {
+	private boolean setPortalInformation(Entity entity, BlockPos pos) {
 
 		Field lastPortalPos;
 		Field lastPortalVec;
@@ -249,14 +236,13 @@ public class BlockPortalCobalt extends BlockPortal {
 			lastPortalVec.setAccessible(true);
 			teleportDirection.setAccessible(true);
 
-			BlockPos entityPos = entity.getPosition();
-            BlockPattern.PatternHelper blockpattern$patternhelper = this.createPatternHelper(entity.world, entityPos);
-            double d0 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? (double)blockpattern$patternhelper.getFrontTopLeft().getZ() : (double)blockpattern$patternhelper.getFrontTopLeft().getX();
-            double d1 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? entity.posZ : entity.posX;
-            d1 = Math.abs(MathHelper.pct(d1 - (double)(blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE ? 1 : 0), d0, d0 - (double)blockpattern$patternhelper.getWidth()));
-            double d2 = MathHelper.pct(entity.posY - 1.0D, (double)blockpattern$patternhelper.getFrontTopLeft().getY(), (double)(blockpattern$patternhelper.getFrontTopLeft().getY() - blockpattern$patternhelper.getHeight()));
-
-			lastPortalPos.set(entity, entity.getPosition());
+			lastPortalPos.set(entity, pos);
+			BlockPattern.PatternHelper blockpattern$patternhelper = this.createPatternHelper(entity.world, pos);
+			double d0 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? (double) blockpattern$patternhelper.getFrontTopLeft().getZ() : (double) blockpattern$patternhelper.getFrontTopLeft().getX();
+			double d1 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? entity.posZ : entity.posX;
+			d1 = Math.abs(MathHelper.pct(d1 - (double) (blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE ? 1 : 0), d0, d0 - (double) blockpattern$patternhelper.getWidth()));
+			double d2 = MathHelper.pct(entity.posY - 1.0D, (double) blockpattern$patternhelper.getFrontTopLeft().getY(), (double) (blockpattern$patternhelper.getFrontTopLeft().getY() - blockpattern$patternhelper.getHeight()));
+			
 			lastPortalVec.set(entity, new Vec3d(d1, d2, 0.0D));
 			teleportDirection.set(entity, blockpattern$patternhelper.getForwards());
 
@@ -266,7 +252,7 @@ public class BlockPortalCobalt extends BlockPortal {
 			return false;
 		}
 	}
-	
+
 	private void getPortalInformation(Entity entity) {
 		Field lastPortalPos;
 		Field lastPortalVec;
@@ -280,17 +266,6 @@ public class BlockPortalCobalt extends BlockPortal {
 			lastPortalPos.setAccessible(true);
 			lastPortalVec.setAccessible(true);
 			teleportDirection.setAccessible(true);
-
-			System.out.println(lastPortalPos.get(entity));
-			System.out.println(lastPortalVec.get(entity));
-			System.out.println(teleportDirection.get(entity));
-			System.out.println("____________________________");
-			System.out.println(entity.getPitchYaw().x);
-			System.out.println(entity.getPitchYaw().y);
-			//System.out.println(teleportDirection.get(entity));
-			System.out.println("---------------------------------------");
-
-
 
 		} catch (Exception e) {
 			e.printStackTrace();

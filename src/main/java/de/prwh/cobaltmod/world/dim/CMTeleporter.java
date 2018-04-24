@@ -133,23 +133,16 @@ public class CMTeleporter extends Teleporter {
 			float f2 = 0.0F;
 			float f3 = 0.0F;
 
-			System.out.println("Portal: " + blockpattern$patternhelper.getForwards());
-			System.out.println("Player: " + entityIn.getTeleportDirection());
-			
 			if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection()) {
-				System.out.println("1");
 				f = 1.0F;
 				f1 = 1.0F;
 			} else if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection().getOpposite()) {
-				System.out.println("2");
 				f = -1.0F;
 				f1 = -1.0F;
 			} else if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection().rotateY()) {
-				System.out.println("3");
 				f2 = 1.0F;
 				f3 = -1.0F;
 			} else {
-				System.out.println("4");
 				f2 = -1.0F;
 				f3 = 1.0F;
 			}
@@ -158,18 +151,13 @@ public class CMTeleporter extends Teleporter {
 			double d4 = entityIn.motionZ;
 			entityIn.motionX = d3 * (double) f + d4 * (double) f3;
 			entityIn.motionZ = d3 * (double) f2 + d4 * (double) f1;
-			entityIn.rotationYaw = rotationYaw - (float) (entityIn.getTeleportDirection().getOpposite().getHorizontalIndex() * 90) + (float) (blockpattern$patternhelper.getForwards().getHorizontalIndex() * 90);
-			
-			
-			System.out.println("Player: " + entityIn.motionX);
-			System.out.println("Player: " + entityIn.motionZ);
-			System.out.println("Player: " + entityIn.rotationYaw);
+
+			entityIn.rotationYaw = rotationYaw - (float) (entityIn.getTeleportDirection().getOpposite().getHorizontalIndex() * 90)
+					+ (float) (blockpattern$patternhelper.getForwards().getHorizontalIndex() * 90);
 
 			if (entityIn instanceof EntityPlayerMP) {
-				System.out.println("PlayerMP: Placing player");
 				((EntityPlayerMP) entityIn).connection.setPlayerLocation(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
 			} else {
-				System.out.println("Something: Placing something");
 				entityIn.setLocationAndAngles(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
 			}
 

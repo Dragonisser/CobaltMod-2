@@ -26,6 +26,7 @@ public class CMBiomeGenBase extends Biome {
 	public CMBiomeGenBase(BiomeProperties properties) {
 		super(properties);
 		properties.setRainDisabled();
+		properties.setRainfall(0.0F);
 		this.theBiomeDecorator.flowersPerChunk = 4;
 		CMBiomeGenBase.biomeDec = this.theBiomeDecorator;
 	}
@@ -36,13 +37,13 @@ public class CMBiomeGenBase extends Biome {
 	
 
 	public static void init() {
-		biomemountains = new BiomeGenCobaltMountains(new Biome.BiomeProperties("Higherlands"))
+		biomemountains = new BiomeGenCobaltMountains(new Biome.BiomeProperties("Higherlands").setBaseHeight(2.0F).setHeightVariation(0.25F))
 				.setRegistryName("higherlands");
-		biomeforest = new BiomeGenCobexForest(new Biome.BiomeProperties("Cobex Forest"))
+		biomeforest = new BiomeGenCobexForest(new Biome.BiomeProperties("Cobex Forest").setBaseHeight(0.1F).setHeightVariation(0.2F))
 				.setRegistryName("cobex_forest");
-		biomeswamp = new BiomeGenCobaltSwamp(new Biome.BiomeProperties("Deep Swamp")).setRegistryName("deep_swamp");
-		biometall = new BiomeGenCobaltTall(new Biome.BiomeProperties("Tall Forest")).setRegistryName("tall_forest");
-		biomehills = new BiomeGenCobaltHills(new Biome.BiomeProperties("Blue Hills")).setRegistryName("blue_hills");
+		biomeswamp = new BiomeGenCobaltSwamp(new Biome.BiomeProperties("Deep Swamp").setBaseHeight(-0.2F).setHeightVariation(0.1F)).setRegistryName("deep_swamp");
+		biometall = new BiomeGenCobaltTall(new Biome.BiomeProperties("Tall Forest").setBaseHeight(0.3F).setHeightVariation(0.2F)).setRegistryName("tall_forest");
+		biomehills = new BiomeGenCobaltHills(new Biome.BiomeProperties("Blue Hills").setBaseHeight(0.8F).setHeightVariation(0.3F)).setRegistryName("blue_hills");
 		biomecaves = new BiomeGenCobaltCaves(new Biome.BiomeProperties("Cobalt Caves")).setRegistryName("cobalt_caves");
 
 		// biomeswamp = new BiomeGenCobaltSwamp(CMMain.biomeswampid,
