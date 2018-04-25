@@ -114,17 +114,17 @@ public class CMTeleporter extends Teleporter {
 			boolean flag1 = blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE;
 			double d2 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? (double) blockpattern$patternhelper.getFrontTopLeft().getZ()
 					: (double) blockpattern$patternhelper.getFrontTopLeft().getX();
-			double d6 = (double) (blockpattern$patternhelper.getFrontTopLeft().getY() + 1) - entityIn.getLastPortalVec().yCoord * (double) blockpattern$patternhelper.getHeight();
+			double d6 = (double) (blockpattern$patternhelper.getFrontTopLeft().getY() + 1) - entityIn.getLastPortalVec().y * (double) blockpattern$patternhelper.getHeight();
 
 			if (flag1) {
 				++d2;
 			}
 
 			if (blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X) {
-				d7 = d2 + (1.0D - entityIn.getLastPortalVec().xCoord) * (double) blockpattern$patternhelper.getWidth()
+				d7 = d2 + (1.0D - entityIn.getLastPortalVec().x) * (double) blockpattern$patternhelper.getWidth()
 						* (double) blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
 			} else {
-				d5 = d2 + (1.0D - entityIn.getLastPortalVec().xCoord) * (double) blockpattern$patternhelper.getWidth()
+				d5 = d2 + (1.0D - entityIn.getLastPortalVec().x) * (double) blockpattern$patternhelper.getWidth()
 						* (double) blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
 			}
 

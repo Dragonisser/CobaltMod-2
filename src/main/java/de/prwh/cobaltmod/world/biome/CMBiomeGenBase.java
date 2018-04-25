@@ -27,8 +27,8 @@ public class CMBiomeGenBase extends Biome {
 		super(properties);
 		properties.setRainDisabled();
 		properties.setRainfall(0.0F);
-		this.theBiomeDecorator.flowersPerChunk = 4;
-		CMBiomeGenBase.biomeDec = this.theBiomeDecorator;
+		this.decorator.flowersPerChunk = 4;
+		CMBiomeGenBase.biomeDec = this.decorator;
 	}
 	
 	public static BiomeDecorator getBiomeDecorator() {

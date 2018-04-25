@@ -25,11 +25,10 @@ public class BlockBlueFire extends BlockFire {
 		this.setSoundType(SoundType.CLOTH);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
 		if (!(CMContent.PORTAL_COBALT).trySpawnPortal(worldIn, pos)) {
-			if (!worldIn.getBlockState(pos.down()).isFullyOpaque() && !this.canNeighborCatchFire(worldIn, pos)) {
+			if (!worldIn.getBlockState(pos.down()).isFullCube() && !this.canNeighborCatchFire(worldIn, pos)) {
 				worldIn.setBlockToAir(pos);
 			} else {
 				worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn) + worldIn.rand.nextInt(10));

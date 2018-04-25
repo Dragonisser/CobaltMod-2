@@ -47,25 +47,25 @@ public class WorldGeneratorDim implements IWorldGenerator {
 		this.chunkPos = new BlockPos(RandPosX, 0, RandPosZ);
 		Biome biome = worldIn.getBiome(pos);
 
-		for (int k = 0; k < 3; k++) // How often it tries to spawn in a chunk
+		for (int k = 0; k < 3; k++) // How often it tries to spawn in a chunk - default:3
 		{
-			int oreXCoord = x + rand.nextInt(16) + 8;
+			int oreXCoord = x + rand.nextInt(16);
 			int oreYCoord = rand.nextInt(20) + 20; // Level 20-40
-			int oreZCoord = z + rand.nextInt(16) + 8;
+			int oreZCoord = z + rand.nextInt(16);
 
 			new WorldGenCobaltMineable(CMContent.COBALT_ORE.getDefaultState(), 4).generate(worldIn, rand, new BlockPos(oreXCoord, oreYCoord, oreZCoord));
 		}
 
-		for (int k = 0; k < 5; k++) // How often it tries to spawn in a chunk
+		for (int k = 0; k < 5; k++) // How often it tries to spawn in a chunk - default:5
 		{
-			int oreXCoord = x + rand.nextInt(16) + 8;
+			int oreXCoord = x + rand.nextInt(16);
 			int oreYCoord = rand.nextInt(70); // Level 0-70
-			int oreZCoord = z + rand.nextInt(16) + 8;
+			int oreZCoord = z + rand.nextInt(16);
 
 			new WorldGenCobaltMineable(CMContent.COBALT_STONE.getDefaultState(), 4).generate(worldIn, rand, new BlockPos(oreXCoord, oreYCoord, oreZCoord));
 		}
 
-		for (int l2 = 0; l2 < CMBiomeGenBase.getBiomeDecorator().flowersPerChunk; ++l2) {
+		for (int l2 = 0; l2 < CMBiomeGenBase.getBiomeDecorator().flowersPerChunk; ++l2) { // How often it tries to spawn in a chunk - default:2
 			if (height > 0) {
 				int rand_height = rand.nextInt(height);
 				BlockPos blockpos1 = this.chunkPos.add(x, rand_height, z);
@@ -85,7 +85,7 @@ public class WorldGeneratorDim implements IWorldGenerator {
 			}
 		}
 
-		for (int i = 0; i < 4; i++) // How often it tries to spawn in a chunk
+		for (int i = 0; i < 4; i++) // How often it tries to spawn in a chunk - default:4
 		{
 			Block block = worldIn.getBlockState(pos).getBlock();
 			boolean tree_gen = false;
@@ -94,11 +94,18 @@ public class WorldGeneratorDim implements IWorldGenerator {
 					for (int b = -5; b < 5; b++) {
 						block = worldIn.getBlockState(pos.add(a, 1, b)).getBlock();
 						if (block != CMContent.COBEX_LOG) {
-							tree_gen = true;
+							
+							int chunkX = pos.getX() >> 4;
+							int chunkZ = pos.getZ() >> 4;
+							
+							if((pos.getX() + 3) >> 4 > chunkX || (pos.getX() - 3) >> 4 < chunkX || (pos.getZ() + 3) >> 4 > chunkZ || (pos.getZ() - 3) >> 4 < chunkZ) {
+								tree_gen = false;
+							} else {
+								tree_gen = true;
+							}
 						} else {
 							tree_gen = false;
 						}
-
 					}
 				}
 

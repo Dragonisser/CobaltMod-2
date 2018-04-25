@@ -24,6 +24,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -36,6 +37,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -191,11 +193,11 @@ public class BlockPortalCobalt extends BlockPortal {
 				} else if (player.capabilities.isCreativeMode || player.getEntityData().getInteger("CM_UNTILPORTAL") <= 0) {
 					if (setPortalInformation(player, pos)) {
 						if (player.dimension != CMMain.cobaltdimension) {
-							mcServer.getPlayerList().transferPlayerToDimension(player, CMMain.cobaltdimension, new CMTeleporter(mcServer.worldServerForDimension(CMMain.cobaltdimension)));
+							mcServer.getPlayerList().transferPlayerToDimension(player, CMMain.cobaltdimension, new CMTeleporter(DimensionManager.getWorld(CMMain.cobaltdimension)));
 							player.getEntityData().setInteger("CM_UNTILPORTAL", 300);
 							player.timeUntilPortal = 15;
 						} else {
-							mcServer.getPlayerList().transferPlayerToDimension(player, 0, new CMTeleporter(mcServer.worldServerForDimension(0)));
+							mcServer.getPlayerList().transferPlayerToDimension(player, 0, new CMTeleporter(DimensionManager.getWorld(0)));
 							player.getEntityData().setInteger("CM_UNTILPORTAL", 300);
 							player.timeUntilPortal = 15;
 						}
@@ -208,43 +210,6 @@ public class BlockPortalCobalt extends BlockPortal {
 	}
 
 	/**
-	 * Uses the given Class, object and the two field names to try reflect a field
-	 * in the given class
-	 * 
-	 * Just a test ¯\_(^_^)_/¯
-	 * 
-	 * System.out.println(getClassField(Entity.class, entityIn,
-	 * "lastPortalPos1", "field_181016_an1"));
-	 * 
-	 * @param className
-	 * @param object
-	 * @param fieldName
-	 * @param altFieldName
-	 * @return
-	 */
-	@SuppressWarnings("unused")
-	private Object getClassField(Class<?> className, Object object, String fieldName, String altFieldName) {
-
-		Field reflection;
-
-		try {
-			reflection = className.getDeclaredField(fieldName);
-			reflection.setAccessible(true);
-
-			return reflection.get(object);
-		} catch (Exception e) {
-			try {
-				reflection = className.getDeclaredField(altFieldName);
-				reflection.setAccessible(true);
-				return reflection.get(object);
-			} catch (Exception e1) {
-				CMMain.getLogger().error("ERROR - Reflection couldnt find Field - " + fieldName + " or " + altFieldName + ". Report to ModCreator");
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * Uses reflection to get the 'lastPortalPos' of the entity
 	 * 
 	 * @param entity
@@ -254,8 +219,7 @@ public class BlockPortalCobalt extends BlockPortal {
 		Field lastPortalPos;
 
 		try {
-			lastPortalPos = Entity.class.getDeclaredField("lastPortalPos");
-			lastPortalPos.setAccessible(true);
+			lastPortalPos = getClassField(Entity.class, entity, "lastPortalPos", "field_181016_an");
 
 			return (BlockPos) lastPortalPos.get(entity);
 		} catch (Exception e) {
@@ -279,13 +243,10 @@ public class BlockPortalCobalt extends BlockPortal {
 		Field teleportDirection;
 
 		try {
-			lastPortalPos = Entity.class.getDeclaredField("lastPortalPos");
-			lastPortalVec = Entity.class.getDeclaredField("lastPortalVec");
-			teleportDirection = Entity.class.getDeclaredField("teleportDirection");
 
-			lastPortalPos.setAccessible(true);
-			lastPortalVec.setAccessible(true);
-			teleportDirection.setAccessible(true);
+			lastPortalPos = getClassField(Entity.class, entity, "lastPortalPos", "field_181016_an");
+			lastPortalVec = getClassField(Entity.class, entity, "lastPortalVec", "field_181017_ao");
+			teleportDirection = getClassField(Entity.class, entity, "teleportDirection", "field_181018_ap");
 
 			lastPortalPos.set(entity, pos);
 			BlockPattern.PatternHelper blockpattern$patternhelper = this.createPatternHelper(entity.world, pos);
@@ -302,9 +263,46 @@ public class BlockPortalCobalt extends BlockPortal {
 
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		}
+	}
+
+	/**
+	 * Uses the given Class, object and the two field names to try reflect a field
+	 * in the given class
+	 * 
+	 * Just a test ¯\_(^_^)_/¯
+	 * 
+	 * System.out.println(getClassField(Entity.class, entityIn, "lastPortalPos1",
+	 * "field_181016_an1"));
+	 * 
+	 * @param className
+	 * @param object
+	 * @param fieldName
+	 * @param altFieldName
+	 * @return
+	 */
+	private Field getClassField(Class<?> className, Object object, String fieldName, String altFieldName) {
+		try {
+			Field reflection;
+			Field altReflection;
+			boolean developmentEnvironment = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
+			
+			if (developmentEnvironment) {
+				reflection = className.getDeclaredField(fieldName);
+				reflection.setAccessible(true);
+				return reflection;
+			} else {
+				altReflection = className.getDeclaredField(altFieldName);
+				altReflection.setAccessible(true);
+				return altReflection;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			CMMain.getLogger().error("ERROR - Reflection couldnt find Field - " + fieldName + " or " + altFieldName + ". Report to ModCreator");
+		}
+		return null;
 	}
 
 	/**
@@ -320,13 +318,9 @@ public class BlockPortalCobalt extends BlockPortal {
 		Field teleportDirection;
 
 		try {
-			lastPortalPos = Entity.class.getDeclaredField("lastPortalPos");
-			lastPortalVec = Entity.class.getDeclaredField("lastPortalVec");
-			teleportDirection = Entity.class.getDeclaredField("teleportDirection");
-
-			lastPortalPos.setAccessible(true);
-			lastPortalVec.setAccessible(true);
-			teleportDirection.setAccessible(true);
+			lastPortalPos = getClassField(Entity.class, entity, "lastPortalPos", "field_181016_an");
+			lastPortalVec = getClassField(Entity.class, entity, "lastPortalVec", "field_181017_ao");
+			teleportDirection = getClassField(Entity.class, entity, "teleportDirection", "field_181018_ap");
 
 			System.out.println(lastPortalPos.get(entity));
 			System.out.println(lastPortalVec.get(entity));
@@ -334,7 +328,6 @@ public class BlockPortalCobalt extends BlockPortal {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 	}
 

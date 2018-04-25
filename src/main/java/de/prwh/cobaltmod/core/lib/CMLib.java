@@ -51,7 +51,7 @@ public class CMLib {
 		entityitem.posZ = pos.getZ();
 		entityitem.setPickupDelay(delay);
 		if (itemstack.hasTagCompound()) {
-			entityitem.getEntityItem().setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
+			entityitem.getItem().setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
 		}
 		world.spawnEntity(entityitem);
 	}

@@ -3,8 +3,6 @@ package de.prwh.cobaltmod.world.dim;
 import java.util.List;
 import java.util.Random;
 
-import javax.annotation.Nullable;
-
 import de.prwh.cobaltmod.core.api.CMContent;
 import de.prwh.cobaltmod.world.gen.feature.MapGenCMCaves;
 import net.minecraft.block.BlockFalling;
@@ -25,10 +23,7 @@ import net.minecraft.world.gen.ChunkProviderSettings;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
-import net.minecraft.world.gen.structure.MapGenMineshaft;
 import net.minecraft.world.gen.structure.MapGenScatteredFeature;
-import net.minecraft.world.gen.structure.MapGenStronghold;
-import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraft.world.gen.structure.StructureOceanMonument;
 
 public class CMChunkGenerator implements IChunkGenerator {
@@ -50,9 +45,6 @@ public class CMChunkGenerator implements IChunkGenerator {
 	private IBlockState oceanBlock = Blocks.WATER.getDefaultState();
 	private double[] depthBuffer = new double[256];
 	private MapGenBase caveGenerator = new MapGenCMCaves();
-	private MapGenStronghold strongholdGenerator = new MapGenStronghold();
-	private MapGenVillage villageGenerator = new MapGenVillage();
-	private MapGenMineshaft mineshaftGenerator = new MapGenMineshaft();
 	private MapGenScatteredFeature scatteredFeatureGenerator = new MapGenScatteredFeature();
 	private StructureOceanMonument oceanMonumentGenerator = new StructureOceanMonument();
 	private Biome[] biomesForGeneration;
@@ -179,17 +171,14 @@ public class CMChunkGenerator implements IChunkGenerator {
 		}
 	}
 
-	public Chunk provideChunk(int x, int z) {
+	public Chunk generateChunk(int x, int z) {
 		this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
 		ChunkPrimer chunkprimer = new ChunkPrimer();
 		this.setBlocksInChunk(x, z, chunkprimer);
 		this.biomesForGeneration = this.world.getBiomeProvider().getBiomes(this.biomesForGeneration, x * 16, z * 16, 16, 16);
 		this.replaceBiomeBlocks(x, z, chunkprimer, this.biomesForGeneration);
 
-		// System.out.println("I wanna put down some caves");
-
 		if (this.settings.useCaves) {
-			// System.out.println("YAY CAVES");
 			this.caveGenerator.generate(this.world, x, z, chunkprimer);
 		}
 
@@ -360,21 +349,13 @@ public class CMChunkGenerator implements IChunkGenerator {
 		return biome.getSpawnableList(creatureType);
 	}
 
-	@Nullable
-	public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position, boolean p_180513_4_) {
-		return !this.mapFeaturesEnabled ? null
-				: ("Stronghold".equals(structureName) && this.strongholdGenerator != null ? this.strongholdGenerator.getClosestStrongholdPos(worldIn, position, p_180513_4_)
-						: ("Monument".equals(structureName) && this.oceanMonumentGenerator != null ? this.oceanMonumentGenerator.getClosestStrongholdPos(worldIn, position, p_180513_4_)
-								: ("Village".equals(structureName) && this.villageGenerator != null ? this.villageGenerator.getClosestStrongholdPos(worldIn, position, p_180513_4_)
-										: ("Mineshaft".equals(structureName) && this.mineshaftGenerator != null ? this.mineshaftGenerator.getClosestStrongholdPos(worldIn, position, p_180513_4_)
-												: ("Temple".equals(structureName) && this.scatteredFeatureGenerator != null
-														? this.scatteredFeatureGenerator.getClosestStrongholdPos(worldIn, position, p_180513_4_)
-														: null)))));
-	}
-
 	public void recreateStructures(Chunk chunkIn, int x, int z) {
 		if (this.mapFeaturesEnabled) {
 
 		}
+	}
+
+	public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored) {
+		return null;
 	}
 }
