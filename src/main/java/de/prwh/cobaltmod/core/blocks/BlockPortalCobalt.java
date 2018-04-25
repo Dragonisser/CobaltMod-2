@@ -208,6 +208,43 @@ public class BlockPortalCobalt extends BlockPortal {
 	}
 
 	/**
+	 * Uses the given Class, object and the two field names to try reflect a field
+	 * in the given class
+	 * 
+	 * Just a test ¯\_(^_^)_/¯
+	 * 
+	 * System.out.println(getClassField(Entity.class, entityIn,
+	 * "lastPortalPos1", "field_181016_an1"));
+	 * 
+	 * @param className
+	 * @param object
+	 * @param fieldName
+	 * @param altFieldName
+	 * @return
+	 */
+	@SuppressWarnings("unused")
+	private Object getClassField(Class<?> className, Object object, String fieldName, String altFieldName) {
+
+		Field reflection;
+
+		try {
+			reflection = className.getDeclaredField(fieldName);
+			reflection.setAccessible(true);
+
+			return reflection.get(object);
+		} catch (Exception e) {
+			try {
+				reflection = className.getDeclaredField(altFieldName);
+				reflection.setAccessible(true);
+				return reflection.get(object);
+			} catch (Exception e1) {
+				CMMain.getLogger().error("ERROR - Reflection couldnt find Field - " + fieldName + " or " + altFieldName + ". Report to ModCreator");
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Uses reflection to get the 'lastPortalPos' of the entity
 	 * 
 	 * @param entity
@@ -215,6 +252,7 @@ public class BlockPortalCobalt extends BlockPortal {
 	 */
 	private BlockPos getLastPortalPos(Entity entity) {
 		Field lastPortalPos;
+
 		try {
 			lastPortalPos = Entity.class.getDeclaredField("lastPortalPos");
 			lastPortalPos.setAccessible(true);

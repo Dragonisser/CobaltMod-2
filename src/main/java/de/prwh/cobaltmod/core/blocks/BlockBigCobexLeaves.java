@@ -38,9 +38,7 @@ public class BlockBigCobexLeaves extends BlockLeaves {
 
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 		super.updateTick(worldIn, pos, state, rand);
-		System.out.println(state.getValue(CHECK_DECAY));
-		System.out.println(state.getValue(DECAYABLE));
-		
+
 		if (!worldIn.isRemote) {
 			for (int i = 0; i < 5; ++i) {
 				BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
