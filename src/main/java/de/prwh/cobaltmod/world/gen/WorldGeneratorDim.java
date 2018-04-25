@@ -50,16 +50,16 @@ public class WorldGeneratorDim implements IWorldGenerator {
 		for (int k = 0; k < 3; k++) // How often it tries to spawn in a chunk
 		{
 			int oreXCoord = x + rand.nextInt(16) + 8;
-			int oreYCoord = rand.nextInt(20) + 20; // Ebene 0 - 25
+			int oreYCoord = rand.nextInt(20) + 20; // Level 20-40
 			int oreZCoord = z + rand.nextInt(16) + 8;
 
 			new WorldGenCobaltMineable(CMContent.COBALT_ORE.getDefaultState(), 4).generate(worldIn, rand, new BlockPos(oreXCoord, oreYCoord, oreZCoord));
 		}
-		
+
 		for (int k = 0; k < 5; k++) // How often it tries to spawn in a chunk
 		{
 			int oreXCoord = x + rand.nextInt(16) + 8;
-			int oreYCoord = rand.nextInt(70); // Ebene 0 - 25
+			int oreYCoord = rand.nextInt(70); // Level 0-70
 			int oreZCoord = z + rand.nextInt(16) + 8;
 
 			new WorldGenCobaltMineable(CMContent.COBALT_STONE.getDefaultState(), 4).generate(worldIn, rand, new BlockPos(oreXCoord, oreYCoord, oreZCoord));
@@ -85,7 +85,7 @@ public class WorldGeneratorDim implements IWorldGenerator {
 			}
 		}
 
-		for (int i = 0; i < 3; i++) // How often it tries to spawn in a chunk
+		for (int i = 0; i < 4; i++) // How often it tries to spawn in a chunk
 		{
 			Block block = worldIn.getBlockState(pos).getBlock();
 			boolean tree_gen = false;
@@ -116,17 +116,16 @@ public class WorldGeneratorDim implements IWorldGenerator {
 			}
 			double d = Math.random();
 
-			if (d < 0.33) {
+			if (d < 0.50) {
 				new WorldGenCMTallGrass().generate(worldIn, rand, pos);
 			}
 		}
 	}
 
-	@SuppressWarnings("unused")
 	public void generateSurface(World worldIn, Random rand, int x, int z) {
 
-		int RandPosX = x + rand.nextInt(16) + 8;
-		int RandPosZ = z + rand.nextInt(16) + 8;
-		int height = worldIn.getHeight(RandPosX, RandPosZ);
+		// int RandPosX = x + rand.nextInt(16) + 8;
+		// int RandPosZ = z + rand.nextInt(16) + 8;
+		// int height = worldIn.getHeight(RandPosX, RandPosZ);
 	}
 }

@@ -32,13 +32,15 @@ public class BlockBigCobexLeaves extends BlockLeaves {
 		this.setRegistryName("big_cobex_leaves");
 		this.setHardness(0.2F);
 		this.setSoundType(SoundType.PLANT);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true))
-				.withProperty(DECAYABLE, Boolean.valueOf(true)));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
 		this.setTickRandomly(true);
 	}
 
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-
+		super.updateTick(worldIn, pos, state, rand);
+		System.out.println(state.getValue(CHECK_DECAY));
+		System.out.println(state.getValue(DECAYABLE));
+		
 		if (!worldIn.isRemote) {
 			for (int i = 0; i < 5; ++i) {
 				BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
@@ -64,8 +66,7 @@ public class BlockBigCobexLeaves extends BlockLeaves {
 	}
 
 	@Override
-	public NonNullList<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos,
-			int fortune) {
+	public NonNullList<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune) {
 		return NonNullList.withSize(1, new ItemStack(this));
 	}
 
@@ -84,8 +85,7 @@ public class BlockBigCobexLeaves extends BlockLeaves {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
-			EnumFacing side) {
+	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
 		return true;
 	}
 
@@ -97,8 +97,7 @@ public class BlockBigCobexLeaves extends BlockLeaves {
 	}
 
 	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(DECAYABLE, Boolean.valueOf((meta & 4) == 0))
-				.withProperty(CHECK_DECAY, Boolean.valueOf((meta & 8) > 0));
+		return this.getDefaultState().withProperty(DECAYABLE, Boolean.valueOf((meta & 4) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf((meta & 8) > 0));
 	}
 
 	/**

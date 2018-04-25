@@ -6,6 +6,7 @@ import net.minecraft.block.BlockSlab;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraftforge.fluids.Fluid;
 
 /**
  * Contains all of the Blocks or Item the Mod has added
@@ -21,7 +22,7 @@ public enum CMContent {
 	public static ArmorMaterial COBALT_ARMOR;
 
 	// Fluid
-	// public static Fluid darkwater_fluid;
+	public static Fluid DARKWATER_FLUID;
 
 	// Blocks
 	public static Block COBALT_ORE;

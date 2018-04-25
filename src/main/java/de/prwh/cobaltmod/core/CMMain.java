@@ -17,12 +17,15 @@ import de.prwh.cobaltmod.world.gen.WorldGeneratorDim;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -30,6 +33,8 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+//Seed 4650873961059636830
 
 @Mod(modid = CMMain.MODID, name = "CobaltMod", version = CMMain.VERSION, dependencies = "after:BiomesOPlenty")
 public class CMMain {
@@ -63,22 +68,9 @@ public class CMMain {
 	// @SideOnly(Side.CLIENT)
 	// public static IRenderHandler skyRenderer;
 
-	// Biome
-	// public static int biomeplainsid;
-	// public static int biomehillsid;
-	// public static int biomeswampid;
-	// public static int biometallid;
-	// public static int biomemountainsid;
-
-	public static int biomecavesid;
-
 	// Dev
 	// public static boolean devenabled;
 	// public static boolean templeenabled;
-
-	private static String GENERATION = "Generation";
-	// private static String BLOCKS = "Blocks";
-	// private static String ITEMS = "Items";
 
 	@SidedProxy(clientSide = "de.prwh.cobaltmod.core.ClientProxyCobalt", serverSide = "de.prwh.cobaltmod.core.CommonProxyCobalt")
 	public static CommonProxyCobalt proxy;
@@ -135,17 +127,7 @@ public class CMMain {
 		// false).getBoolean(false);
 		// config.get("Development", "Dev Enabled", false).comment = "To enable
 		// the Development Items/Blocks.";
-		//
-		config.setCategoryComment(GENERATION,
-				"Change the Ids here if it conflicts with others. If you have large stone biomes, like highlands without grass and such, there is a possible id conflict with other mods.");
 
-		// biomehillsid = config.get(GENERATION, "Blue Hills", 180).getInt();
-		// biomeplainsid = config.get(GENERATION, "Cobalt Plains",181).getInt();
-		// biomeswampid = config.get(GENERATION, "Deep Swamp", 182).getInt();
-		// biometallid = config.get(GENERATION, "Tall Forest", 183).getInt();
-		// biomemountainsid = config.get(GENERATION, "Highlands", 184).getInt();
-		// biomecavesid = config.get(GENERATION, "Cobalt Caves", 185).getInt();
-		//
 		// templeenabled = config.get(GENERATION, "Temple Enabled",
 		// true).getBoolean(true);
 		// config.get(GENERATION, "Temple Enabled", true).comment = "To enable
@@ -156,10 +138,8 @@ public class CMMain {
 
 		config.save();
 
-		// Fluid
-		// CMContent.darkwater_fluid = new
-		// BlockFluidDarkWater("darkwater_fluid");
-		// FluidRegistry.registerFluid(CMContent.darkwater_fluid);
+		CMContent.DARKWATER_FLUID = new Fluid("darkwater_fluid", new ResourceLocation(CMMain.MODID + "blocks/darkwater_flow"), new ResourceLocation(CMMain.MODID + "blocks/darkwater_flow"));
+		FluidRegistry.registerFluid(CMContent.DARKWATER_FLUID);
 
 		// EnumMaterial
 		CMContent.COBALT_ARMOR = EnumHelper.addArmorMaterial("COBALT_ARMOR", CMMain.MODID + ":cobalt_armor", 50, new int[] { 4, 9, 7, 4 }, 7, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0);
@@ -319,9 +299,6 @@ public class CMMain {
 		// Neutralizer
 		// GameRegistry.registerTileEntity(TileEntityNeutralizer.class,
 		// "tileentityneutralizer");
-
-		// Worldgenerator Registration
-		// GameRegistry.registerWorldGenerator(new WorldGeneratorDim(), 0);
 
 		/**
 		 * Use with caution Reason because it lags so intense. Not so good .-.

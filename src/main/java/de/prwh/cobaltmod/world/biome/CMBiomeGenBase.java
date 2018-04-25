@@ -35,25 +35,15 @@ public class CMBiomeGenBase extends Biome {
 		return biomeDec;
 	}
 	
-
 	public static void init() {
 		biomemountains = new BiomeGenCobaltMountains(new Biome.BiomeProperties("Higherlands").setBaseHeight(2.0F).setHeightVariation(0.25F))
 				.setRegistryName("higherlands");
 		biomeforest = new BiomeGenCobexForest(new Biome.BiomeProperties("Cobex Forest").setBaseHeight(0.1F).setHeightVariation(0.2F))
 				.setRegistryName("cobex_forest");
 		biomeswamp = new BiomeGenCobaltSwamp(new Biome.BiomeProperties("Deep Swamp").setBaseHeight(-0.2F).setHeightVariation(0.1F)).setRegistryName("deep_swamp");
-		biometall = new BiomeGenCobaltTall(new Biome.BiomeProperties("Tall Forest").setBaseHeight(0.3F).setHeightVariation(0.2F)).setRegistryName("tall_forest");
+		biometall = new BiomeGenCobaltTall(new Biome.BiomeProperties("Tall Forest").setBaseHeight(0.4F).setHeightVariation(0.2F)).setRegistryName("tall_forest");
 		biomehills = new BiomeGenCobaltHills(new Biome.BiomeProperties("Blue Hills").setBaseHeight(0.8F).setHeightVariation(0.3F)).setRegistryName("blue_hills");
 		biomecaves = new BiomeGenCobaltCaves(new Biome.BiomeProperties("Cobalt Caves")).setRegistryName("cobalt_caves");
-
-		// biomeswamp = new BiomeGenCobaltSwamp(CMMain.biomeswampid,
-		// false).setBiomeName("Deep Swamp");
-		// biometall = new BiomeGenCobaltTall(CMMain.biometallid,
-		// false).setBiomeName("Tall Forest");
-		// biomehills = new BiomeGenCobaltHills(CMMain.biomehillsid,
-		// false).setBiomeName("Blue Mountains");
-		// biomecaves = new BiomeGenCobaltCaves(CMMain.biomecavesid,
-		// false).setBiomeName("Cobalt Caves");
 
 		GameRegistry.register(biomemountains);
 		GameRegistry.register(biomeforest);

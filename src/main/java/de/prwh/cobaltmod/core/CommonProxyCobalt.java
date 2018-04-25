@@ -4,9 +4,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class CommonProxyCobalt {
-	public int addArmor(String string) {
-		return 0;
-	}
 
 	public void init() {
 	}

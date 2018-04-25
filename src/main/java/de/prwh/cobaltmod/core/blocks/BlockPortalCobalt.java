@@ -196,7 +196,6 @@ public class BlockPortalCobalt extends BlockPortal {
 							player.timeUntilPortal = 15;
 						} else {
 							mcServer.getPlayerList().transferPlayerToDimension(player, 0, new CMTeleporter(mcServer.worldServerForDimension(0)));
-							getPortalInformation(player);
 							player.getEntityData().setInteger("CM_UNTILPORTAL", 300);
 							player.timeUntilPortal = 15;
 						}
@@ -208,6 +207,12 @@ public class BlockPortalCobalt extends BlockPortal {
 		}
 	}
 
+	/**
+	 * Uses reflection to get the 'lastPortalPos' of the entity
+	 * 
+	 * @param entity
+	 * @return
+	 */
 	private BlockPos getLastPortalPos(Entity entity) {
 		Field lastPortalPos;
 		try {
@@ -221,6 +226,14 @@ public class BlockPortalCobalt extends BlockPortal {
 		return null;
 	}
 
+	/**
+	 * Uses reflection to set 'lastPortalPos', 'lastPortalVec' and
+	 * 'teleportDirection' of the entity.
+	 * 
+	 * @param entity
+	 * @param pos
+	 * @return true/false
+	 */
 	private boolean setPortalInformation(Entity entity, BlockPos pos) {
 
 		Field lastPortalPos;
@@ -238,11 +251,14 @@ public class BlockPortalCobalt extends BlockPortal {
 
 			lastPortalPos.set(entity, pos);
 			BlockPattern.PatternHelper blockpattern$patternhelper = this.createPatternHelper(entity.world, pos);
-			double d0 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? (double) blockpattern$patternhelper.getFrontTopLeft().getZ() : (double) blockpattern$patternhelper.getFrontTopLeft().getX();
+			double d0 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? (double) blockpattern$patternhelper.getFrontTopLeft().getZ()
+					: (double) blockpattern$patternhelper.getFrontTopLeft().getX();
 			double d1 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? entity.posZ : entity.posX;
-			d1 = Math.abs(MathHelper.pct(d1 - (double) (blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE ? 1 : 0), d0, d0 - (double) blockpattern$patternhelper.getWidth()));
-			double d2 = MathHelper.pct(entity.posY - 1.0D, (double) blockpattern$patternhelper.getFrontTopLeft().getY(), (double) (blockpattern$patternhelper.getFrontTopLeft().getY() - blockpattern$patternhelper.getHeight()));
-			
+			d1 = Math.abs(MathHelper.pct(d1 - (double) (blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE ? 1 : 0), d0,
+					d0 - (double) blockpattern$patternhelper.getWidth()));
+			double d2 = MathHelper.pct(entity.posY - 1.0D, (double) blockpattern$patternhelper.getFrontTopLeft().getY(),
+					(double) (blockpattern$patternhelper.getFrontTopLeft().getY() - blockpattern$patternhelper.getHeight()));
+
 			lastPortalVec.set(entity, new Vec3d(d1, d2, 0.0D));
 			teleportDirection.set(entity, blockpattern$patternhelper.getForwards());
 
@@ -253,7 +269,14 @@ public class BlockPortalCobalt extends BlockPortal {
 		}
 	}
 
-	private void getPortalInformation(Entity entity) {
+	/**
+	 * Uses reflection to get 'lastPortalPos', 'lastPortalVec' and
+	 * 'teleportDirection' of the entity and print it to console.
+	 * 
+	 * @param entity
+	 */
+	@SuppressWarnings("unused")
+	private void printPortalInformation(Entity entity) {
 		Field lastPortalPos;
 		Field lastPortalVec;
 		Field teleportDirection;
@@ -266,6 +289,10 @@ public class BlockPortalCobalt extends BlockPortal {
 			lastPortalPos.setAccessible(true);
 			lastPortalVec.setAccessible(true);
 			teleportDirection.setAccessible(true);
+
+			System.out.println(lastPortalPos.get(entity));
+			System.out.println(lastPortalVec.get(entity));
+			System.out.println(teleportDirection.get(entity));
 
 		} catch (Exception e) {
 			e.printStackTrace();
