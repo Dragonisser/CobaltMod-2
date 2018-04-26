@@ -219,7 +219,7 @@ public class BlockPortalCobalt extends BlockPortal {
 		Field lastPortalPos;
 
 		try {
-			lastPortalPos = getClassField(Entity.class, entity, "lastPortalPos", "field_181016_an");
+			lastPortalPos = getClassField(Entity.class, "lastPortalPos", "field_181016_an");
 
 			return (BlockPos) lastPortalPos.get(entity);
 		} catch (Exception e) {
@@ -244,9 +244,9 @@ public class BlockPortalCobalt extends BlockPortal {
 
 		try {
 
-			lastPortalPos = getClassField(Entity.class, entity, "lastPortalPos", "field_181016_an");
-			lastPortalVec = getClassField(Entity.class, entity, "lastPortalVec", "field_181017_ao");
-			teleportDirection = getClassField(Entity.class, entity, "teleportDirection", "field_181018_ap");
+			lastPortalPos = getClassField(Entity.class, "lastPortalPos", "field_181016_an");
+			lastPortalVec = getClassField(Entity.class, "lastPortalVec", "field_181017_ao");
+			teleportDirection = getClassField(Entity.class, "teleportDirection", "field_181018_ap");
 
 			lastPortalPos.set(entity, pos);
 			BlockPattern.PatternHelper blockpattern$patternhelper = this.createPatternHelper(entity.world, pos);
@@ -277,30 +277,28 @@ public class BlockPortalCobalt extends BlockPortal {
 	 * System.out.println(getClassField(Entity.class, entityIn, "lastPortalPos1",
 	 * "field_181016_an1"));
 	 * 
-	 * @param className
-	 * @param object
+	 * @param clazz
 	 * @param fieldName
 	 * @param altFieldName
 	 * @return
 	 */
-	private Field getClassField(Class<?> className, Object object, String fieldName, String altFieldName) {
+	private Field getClassField(Class<?> clazz, String fieldName, String altFieldName) {
 		try {
 			Field reflection;
-			Field altReflection;
 			boolean developmentEnvironment = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
 			
 			if (developmentEnvironment) {
-				reflection = className.getDeclaredField(fieldName);
+				reflection = clazz.getDeclaredField(fieldName);
 				reflection.setAccessible(true);
 				return reflection;
 			} else {
-				altReflection = className.getDeclaredField(altFieldName);
-				altReflection.setAccessible(true);
-				return altReflection;
+				reflection = clazz.getDeclaredField(altFieldName);
+				reflection.setAccessible(true);
+				return reflection;
 			}
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			CMMain.getLogger().error("ERROR - Reflection couldnt find Field - " + fieldName + " or " + altFieldName + ". Report to ModCreator");
+			CMMain.getLogger().catching(ex);
 		}
 		return null;
 	}
@@ -318,9 +316,9 @@ public class BlockPortalCobalt extends BlockPortal {
 		Field teleportDirection;
 
 		try {
-			lastPortalPos = getClassField(Entity.class, entity, "lastPortalPos", "field_181016_an");
-			lastPortalVec = getClassField(Entity.class, entity, "lastPortalVec", "field_181017_ao");
-			teleportDirection = getClassField(Entity.class, entity, "teleportDirection", "field_181018_ap");
+			lastPortalPos = getClassField(Entity.class, "lastPortalPos", "field_181016_an");
+			lastPortalVec = getClassField(Entity.class, "lastPortalVec", "field_181017_ao");
+			teleportDirection = getClassField(Entity.class, "teleportDirection", "field_181018_ap");
 
 			System.out.println(lastPortalPos.get(entity));
 			System.out.println(lastPortalVec.get(entity));
