@@ -280,12 +280,12 @@ public class BlockPortalCobalt extends BlockPortal {
 	 * @param clazz
 	 * @param fieldName
 	 * @param altFieldName
-	 * @return
+	 * @return Field<reflection>
 	 */
 	private Field getClassField(Class<?> clazz, String fieldName, String altFieldName) {
+		boolean developmentEnvironment = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
 		try {
 			Field reflection;
-			boolean developmentEnvironment = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
 			
 			if (developmentEnvironment) {
 				reflection = clazz.getDeclaredField(fieldName);
@@ -296,8 +296,8 @@ public class BlockPortalCobalt extends BlockPortal {
 				reflection.setAccessible(true);
 				return reflection;
 			}
-		} catch (Exception ex) {
-			CMMain.getLogger().error("ERROR - Reflection couldnt find Field - " + fieldName + " or " + altFieldName + ". Report to ModCreator");
+		} catch (NoSuchFieldException ex) {
+			CMMain.getLogger().error("ERROR - Reflection couldnt find Field - " + (developmentEnvironment ? fieldName : altFieldName) + ". Report to ModCreator");
 			CMMain.getLogger().catching(ex);
 		}
 		return null;
