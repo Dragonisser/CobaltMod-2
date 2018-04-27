@@ -28,7 +28,6 @@ import net.minecraft.launchwrapper.Launch;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -283,10 +282,10 @@ public class BlockPortalCobalt extends BlockPortal {
 	 * @return Field<reflection>
 	 */
 	private Field getClassField(Class<?> clazz, String fieldName, String altFieldName) {
-		boolean developmentEnvironment = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
+		boolean developmentEnvironment = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
 		try {
 			Field reflection;
-			
+
 			if (developmentEnvironment) {
 				reflection = clazz.getDeclaredField(fieldName);
 				reflection.setAccessible(true);
@@ -353,25 +352,27 @@ public class BlockPortalCobalt extends BlockPortal {
 					rand.nextFloat() * 0.4F + 0.8F, false);
 		}
 
-		for (int i = 0; i < 4; ++i) {
-			double d0 = (double) ((float) pos.getX() + rand.nextFloat());
-			double d1 = (double) ((float) pos.getY() + rand.nextFloat());
-			double d2 = (double) ((float) pos.getZ() + rand.nextFloat());
-			double d3 = ((double) rand.nextFloat() - 0.5D) * 0.5D;
-			double d4 = ((double) rand.nextFloat() - 0.5D) * 0.5D;
-			double d5 = ((double) rand.nextFloat() - 0.5D) * 0.5D;
-			int j = rand.nextInt(2) * 2 - 1;
-
-			if (worldIn.getBlockState(pos.west()).getBlock() != this && worldIn.getBlockState(pos.east()).getBlock() != this) {
-				d0 = (double) pos.getX() + 0.5D + 0.25D * (double) j;
-				d3 = (double) (rand.nextFloat() * 2.0F * (float) j);
-			} else {
-				d2 = (double) pos.getZ() + 0.5D + 0.25D * (double) j;
-				d5 = (double) (rand.nextFloat() * 2.0F * (float) j);
-			}
-
-			worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5, new int[0]); // TODO CHANGE THAT
-		}
+		// for (int i = 0; i < 4; ++i) {
+		// double d0 = (double) ((float) pos.getX() + rand.nextFloat());
+		// double d1 = (double) ((float) pos.getY() + rand.nextFloat());
+		// double d2 = (double) ((float) pos.getZ() + rand.nextFloat());
+		// double d3 = ((double) rand.nextFloat() - 0.5D) * 0.5D;
+		// double d4 = ((double) rand.nextFloat() - 0.5D) * 0.5D;
+		// double d5 = ((double) rand.nextFloat() - 0.5D) * 0.5D;
+		// int j = rand.nextInt(2) * 2 - 1;
+		//
+		// if (worldIn.getBlockState(pos.west()).getBlock() != this &&
+		// worldIn.getBlockState(pos.east()).getBlock() != this) {
+		// d0 = (double) pos.getX() + 0.5D + 0.25D * (double) j;
+		// d3 = (double) (rand.nextFloat() * 2.0F * (float) j);
+		// } else {
+		// d2 = (double) pos.getZ() + 0.5D + 0.25D * (double) j;
+		// d5 = (double) (rand.nextFloat() * 2.0F * (float) j);
+		// }
+		//
+		// worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5, new
+		// int[0]); // TODO CHANGE THAT
+		// }
 	}
 
 	/**

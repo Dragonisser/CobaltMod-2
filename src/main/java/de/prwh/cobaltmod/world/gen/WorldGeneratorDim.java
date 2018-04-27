@@ -85,29 +85,15 @@ public class WorldGeneratorDim implements IWorldGenerator {
 			}
 		}
 
-		for (int i = 0; i < 4; i++) // How often it tries to spawn in a chunk - default:4
+		for (int i = 0; i < 20; i++) // How often it tries to spawn in a chunk - default:4
 		{
 			Block block = worldIn.getBlockState(pos).getBlock();
 			boolean tree_gen = false;
 			if (block != CMContent.COBEX_LOG) {
-				for (int a = -5; a < 5; a++) {
-					for (int b = -5; b < 5; b++) {
-						block = worldIn.getBlockState(pos.add(a, 1, b)).getBlock();
-						if (block != CMContent.COBEX_LOG) {
-							
-							int chunkX = pos.getX() >> 4;
-							int chunkZ = pos.getZ() >> 4;
-							
-							if((pos.getX() + 3) >> 4 > chunkX || (pos.getX() - 3) >> 4 < chunkX || (pos.getZ() + 3) >> 4 > chunkZ || (pos.getZ() - 3) >> 4 < chunkZ) {
-								tree_gen = false;
-							} else {
-								tree_gen = true;
-							}
-						} else {
-							tree_gen = false;
-						}
-					}
-				}
+//				int chunkX = pos.getX() >> 4;
+//				int chunkZ = pos.getZ() >> 4;
+//				System.out.println(worldIn.isChunkGeneratedAt(chunkX, chunkZ) + " " + (pos.getX() & 15) + " - " + (pos.getZ() & 15));
+				tree_gen = true;
 
 			}
 			if (tree_gen) {
@@ -123,7 +109,7 @@ public class WorldGeneratorDim implements IWorldGenerator {
 			}
 			double d = Math.random();
 
-			if (d < 0.50) {
+			if (d < 0.10) {
 				new WorldGenCMTallGrass().generate(worldIn, rand, pos);
 			}
 		}
