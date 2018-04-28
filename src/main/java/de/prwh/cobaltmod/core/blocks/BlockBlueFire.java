@@ -10,13 +10,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockBlueFire extends BlockFire {
-
 	protected BlockBlueFire() {
 		super();
-		this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, Integer.valueOf(0))
-				.withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false))
-				.withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false))
-				.withProperty(UPPER, Boolean.valueOf(false)));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, Integer.valueOf(0)).withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false))
+				.withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)).withProperty(UPPER, Boolean.valueOf(false)));
 		this.setTickRandomly(true);
 		this.setUnlocalizedName("blue_fire");
 		this.setRegistryName("blue_fire");
@@ -45,11 +42,10 @@ public class BlockBlueFire extends BlockFire {
 
 		return false;
 	}
-	
-	public boolean isBurning(IBlockAccess world, BlockPos pos)
-    {
-        return true;
-    }
+
+	public boolean isBurning(IBlockAccess world, BlockPos pos) {
+		return true;
+	}
 
 	public boolean canCatchFire(IBlockAccess world, BlockPos pos, EnumFacing face) {
 		return world.getBlockState(pos).getBlock().isFlammable(world, pos, face);

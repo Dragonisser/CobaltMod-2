@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CMBiomeGenBase extends Biome {
@@ -36,13 +37,13 @@ public class CMBiomeGenBase extends Biome {
 	}
 	
 	public static void init() {
-		biomemountains = new BiomeGenCobaltMountains(new Biome.BiomeProperties("Higherlands").setBaseHeight(2.0F).setHeightVariation(0.25F))
+		biomemountains = new BiomeGenCobaltMountains(new Biome.BiomeProperties("Higherlands").setBaseHeight(2.5F).setHeightVariation(0.25F))
 				.setRegistryName("higherlands");
-		biomeforest = new BiomeGenCobexForest(new Biome.BiomeProperties("Cobex Forest").setBaseHeight(0.1F).setHeightVariation(0.2F))
+		biomeforest = new BiomeGenCobexForest(new Biome.BiomeProperties("Cobex Forest").setBaseHeight(0.2F).setHeightVariation(0.2F))
 				.setRegistryName("cobex_forest");
 		biomeswamp = new BiomeGenCobaltSwamp(new Biome.BiomeProperties("Deep Swamp").setBaseHeight(-0.2F).setHeightVariation(0.1F)).setRegistryName("deep_swamp");
-		biometall = new BiomeGenCobaltTall(new Biome.BiomeProperties("Tall Forest").setBaseHeight(0.4F).setHeightVariation(0.2F)).setRegistryName("tall_forest");
-		biomehills = new BiomeGenCobaltHills(new Biome.BiomeProperties("Blue Hills").setBaseHeight(0.8F).setHeightVariation(0.3F)).setRegistryName("blue_hills");
+		biometall = new BiomeGenCobaltTall(new Biome.BiomeProperties("Tall Forest").setBaseHeight(0.7F).setHeightVariation(0.2F)).setRegistryName("tall_forest");
+		biomehills = new BiomeGenCobaltHills(new Biome.BiomeProperties("Blue Hills").setBaseHeight(1.4F).setHeightVariation(0.3F)).setRegistryName("blue_hills");
 		biomecaves = new BiomeGenCobaltCaves(new Biome.BiomeProperties("Cobalt Caves")).setRegistryName("cobalt_caves");
 
 		GameRegistry.register(biomemountains);
@@ -51,6 +52,13 @@ public class CMBiomeGenBase extends Biome {
 		GameRegistry.register(biometall);
 		GameRegistry.register(biomehills);
 		GameRegistry.register(biomecaves);
+		
+		BiomeDictionary.addTypes(biomemountains, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HILLS);
+		BiomeDictionary.addTypes(biomeforest, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.HILLS);
+		BiomeDictionary.addTypes(biomeswamp, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.WET);
+		BiomeDictionary.addTypes(biometall, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.HILLS);
+		BiomeDictionary.addTypes(biomehills, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HILLS);
+		BiomeDictionary.addTypes(biomecaves, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.HILLS);
 	}
 
 	public static void registerWithBiomeDictionary() {

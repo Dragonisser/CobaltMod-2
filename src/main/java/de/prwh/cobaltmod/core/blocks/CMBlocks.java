@@ -14,6 +14,7 @@ import de.prwh.cobaltmod.core.lib.MetaBlockPlant;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
@@ -21,6 +22,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class CMBlocks {
 
@@ -49,11 +51,11 @@ public class CMBlocks {
 		CMContent.BELL_FLOWER = addBlock(new BlockBellFlower());
 		CMContent.GLOW_FLOWER = addBlock(new BlockGlowFlower());
 		CMContent.COBEX_TORCH = addBlock(new BlockCobexTorch());
-		
+
 		CMContent.PORTAL_COBALT = addBlock(new BlockPortalCobalt());
 		CMContent.PORTAL_FRAME = addBlock(new BlockPortalFrame());
 		CMContent.BLUE_FIRE = addBlock(new BlockBlueFire());
-		
+
 		CMContent.BLUE_VINE = addBlock(new BlockBlueVine());
 		CMContent.BIG_COBEX_LEAVES = addBlock(new BlockBigCobexLeaves());
 		CMContent.BIG_COBEX_SAPLING = addBlock(new BlockBigCobexSapling());
@@ -65,14 +67,21 @@ public class CMBlocks {
 	}
 
 	public static void setFireInfo() {
-
+		Blocks.FIRE.setFireInfo(CMContent.COBEX_LOG, 60, 60);
+		Blocks.FIRE.setFireInfo(CMContent.COBEX_WOOD, 60, 60);
+		Blocks.FIRE.setFireInfo(CMContent.BIG_COBEX_LEAVES, 60, 60);
+		Blocks.FIRE.setFireInfo(CMContent.COBEX_LEAVES, 60, 60);
+		Blocks.FIRE.setFireInfo(CMContent.COBEX_SAPLING, 60, 60);
+		Blocks.FIRE.setFireInfo(CMContent.BIG_COBEX_SAPLING, 60, 60);
+		Blocks.FIRE.setFireInfo(CMContent.BLUE_VINE, 60, 60);
+		Blocks.FIRE.setFireInfo(CMContent.BLUE_TALL_GRASS, 60, 60);
 	}
 
 	public static void oredictregister() {
-		// OreDictionary.registerOre("oreCobalt", CMContent.cobaltore);
+		OreDictionary.registerOre("oreCobalt", CMContent.COBALT_ORE);
 		// OreDictionary.registerOre("oreCarthun", CMContent.carthunore);
-		// OreDictionary.registerOre("treeCobex", CMContent.cobexlog);
-		// OreDictionary.registerOre("plankCobex", CMContent.cobexwood);
+		OreDictionary.registerOre("treeCobex", CMContent.COBEX_LOG);
+		OreDictionary.registerOre("plankCobex", CMContent.COBEX_WOOD);
 	}
 
 	public static class BlockData {
@@ -97,12 +106,12 @@ public class CMBlocks {
 	}
 
 	public static void register() {
-		
+
 		BlockSlab hslab = CMContent.COBALT_HALF_SLAB;
 		BlockSlab dSlab = CMContent.COBALT_DOUBLE_SLAB;
 
-		registerWithItemSlab(hslab, hslab, dSlab, hslab.getRegistryName(),true);
-		registerWithItemSlab(dSlab, hslab, dSlab, dSlab.getRegistryName(),false);
+		registerWithItemSlab(hslab, hslab, dSlab, hslab.getRegistryName(), true);
+		registerWithItemSlab(dSlab, hslab, dSlab, dSlab.getRegistryName(), false);
 
 		// leaves
 		// NLib.register(NanpaContent.leaves_jungle);
