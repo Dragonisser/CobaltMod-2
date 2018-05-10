@@ -42,8 +42,7 @@ public enum CMContent {
 	public static BlockPortal PORTAL_COBALT;
 	public static Block COBEX_TORCH;
 
-	public static Block BLUEBERRY_BUSH_FULL;
-	public static Block BLUEBERRY_BUSH_EMPTY;
+	public static Block BLUEBERRY_BUSH;
 	public static Block RITUAL_STONE;
 	public static Block ALTAR_OF_ASSOCIATION;
 	public static Block COBEX_STAIR;

@@ -59,6 +59,8 @@ public class CMBlocks {
 		CMContent.BLUE_VINE = addBlock(new BlockBlueVine());
 		CMContent.BIG_COBEX_LEAVES = addBlock(new BlockBigCobexLeaves());
 		CMContent.BIG_COBEX_SAPLING = addBlock(new BlockBigCobexSapling());
+		
+		CMContent.BLUEBERRY_BUSH = addBlock(new BlockBlueBerryBush());
 
 		register();
 		setFireInfo();

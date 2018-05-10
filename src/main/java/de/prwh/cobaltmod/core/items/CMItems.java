@@ -32,13 +32,15 @@ public class CMItems {
 //		CMContent.COBEX_ARROW = 
 		CMContent.RED_CABBAGE_SEEDS = addItem(
 				new ItemRedCabbageSeeds(CMContent.RED_CABBAGE_CROP, CMContent.COBALT_FARMLAND));
-		CMContent.RED_CABBAGE = addItem(new ItemRedCabbage(1, 2, false));
+		CMContent.RED_CABBAGE = addItem(new ItemRedCabbage(2, 2, false));
 		CMContent.RED_CABBAGE_COOKED = addItem(new ItemRedCabbageCooked(3, 4, false));
 		CMContent.COBEX_SWORD = addItem(new ItemCobexSword(CMContent.COBEX_TOOL));
 		CMContent.COBEX_PICKAXE = addItem(new ItemCobexPickAxe(CMContent.COBEX_TOOL));
 		CMContent.COBEX_SHOVEL = addItem(new ItemCobexShovel(CMContent.COBEX_TOOL));
 		CMContent.COBEX_AXE = addItem(new ItemCobexAxe(CMContent.COBEX_TOOL));
 		CMContent.COBEX_HOE = addItem(new ItemCobexHoe(CMContent.COBEX_TOOL));
+		
+		CMContent.BLUE_BERRY = addItem(new ItemBlueBerry(2, 2, false));
 		
 		//Stuff
 		
