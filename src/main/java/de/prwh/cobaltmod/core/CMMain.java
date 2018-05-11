@@ -10,6 +10,7 @@ import de.prwh.cobaltmod.core.items.CMItems;
 import de.prwh.cobaltmod.handler.AchievementHandler;
 import de.prwh.cobaltmod.handler.RecipeHandler;
 import de.prwh.cobaltmod.handler.event.CMLivingUpdateEventHandler;
+import de.prwh.cobaltmod.handler.event.CMRainEventHandler;
 import de.prwh.cobaltmod.world.biome.CMBiomeGenBase;
 import de.prwh.cobaltmod.world.dim.CMWorldProvider;
 import de.prwh.cobaltmod.world.dim.CMWorldType;
@@ -181,6 +182,7 @@ public class CMMain {
 		// MinecraftForge.EVENT_BUS.register(new
 		// CobaltBlockBreakEventHandler());
 		MinecraftForge.EVENT_BUS.register(new CMLivingUpdateEventHandler());
+		MinecraftForge.EVENT_BUS.register(new CMRainEventHandler());
 		// MinecraftForge.EVENT_BUS.register(new HurtBlocksHandler());
 
 		// Fluid

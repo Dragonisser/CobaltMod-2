@@ -23,8 +23,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 public class BlockCobexSapling extends BlockBush implements IGrowable {
 
 	public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
-	protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.09999999403953552D, 0.0D,
-			0.09999999403953552D, 0.8999999761581421D, 0.800000011920929D, 0.8999999761581421D);
+	protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.09999999403953552D, 0.0D, 0.09999999403953552D, 0.8999999761581421D, 0.800000011920929D, 0.8999999761581421D);
 
 	public BlockCobexSapling() {
 		super(Material.PLANTS);
@@ -90,9 +89,7 @@ public class BlockCobexSapling extends BlockBush implements IGrowable {
 		if (worldIn.getBiome(pos) instanceof BiomeGenCobaltSwamp) {
 			worldgenerator = (WorldGenerator) new WorldGenCobexTrees(true, 4 + rand.nextInt(3), true);
 		}
-		
-		
-		
+
 		int i = 0;
 		int j = 0;
 		boolean flag = false;
@@ -121,9 +118,9 @@ public class BlockCobexSapling extends BlockBush implements IGrowable {
 	}
 
 	/**
-	 * Gets the metadata of the item this Block can drop. This method is called
-	 * when the block gets destroyed. It returns the metadata of the dropped
-	 * item based on the old metadata of the block.
+	 * Gets the metadata of the item this Block can drop. This method is called when
+	 * the block gets destroyed. It returns the metadata of the dropped item based
+	 * on the old metadata of the block.
 	 */
 	public int damageDropped(IBlockState state) {
 		return 0;
