@@ -76,8 +76,10 @@ public class WorldGeneratorDim implements IWorldGenerator {
 					double d1 = Math.random();
 					if (d1 < 0.33) {
 						new WorldGenCMFlowers(CMContent.BELL_FLOWER).generate(worldIn, rand, pos);
-					} else if (d1 > 0.33 && d1 < 0.66) {
+					} else if (d1 > 0.43 && d1 < 0.66) {
 						new WorldGenCMFlowers(CMContent.CLEMATIS_FLOWER).generate(worldIn, rand, pos);
+					} else if (d1 > 0.35 && d1 < 0.55) {
+						new WorldGenCMFlowers(CMContent.BLUEBERRY_BUSH).generate(worldIn, rand, pos);
 					} else {
 						new WorldGenCMFlowers(CMContent.GLOW_FLOWER).generate(worldIn, rand, pos);
 					}
