@@ -14,6 +14,23 @@ public class CMLivingUpdateEventHandler {
 			if (!thePlayer.getEntityData().hasKey("CM_UNTILPORTAL")) {
 				thePlayer.getEntityData().setInteger("CM_UNTILPORTAL", 300);
 			}
+			if(!thePlayer.getEntityData().hasKey("CM_INPORTAL")) {
+				thePlayer.getEntityData().setBoolean("CM_INPORTAL", false);
+			}
+			if(!thePlayer.getEntityData().hasKey("CM_PORTALCOUNTER")) {
+				thePlayer.getEntityData().setInteger("CM_PORTALCOUNTER", 0);
+			}
+			
+			
+			if(!thePlayer.getEntityData().getBoolean("CM_INPORTAL")) {
+				int portalcounter = thePlayer.getEntityData().getInteger("CM_PORTALCOUNTER");
+				//System.out.println(portalcounter);
+				if(portalcounter > 0) {
+					thePlayer.getEntityData().setInteger("CM_PORTALCOUNTER", portalcounter - 4);
+				} else if (portalcounter < 0) {
+					thePlayer.getEntityData().setInteger("CM_PORTALCOUNTER", 0);
+				}
+			}
 		}
 //		if (event.entityLiving.isPotionActive(CMContent.potion_cobalt_resistance)) {
 //			if (event.entityLiving.getActivePotionEffect(CMContent.potion_cobalt_resistance).getDuration() == 0) {

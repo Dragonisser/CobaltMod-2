@@ -36,6 +36,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -47,7 +48,7 @@ public class BlockPortalCobalt extends BlockPortal {
 	protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 1.0D, 0.625D);
 	protected static final AxisAlignedBB Z_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 1.0D, 1.0D);
 	protected static final AxisAlignedBB Y_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1.0D, 0.625D);
-	protected int portalCounter;
+	private int portalCounter;
 
 	public BlockPortalCobalt() {
 		super();
@@ -173,38 +174,53 @@ public class BlockPortalCobalt extends BlockPortal {
 
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
 
-		if (!entityIn.isRiding() && !entityIn.isBeingRidden() && entityIn.isNonBoss() && (entityIn instanceof EntityPlayerMP)) {
-			MinecraftServer mcServer = entityIn.getServer();
-			EntityPlayerMP player = (EntityPlayerMP) entityIn;
+		if (!worldIn.isRemote && worldIn instanceof WorldServer) {
+			if (!entityIn.isRiding() && !entityIn.isBeingRidden() && entityIn.isNonBoss() && (entityIn instanceof EntityPlayerMP)) {
+				MinecraftServer mcServer = entityIn.getServer();
+				EntityPlayerMP player = (EntityPlayerMP) entityIn;
+				System.out.println("#####PORTAL_START#####");
 
-			if (!pos.equals(getLastPortalPos(player))) {
+				setCMPortal(player, pos);
 
-				if (player.timeUntilPortal == 0) {
-					if (player.getEntityData().getInteger("CM_UNTILPORTAL") > 0) {
-						player.getEntityData().setInteger("CM_UNTILPORTAL", player.getEntityData().getInteger("CM_UNTILPORTAL") - 1);
-					} else {
-						player.getEntityData().setInteger("CM_UNTILPORTAL", 300);
-					}
-				}
+				if (player.getEntityData().getBoolean("CM_INPORTAL")) {
+					int i = player.getMaxInPortalTime();
+					portalCounter = player.getEntityData().getInteger("CM_PORTALCOUNTER");
+					System.out.println("portalCounter: " + portalCounter);
+					System.out.println("getMaxInPortalTime: " + i);
 
-				if (player.timeUntilPortal > 0) {
-					player.timeUntilPortal = 10;
-				} else if (player.capabilities.isCreativeMode || player.getEntityData().getInteger("CM_UNTILPORTAL") <= 0) {
-					if (setPortalInformation(player, pos)) {
+					player.getEntityData().setInteger("CM_PORTALCOUNTER", portalCounter + 1);
+					if (portalCounter >= i) {
+
+						portalCounter = i;
+						System.out.println("portalCounter: " + portalCounter);
+						player.timeUntilPortal = player.getPortalCooldown();
+
 						if (player.dimension != CMMain.cobaltdimension) {
 							mcServer.getPlayerList().transferPlayerToDimension(player, CMMain.cobaltdimension, new CMTeleporter(DimensionManager.getWorld(CMMain.cobaltdimension)));
-							player.getEntityData().setInteger("CM_UNTILPORTAL", 300);
-							player.timeUntilPortal = 15;
+							player.getEntityData().setBoolean("CM_INPORTAL", false);
 						} else {
 							mcServer.getPlayerList().transferPlayerToDimension(player, 0, new CMTeleporter(DimensionManager.getWorld(0)));
-							player.getEntityData().setInteger("CM_UNTILPORTAL", 300);
-							player.timeUntilPortal = 15;
+							player.getEntityData().setBoolean("CM_INPORTAL", false);
 						}
 					}
-
 				}
+				System.out.println("#####PORTAL_END#####");
 			}
+		}
+	}
 
+	public void setCMPortal(Entity entity, BlockPos pos) {
+		System.out.println("timeUntilPortal: " + entity.timeUntilPortal);
+		if (entity.timeUntilPortal > 0) {
+			entity.timeUntilPortal = entity.getPortalCooldown();
+		} else {
+			System.out.println("Before: " + getLastPortalPos(entity));
+			if (!entity.world.isRemote && !pos.equals(getLastPortalPos(entity))) {
+				System.out.println("Set PortalInformation");
+				setPortalInformation(entity, pos);
+				System.out.println("After: " + getLastPortalPos(entity));
+			}
+			entity.getEntityData().setBoolean("CM_INPORTAL", true);
 		}
 	}
 
@@ -262,7 +278,7 @@ public class BlockPortalCobalt extends BlockPortal {
 
 			return true;
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			return false;
 		}
 	}
