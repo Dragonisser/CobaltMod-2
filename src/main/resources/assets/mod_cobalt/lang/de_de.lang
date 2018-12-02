@@ -56,7 +56,7 @@ tile.cobaltdoor.name=Cobalttür
 tile.portal_cobalt.name=Cobaltportal
 
 
-item.mod_cobalt:fireshard.name=Feuerscherbe
+item.mod_cobalt:fire_shard.name=Feuerscherbe
 item.mod_cobalt:cobaltdoor1.name=Cobalttür
 item.mod_cobalt:cobexdoor1.name=Cobexholztür
 item.mod_cobalt:cobaltbed1.name=Cobaltbett

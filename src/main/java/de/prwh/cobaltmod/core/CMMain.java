@@ -41,7 +41,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 //Seed 4650873961059636830
 
-@Mod(modid = CMMain.MODID, name = "CobaltMod", version = CMMain.VERSION, dependencies = "after:BiomesOPlenty")
+@Mod(modid = CMMain.MODID, name = "CobaltMod", version = CMMain.VERSION, dependencies = "after:biomesoplenty")
 public class CMMain {
 
 	// CreativeTab
@@ -80,7 +80,7 @@ public class CMMain {
 	@SidedProxy(clientSide = "de.prwh.cobaltmod.core.ClientProxyCobalt", serverSide = "de.prwh.cobaltmod.core.CommonProxyCobalt")
 	public static CommonProxyCobalt proxy;
 	public static final String MODID = "mod_cobalt";
-	public static final String VERSION = "2.0.2";
+	public static final String VERSION = "2.0.3";
 
 	private static final Logger log = LogManager.getLogger(MODID.toUpperCase());
 

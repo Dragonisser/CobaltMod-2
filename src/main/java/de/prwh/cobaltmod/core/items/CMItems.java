@@ -42,6 +42,7 @@ public class CMItems {
 		CMContent.COBEX_HOE = addItem(new ItemCobexHoe(CMContent.COBEX_TOOL));
 		
 		CMContent.BLUE_BERRY = addItem(new ItemBlueBerry(2, 2, false));
+		CMContent.FIRE_SHARD = addItem(new ItemFireShard());
 		
 		//Stuff
 		
