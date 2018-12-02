@@ -39,7 +39,7 @@ public class BlockRedCabbageCrop extends BlockCrops {
 		this.setHardness(0.0F);
 		this.setSoundType(SoundType.PLANT);
 		this.disableStats();
-		this.setUnlocalizedName("red_cabbage_crop");
+		this.setTranslationKey("red_cabbage_crop");
 		this.setRegistryName("red_cabbage_crop");
 	}
 	
@@ -178,49 +178,6 @@ public class BlockRedCabbageCrop extends BlockCrops {
 
 	protected Item getCrop() {
 		return CMContent.RED_CABBAGE;
-	}
-
-	@SuppressWarnings("unused")
-	@Override
-	public java.util.List<ItemStack> getDrops(net.minecraft.world.IBlockAccess world, BlockPos pos, IBlockState state,
-			int fortune) {
-		java.util.List<ItemStack> ret = super.getDrops(world, pos, state, fortune);
-		int age = getAge(state);
-		Random rand = world instanceof World ? ((World) world).rand : new Random();
-
-		if (age >= getMaxAge()) {
-			int k = 3 + fortune;
-
-			for (int i = 0; i < 3 + fortune; ++i) {
-				if (rand.nextInt(2 * getMaxAge()) <= age) {
-					ret.add(new ItemStack(this.getSeed(), 1, 0));
-				}
-			}
-		}
-		return ret;
-	}
-
-	/**
-	 * Spawns this Block's drops into the World as EntityItems.
-	 */
-	@SuppressWarnings("unused")
-	public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune) {
-		super.dropBlockAsItemWithChance(worldIn, pos, state, chance, 0);
-
-		if (false && !worldIn.isRemote) // Forge: NOP all this.
-		{
-			int i = this.getAge(state);
-
-			if (i >= this.getMaxAge()) {
-				int j = 3 + fortune;
-
-				for (int k = 0; k < j; ++k) {
-					if (worldIn.rand.nextInt(2 * this.getMaxAge()) <= i) {
-						spawnAsEntity(worldIn, pos, new ItemStack(this.getSeed()));
-					}
-				}
-			}
-		}
 	}
 
 	/**

@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 public class BlockBlueBerryBush extends BlockCrops {
 
 	public BlockBlueBerryBush() {
-		this.setUnlocalizedName("blueberry_bush");
+		this.setTranslationKey("blueberry_bush");
 		this.setRegistryName("blueberry_bush");
 		this.setHardness(0.2F);
 	}

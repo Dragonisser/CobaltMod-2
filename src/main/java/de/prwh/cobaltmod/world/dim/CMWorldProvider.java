@@ -3,7 +3,7 @@ package de.prwh.cobaltmod.world.dim;
 import de.prwh.cobaltmod.core.CMMain;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 
 public class CMWorldProvider extends WorldProvider {
 
@@ -26,11 +26,6 @@ public class CMWorldProvider extends WorldProvider {
 	@Override
 	public boolean isSurfaceWorld() {
 		return false;
-	}
-
-	@Override
-	public String getWelcomeMessage() {
-		return "Entering cobaltis";
 	}
 
 	@Override

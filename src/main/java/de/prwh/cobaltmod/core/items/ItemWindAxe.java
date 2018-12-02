@@ -37,10 +37,10 @@ public class ItemWindAxe extends ItemTool {
 
 	protected ItemWindAxe(ToolMaterial material) {
 		super(material, EFFECTIVE_ON);
-		this.damageVsEntity = material.getDamageVsEntity();
+		this.efficiency = material.getEfficiency();
 		this.attackSpeed = -3.0F;
 
-		this.setUnlocalizedName("wind_axe");
+		this.setTranslationKey("wind_axe");
 		this.setRegistryName("wind_axe");
 
 		this.setMaxDamage(200);
@@ -49,14 +49,14 @@ public class ItemWindAxe extends ItemTool {
 
 	protected ItemWindAxe(Item.ToolMaterial material, float damage, float speed) {
 		super(material, EFFECTIVE_ON);
-		this.damageVsEntity = damage;
+		this.attackDamage = damage;
 		this.attackSpeed = speed;
 	}
 
 	public float getStrVsBlock(ItemStack stack, IBlockState state) {
 		Material material = state.getMaterial();
 		return material != Material.WOOD && material != Material.PLANTS && material != Material.VINE
-				? super.getStrVsBlock(stack, state) : this.efficiencyOnProperMaterial;
+				? super.getDestroySpeed(stack, state) : this.efficiency;
 	}
 
 	@SideOnly(Side.CLIENT)

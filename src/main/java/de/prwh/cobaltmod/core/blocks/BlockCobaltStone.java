@@ -16,7 +16,7 @@ public class BlockCobaltStone extends Block {
 
 	public BlockCobaltStone() {
 		super(Material.ROCK);
-		this.setUnlocalizedName("cobalt_stone");
+		this.setTranslationKey("cobalt_stone");
 		this.setRegistryName("cobalt_stone");
 		this.setHardness(2.0F);
 	}

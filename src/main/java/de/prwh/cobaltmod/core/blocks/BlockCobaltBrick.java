@@ -2,7 +2,6 @@ package de.prwh.cobaltmod.core.blocks;
 
 import java.util.Random;
 
-import de.prwh.cobaltmod.handler.AchievementHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -17,7 +16,7 @@ public class BlockCobaltBrick extends Block {
 
 	public BlockCobaltBrick() {
 		super(Material.ROCK);
-		this.setUnlocalizedName("cobalt_brick");
+		this.setTranslationKey("cobalt_brick");
 		this.setRegistryName("cobalt_brick");
 		this.setHardness(5F);
 		this.setResistance(2000F);
@@ -27,8 +26,8 @@ public class BlockCobaltBrick extends Block {
 
 	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
 		if (entityIn instanceof EntityPlayer) {
-			EntityPlayer entityplayer = (EntityPlayer) entityIn;
-			entityplayer.addStat(AchievementHandler.cobaltachiev9, 1);
+			//EntityPlayer entityplayer = (EntityPlayer) entityIn;
+			// entityplayer.addStat(AchievementHandler.cobaltachiev9, 1);
 		}
 		super.onEntityWalk(worldIn, pos, entityIn);
 	}

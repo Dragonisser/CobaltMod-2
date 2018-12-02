@@ -7,4 +7,9 @@ public class BlockCobaltDoubleSlab extends CobaltBrickSlab {
 		return true;
 	}
 
+	@Override
+	public String getTranslationKey(int meta) {
+		return super.getTranslationKey();
+	}
+
 }

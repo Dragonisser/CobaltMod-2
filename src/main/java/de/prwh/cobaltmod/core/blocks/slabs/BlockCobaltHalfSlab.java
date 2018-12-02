@@ -10,4 +10,9 @@ public class BlockCobaltHalfSlab extends CobaltBrickSlab {
 		return false;
 	}
 
+	@Override
+	public String getTranslationKey(int meta) {
+		return super.getTranslationKey();
+	}
+
 }

@@ -14,8 +14,7 @@ public class CreativeTabCobalt extends CreativeTabs {
 	}
 
 	@Override
-	public ItemStack getTabIconItem() {
-
+	public ItemStack createIcon() {
 		if (tab == 1) {
 			return new ItemStack(CMContent.COBALT_INGOT);
 		} else {

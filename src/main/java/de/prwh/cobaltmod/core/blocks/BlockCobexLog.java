@@ -15,7 +15,7 @@ public class BlockCobexLog extends BlockLog {
 
 	public BlockCobexLog() {
 		super();
-		this.setUnlocalizedName("cobex_log");
+		this.setTranslationKey("cobex_log");
 		this.setRegistryName("cobex_log");
 		this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
 		this.setTickRandomly(true);

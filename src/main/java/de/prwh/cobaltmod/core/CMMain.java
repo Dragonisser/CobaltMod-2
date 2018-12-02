@@ -7,24 +7,27 @@ import de.prwh.cobaltmod.core.api.CMContent;
 import de.prwh.cobaltmod.core.api.CMReplace;
 import de.prwh.cobaltmod.core.blocks.CMBlocks;
 import de.prwh.cobaltmod.core.items.CMItems;
-import de.prwh.cobaltmod.handler.AchievementHandler;
-import de.prwh.cobaltmod.handler.RecipeHandler;
 import de.prwh.cobaltmod.handler.event.CMLivingUpdateEventHandler;
 import de.prwh.cobaltmod.handler.event.CMRainEventHandler;
 import de.prwh.cobaltmod.world.biome.CMBiomeGenBase;
 import de.prwh.cobaltmod.world.dim.CMWorldProvider;
 import de.prwh.cobaltmod.world.dim.CMWorldType;
 import de.prwh.cobaltmod.world.gen.WorldGeneratorDim;
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldType;
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -33,6 +36,7 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 //Seed 4650873961059636830
@@ -99,7 +103,7 @@ public class CMMain {
 
 		// Config
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
-
+		
 		config.load();
 
 		config.get("Dimension", "Cobalt", 20).setComment("Which ID the Dimension has. Change it if you have problems with other Mods.");
@@ -170,9 +174,6 @@ public class CMMain {
 		CMReplace.addFlowers(CMContent.BELL_FLOWER);
 		CMReplace.addFlowers(CMContent.GLOW_FLOWER);
 
-		// Proxy
-		proxy.init();
-
 		// Handler
 		// FMLCommonHandler.instance().bus().register(new CraftingHandler());
 		// FMLCommonHandler.instance().bus().register(new PickupHandler());
@@ -195,7 +196,7 @@ public class CMMain {
 		// CMContent.bucket_darkwater), new ItemStack(Items.bucket));
 
 		// Achievement
-		AchievementHandler.init();
+		//AchievementHandler.init();
 
 		CMBiomeGenBase.init();
 
@@ -203,13 +204,11 @@ public class CMMain {
 		type_cobaltdimension = DimensionType.register("CM", "_cobalt", cobaltdimension, CMWorldProvider.class, true);
 		DimensionManager.registerDimension(cobaltdimension, type_cobaltdimension);
 		//
-		// DimensionManager.registerProviderType(cobaltdimension1,
-		// WorldProviderCobaltCaves.class, true);
-		// DimensionManager.registerDimension(cobaltdimension1,
-		// cobaltdimension1);
+		//DimensionManager.registerProviderType(cobaltdimension1, WorldProviderCobaltCaves.class, true);
+		//DimensionManager.registerDimension(cobaltdimension1,cobaltdimension1);
 
 		// Recipe
-		RecipeHandler.init();
+		//RecipeHandler.init();
 
 		// GuiHandler
 		// NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
@@ -222,6 +221,9 @@ public class CMMain {
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
+		CMBiomeGenBase.initBiomeType();
+		CMBlocks.oredictregister();
+		
 		// CobaltZombie
 		// EntityRegistry.registerModEntity(EntityCobaltZombie.class,
 		// "CobaltZombie", 1, this, 80, 2, true);
@@ -305,6 +307,35 @@ public class CMMain {
 		/**
 		 * Use with caution Reason because it lags so intense. Not so good .-.
 		 */
+	}
+
+	@Mod.EventBusSubscriber
+	public static class RegistrationHandler {
+
+		@SubscribeEvent
+		public static void registerBlocks(RegistryEvent.Register<Block> event) {
+			CMBlocks.registerBlocks(event.getRegistry());
+		}
+		
+		@SubscribeEvent
+		public static void registerBlockModels(ModelRegistryEvent event) {
+			CMBlocks.initTextures();
+		}
+
+		@SubscribeEvent
+		public static void registerItems(RegistryEvent.Register<Item> event) {
+			CMItems.registerItems(event.getRegistry());
+		}
+		
+		@SubscribeEvent
+		public static void registerItemModels(ModelRegistryEvent event) {
+			CMItems.initTextures();
+		}
+
+		@SubscribeEvent
+		public static void registerBiomes(RegistryEvent.Register<Biome> event) {
+			CMBiomeGenBase.registerBiomes(event.getRegistry());
+		}
 	}
 
 	public static Logger getLogger() {

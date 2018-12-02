@@ -12,6 +12,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
+import net.minecraftforge.registries.IForgeRegistry;
 
 public class CMItems {
 	public static void init() {
@@ -24,10 +25,10 @@ public class CMItems {
 		CMContent.COBALT_AXE = addItem(new ItemCobaltAxe(CMContent.COBALT_TOOL));
 		CMContent.COBALT_HOE = addItem(new ItemCobaltHoe(CMContent.COBALT_TOOL));
 		CMContent.COBEX_STICK = addItem(new ItemCobexStick());
-		CMContent.COBALT_HELMET = addItem(new ItemArmor(CMContent.COBALT_ARMOR, 0, EntityEquipmentSlot.HEAD).setUnlocalizedName("cobalt_helmet").setRegistryName("cobalt_helmet"));
-		CMContent.COBALT_CHESTPLATE = addItem(new ItemArmor(CMContent.COBALT_ARMOR, 1, EntityEquipmentSlot.CHEST).setUnlocalizedName("cobalt_chestplate").setRegistryName("cobalt_chestplate"));
-		CMContent.COBALT_LEGGINGS = addItem(new ItemArmor(CMContent.COBALT_ARMOR, 2, EntityEquipmentSlot.LEGS).setUnlocalizedName("cobalt_leggings").setRegistryName("cobalt_leggings"));
-		CMContent.COBALT_BOOTS = addItem(new ItemArmor(CMContent.COBALT_ARMOR, 3, EntityEquipmentSlot.FEET).setUnlocalizedName("cobalt_boots").setRegistryName("cobalt_boots"));
+		CMContent.COBALT_HELMET = addItem(new ItemArmor(CMContent.COBALT_ARMOR, 0, EntityEquipmentSlot.HEAD).setTranslationKey("cobalt_helmet").setRegistryName("cobalt_helmet"));
+		CMContent.COBALT_CHESTPLATE = addItem(new ItemArmor(CMContent.COBALT_ARMOR, 1, EntityEquipmentSlot.CHEST).setTranslationKey("cobalt_chestplate").setRegistryName("cobalt_chestplate"));
+		CMContent.COBALT_LEGGINGS = addItem(new ItemArmor(CMContent.COBALT_ARMOR, 2, EntityEquipmentSlot.LEGS).setTranslationKey("cobalt_leggings").setRegistryName("cobalt_leggings"));
+		CMContent.COBALT_BOOTS = addItem(new ItemArmor(CMContent.COBALT_ARMOR, 3, EntityEquipmentSlot.FEET).setTranslationKey("cobalt_boots").setRegistryName("cobalt_boots"));
 //		CMContent.COBEX_BOW =
 //		CMContent.COBEX_ARROW = 
 		CMContent.RED_CABBAGE_SEEDS = addItem(
@@ -46,10 +47,6 @@ public class CMItems {
 		
 		CMContent.WIND_AXE = addItem(new ItemWindAxe(CMContent.COBALT_TOOL));
 		
-		
-		
-		
-		
 	}
 
 	private static <T extends Item> T addItem(T item) {
@@ -57,7 +54,7 @@ public class CMItems {
 		item.setCreativeTab(CMMain.cobalttabitems);
 
 		CMLib.register(item);
-		items.add(new ItemData(item, 0));
+		addToItemList(new ItemData(item, 0));
 		return item;
 	}
 
@@ -65,7 +62,7 @@ public class CMItems {
 	private static <T extends Item> T addItem(T item, CreativeTabs tab) {
 		item.setCreativeTab(tab);
 		CMLib.register(item);
-		items.add(new ItemData(item, 0));
+		addToItemList(new ItemData(item, 0));
 		return item;
 	}
 
@@ -74,7 +71,7 @@ public class CMItems {
 		item.setCreativeTab(CMMain.cobalttabitems);
 		CMLib.register(item);
 		CMLib.registerVariant(item, meta);
-		items.add(new ItemData(item, meta));
+		addToItemList(new ItemData(item, meta));
 		return item;
 	}
 
@@ -86,7 +83,7 @@ public class CMItems {
 
 		// NLib.registerVariant(item, meta);
 
-		items.add(new ItemData(item, meta));
+		addToItemList(new ItemData(item, meta));
 		return item;
 	}
 
@@ -96,18 +93,17 @@ public class CMItems {
 		return item;
 	}
 
-	public static List<ItemData> items = new ArrayList<ItemData>();
-
-	public static void initTextures() {
-		items.forEach((ItemData item) -> {
-			if (item.item instanceof MetaItem) {
-				CMLib.registerInventoryMetaItem((MetaItem) item.item, item.meta);
-			} else {
-				CMLib.registerInventoryItem(item.item);
-			}
-		});
-		items.clear();
+	private static List<ItemData> items = new ArrayList<ItemData>();
+	
+	public static List<ItemData> getItemList() {
+		return items;
 	}
+	
+	public static void addToItemList(ItemData itemdata) {
+		getItemList().add(itemdata);
+	}
+
+
 
 	public static class ItemData {
 		public Item item = null;
@@ -124,11 +120,29 @@ public class CMItems {
 
 		@Override
 		public String toString() {
-			return "block:" + this.item.getUnlocalizedName() + "; meta:" + this.meta;
+			return "item: " + this.item.getTranslationKey() + "; meta: " + this.meta;
 		}
 	}
 
 	public static boolean contains(Item item, String word) {
-		return item.getUnlocalizedName().contains(word);
+		return item.getTranslationKey().contains(word);
+	}
+	
+	public static void initTextures() {
+		getItemList().forEach((ItemData item) -> {
+			
+			if (item.item instanceof MetaItem) {
+				CMLib.registerInventoryMetaItem((MetaItem) item.item, item.meta);
+			} else {
+				CMLib.registerInventoryItem(item.item);
+			}
+		});
+	}
+	
+	public static void registerItems(IForgeRegistry<Item> registry) {
+		getItemList().forEach((ItemData item) -> {
+			registry.registerAll(item.item);
+			//CMMain.getLogger().info(item.item);
+		});
 	}
 }

@@ -14,7 +14,7 @@ public class BlockFlowerClematis extends BlockBush {
 	
 	public BlockFlowerClematis() {
 		super(Material.PLANTS);
-		this.setUnlocalizedName("clematis_flower");
+		this.setTranslationKey("clematis_flower");
 		this.setRegistryName("clematis_flower");
 		this.setSoundType(SoundType.PLANT);
 		this.setTickRandomly(true);

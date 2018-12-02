@@ -29,7 +29,7 @@ public class BlockBigCobexLeaves extends BlockLeaves {
 
 	public BlockBigCobexLeaves() {
 		super();
-		this.setUnlocalizedName("big_cobex_leaves");
+		this.setTranslationKey("big_cobex_leaves");
 		this.setRegistryName("big_cobex_leaves");
 		this.setHardness(0.2F);
 		this.setSoundType(SoundType.PLANT);
@@ -81,14 +81,16 @@ public class BlockBigCobexLeaves extends BlockLeaves {
 		return null;
 	}
 
-	public boolean isOpaqueCube(IBlockState state) {
-		return false;
-	}
+    public boolean isOpaqueCube(IBlockState state)
+    {
+        return false;
+    }
 
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer() {
-		return BlockRenderLayer.CUTOUT_MIPPED;
-	}
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getRenderLayer()
+    {
+        return BlockRenderLayer.CUTOUT_MIPPED;
+    }
 
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {

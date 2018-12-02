@@ -7,7 +7,7 @@ import net.minecraft.block.material.Material;
 public class BlockCobaltBlock extends Block {
 	public BlockCobaltBlock() {
 		super(Material.ROCK);
-		this.setUnlocalizedName("cobalt_block");
+		this.setTranslationKey("cobalt_block");
 		this.setRegistryName("cobalt_block");
 		this.setHardness(5F);
 		this.setResistance(10F);

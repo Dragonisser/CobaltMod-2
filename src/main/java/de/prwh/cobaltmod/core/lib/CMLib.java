@@ -6,6 +6,8 @@ import java.util.Random;
 import de.prwh.cobaltmod.core.CMMain;
 import de.prwh.cobaltmod.core.blocks.CMBlocks;
 import de.prwh.cobaltmod.core.blocks.CMBlocks.BlockData;
+import de.prwh.cobaltmod.core.items.CMItems;
+import de.prwh.cobaltmod.core.items.CMItems.ItemData;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -18,7 +20,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -128,14 +129,14 @@ public class CMLib {
 	 * Registers an item with unlocalized name
 	 */
 	public static void register(Item item) {
-		GameRegistry.register(item); // registers Item using new Parents
+		//GameRegistry.register(item); // registers Item using new Parents
 	}
 
 	/**
 	 * Registers a block with unlocalized name
 	 */
 	public static void register(Block block) {
-		GameRegistry.register(block); // registers Block using new Parents
+		//GameRegistry.register(block); // registers Block using new Parents
 	}
 
 	/**
@@ -151,7 +152,7 @@ public class CMLib {
 	 * specified amount of metadata
 	 */
 	public static <T extends Block> T registerWithItem(T block, int meta) {
-		GameRegistry.register(block); // register block
+		//GameRegistry.register(block); // register block
 		Item item = null;
 		if (meta > 1) {
 			item = new ItemBlockMeta(block);
@@ -159,8 +160,8 @@ public class CMLib {
 			item = new ItemBlock(block);
 		}
 		item.setRegistryName(block.getRegistryName());
-		GameRegistry.register(item); // register blockitem in name of block
-		CMBlocks.blocks.add(new BlockData(item, block, meta)); // write to init,
+		CMItems.addToItemList(new ItemData(item, meta)); // register blockitem in name of block
+		CMBlocks.addToBlockList(new BlockData(item, block, meta)); // write to init,
 																// so it could
 																// be loaded
 																// later
@@ -209,7 +210,7 @@ public class CMLib {
 	public static void registerVariant(Block block, int meta) {
 		for (int i = 0; i < meta; i++) {
 			ItemStack it = new ItemStack(block, 1, i);
-			String name = it.getUnlocalizedName().substring(5);
+			String name = it.getTranslationKey().substring(5);
 			ModelBakery.registerItemVariants(Item.getItemFromBlock(block), new ResourceLocation(MODID + ":" + name));
 		}
 	}
@@ -226,7 +227,7 @@ public class CMLib {
 	public static void registerVariant(Item item, int meta) {
 		for (int i = 0; i < meta; i++) {
 			ItemStack it = new ItemStack(item, 1, i);
-			String name = it.getUnlocalizedName().substring(5);
+			String name = it.getTranslationKey().substring(5);
 			ModelBakery.registerItemVariants(item, new ResourceLocation(MODID + ":" + name));
 		}
 	}
@@ -243,7 +244,7 @@ public class CMLib {
 	public static void registerInventoryMetaItem(Block block, int meta) {
 		for (int i = 0; i < meta; i++) {
 			ItemStack it = new ItemStack(block, 1, i);
-			String name = it.getUnlocalizedName().substring(5);
+			String name = it.getTranslationKey().substring(5);
 			registerInventoryItem(Item.getItemFromBlock(block), new ResourceLocation(MODID, name), i);
 		}
 	}
@@ -260,7 +261,7 @@ public class CMLib {
 	public static void registerInventoryMetaItem(MetaItem item, int meta) {
 		for (int i = 0; i < meta; i++) {
 			ItemStack it = new ItemStack(item, 1, i);
-			String name = it.getUnlocalizedName().substring(5);
+			String name = it.getTranslationKey().substring(5);
 			registerInventoryItem(item, new ResourceLocation(MODID, name), i);
 		}
 	}
@@ -366,6 +367,8 @@ public class CMLib {
 	 */
 	@SideOnly(Side.CLIENT)
 	public static void registerInventoryItem(Item item, ResourceLocation resourceLocation, int meta) {
+		//CMMain.getLogger().info(item.getTranslationKey() + " " + resourceLocation + " " + meta);
+		
 		ModelResourceLocation model = new ModelResourceLocation(resourceLocation, "inventory");
 		ModelLoader.setCustomModelResourceLocation(item, meta, model);
 	}

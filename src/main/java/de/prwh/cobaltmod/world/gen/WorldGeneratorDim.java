@@ -21,8 +21,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGeneratorDim implements IWorldGenerator {
@@ -92,9 +92,10 @@ public class WorldGeneratorDim implements IWorldGenerator {
 			Block block = worldIn.getBlockState(pos).getBlock();
 			boolean tree_gen = false;
 			if (block != CMContent.COBEX_LOG) {
-//				int chunkX = pos.getX() >> 4;
-//				int chunkZ = pos.getZ() >> 4;
-//				System.out.println(worldIn.isChunkGeneratedAt(chunkX, chunkZ) + " " + (pos.getX() & 15) + " - " + (pos.getZ() & 15));
+				// int chunkX = pos.getX() >> 4;
+				// int chunkZ = pos.getZ() >> 4;
+				// System.out.println(worldIn.isChunkGeneratedAt(chunkX, chunkZ) + " " +
+				// (pos.getX() & 15) + " - " + (pos.getZ() & 15));
 				tree_gen = true;
 
 			}

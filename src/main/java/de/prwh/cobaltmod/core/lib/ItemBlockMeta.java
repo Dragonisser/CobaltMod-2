@@ -22,7 +22,7 @@ public class ItemBlockMeta extends ItemMultiTexture {
 	}
 
 	public String getUnlocalizedName(ItemStack stack) {
-		String name = super.getUnlocalizedName();
+		String name = super.getTranslationKey();
 		Object addname = this.nameFunction.apply(stack);
 		if (addname != null) {
 			name += "_" + (String) addname;

@@ -18,8 +18,8 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkGenerator;
-import net.minecraft.world.gen.ChunkProviderSettings;
+import net.minecraft.world.gen.ChunkGeneratorSettings;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
@@ -41,7 +41,7 @@ public class CMChunkGenerator implements IChunkGenerator {
 	private final WorldType terrainType;
 	private final double[] heightMap;
 	private final float[] biomeWeights;
-	private ChunkProviderSettings settings;
+	private ChunkGeneratorSettings settings;
 	private IBlockState oceanBlock = Blocks.WATER.getDefaultState();
 	private double[] depthBuffer = new double[256];
 	private MapGenBase caveGenerator = new MapGenCMCaves();
@@ -79,7 +79,7 @@ public class CMChunkGenerator implements IChunkGenerator {
 		}
 
 		if (p_i46668_5_ != null) {
-			this.settings = ChunkProviderSettings.Factory.jsonToFactory(p_i46668_5_).build();
+			this.settings = ChunkGeneratorSettings.Factory.jsonToFactory(p_i46668_5_).build();
 			this.oceanBlock = this.settings.useLavaOceans ? Blocks.LAVA.getDefaultState() : Blocks.WATER.getDefaultState();
 			worldIn.setSeaLevel(this.settings.seaLevel);
 		}
@@ -338,11 +338,11 @@ public class CMChunkGenerator implements IChunkGenerator {
 
 		if (this.mapFeaturesEnabled) {
 			if (creatureType == EnumCreatureType.MONSTER && this.scatteredFeatureGenerator.isSwampHut(pos)) {
-				return this.scatteredFeatureGenerator.getScatteredFeatureSpawnList();
+				return this.scatteredFeatureGenerator.getMonsters();
 			}
 
 			if (creatureType == EnumCreatureType.MONSTER && this.settings.useMonuments && this.oceanMonumentGenerator.isPositionInStructure(this.world, pos)) {
-				return this.oceanMonumentGenerator.getScatteredFeatureSpawnList();
+				return this.oceanMonumentGenerator.getMonsters();
 			}
 		}
 
@@ -357,5 +357,10 @@ public class CMChunkGenerator implements IChunkGenerator {
 
 	public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored) {
 		return null;
+	}
+
+	@Override
+	public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
+		return false;
 	}
 }

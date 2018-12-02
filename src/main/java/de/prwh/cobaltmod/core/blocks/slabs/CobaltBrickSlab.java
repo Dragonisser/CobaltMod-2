@@ -34,6 +34,11 @@ public abstract class CobaltBrickSlab extends BlockSlab {
 		this.setDefaultState(iblockstate.withProperty(VARIANT, CobaltBrickSlab.Variant.DEFAULT));
 	}
 
+    public boolean isOpaqueCube(IBlockState state)
+    {
+        return this.isDouble();
+    }
+    
 	/**
 	 * Get the Item that this Block should drop when harvested.
 	 */
@@ -82,7 +87,7 @@ public abstract class CobaltBrickSlab extends BlockSlab {
 	 * Returns the slab block name with the type associated with it
 	 */
 	public String getUnlocalizedName(int meta) {
-		return super.getUnlocalizedName();
+		return super.getTranslationKey();
 	}
 
 	public IProperty<?> getVariantProperty() {
@@ -97,11 +102,21 @@ public abstract class CobaltBrickSlab extends BlockSlab {
 		public boolean isDouble() {
 			return true;
 		}
+
+		@Override
+		public String getTranslationKey(int meta) {
+			return super.getTranslationKey();
+		}
 	}
 
 	public static class Half extends CobaltBrickSlab {
 		public boolean isDouble() {
 			return false;
+		}
+
+		@Override
+		public String getTranslationKey(int meta) {
+			return super.getTranslationKey();
 		}
 	}
 

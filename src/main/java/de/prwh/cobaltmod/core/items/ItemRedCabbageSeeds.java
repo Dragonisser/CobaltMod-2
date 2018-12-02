@@ -24,7 +24,7 @@ public class ItemRedCabbageSeeds extends Item implements IPlantable {
 	public ItemRedCabbageSeeds(Block crops, Block soil) {
 		this.crops = crops;
 		this.soilBlockID = soil;
-		this.setUnlocalizedName("red_cabbage_seeds");
+		this.setTranslationKey("red_cabbage_seeds");
 		this.setRegistryName("red_cabbage_seeds");
 	}
 

@@ -19,22 +19,22 @@ public class ItemCobexAxe extends ItemTool {
 
 	protected ItemCobexAxe(ToolMaterial material) {
 		super(material, EFFECTIVE_ON);
-		this.damageVsEntity = material.getDamageVsEntity();
+		this.efficiency = material.getEfficiency();
 		this.attackSpeed = -3.0F;
 		
-		this.setUnlocalizedName("cobex_axe");
+		this.setTranslationKey("cobex_axe");
 		this.setRegistryName("cobex_axe");
 	}
 
 	protected ItemCobexAxe(Item.ToolMaterial material, float damage, float speed) {
 		super(material, EFFECTIVE_ON);
-		this.damageVsEntity = damage;
+		this.attackDamage = damage;
 		this.attackSpeed = speed;
 	}
 
 	public float getStrVsBlock(ItemStack stack, IBlockState state) {
 		Material material = state.getMaterial();
 		return material != Material.WOOD && material != Material.PLANTS && material != Material.VINE
-				? super.getStrVsBlock(stack, state) : this.efficiencyOnProperMaterial;
+				? super.getDestroySpeed(stack, state) : this.efficiency;
 	}
 }

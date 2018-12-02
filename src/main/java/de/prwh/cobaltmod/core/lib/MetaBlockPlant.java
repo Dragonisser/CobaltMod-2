@@ -5,7 +5,6 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
@@ -29,7 +28,7 @@ public abstract class MetaBlockPlant extends BlockBush {
 	protected MetaBlockPlant(Material material, String unlocname, int metaCount) {
 		super(material);
 		setCreativeTab(CMMain.cobalttabblocks);
-		setUnlocalizedName(unlocname);
+		setTranslationKey(unlocname);
 		this.meta = metaCount;
 	}
 
@@ -74,12 +73,11 @@ public abstract class MetaBlockPlant extends BlockBush {
 	 */
 	@Override
 	@SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
-    {
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
 		for (int i = 0; i < meta; i++) {
-			list.add(new ItemStack(itemIn, 1, i));
+			list.add(new ItemStack(this, 1, i));
 		}
-    }
+	}
 
 	// example implementation
 	public enum MetaBlockType implements IStringSerializable {

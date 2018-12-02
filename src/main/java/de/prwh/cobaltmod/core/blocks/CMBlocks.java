@@ -7,6 +7,8 @@ import de.prwh.cobaltmod.core.CMMain;
 import de.prwh.cobaltmod.core.api.CMContent;
 import de.prwh.cobaltmod.core.blocks.slabs.BlockCobaltDoubleSlab;
 import de.prwh.cobaltmod.core.blocks.slabs.BlockCobaltHalfSlab;
+import de.prwh.cobaltmod.core.items.CMItems;
+import de.prwh.cobaltmod.core.items.CMItems.ItemData;
 import de.prwh.cobaltmod.core.lib.CMLib;
 import de.prwh.cobaltmod.core.lib.ItemBlockMeta;
 import de.prwh.cobaltmod.core.lib.MetaBlock;
@@ -19,10 +21,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
 
 public class CMBlocks {
 
@@ -43,8 +45,8 @@ public class CMBlocks {
 		CMContent.COBEX_WOOD = addBlock(new BlockCobexWood());
 		CMContent.COBEX_LEAVES = addBlock(new BlockCobexLeaves());
 		CMContent.COBEX_SAPLING = addBlock(new BlockCobexSapling());
-		CMContent.COBALT_HALF_SLAB = (BlockSlab) new BlockCobaltHalfSlab().setUnlocalizedName("half_slab_cobalt").setRegistryName("half_slab_cobalt");
-		CMContent.COBALT_DOUBLE_SLAB = (BlockSlab) new BlockCobaltDoubleSlab().setUnlocalizedName("double_slab_cobalt").setRegistryName("double_slab_cobalt");
+		CMContent.COBALT_HALF_SLAB = (BlockSlab) new BlockCobaltHalfSlab().setTranslationKey("half_slab_cobalt").setRegistryName("half_slab_cobalt");
+		CMContent.COBALT_DOUBLE_SLAB = (BlockSlab) new BlockCobaltDoubleSlab().setTranslationKey("double_slab_cobalt").setRegistryName("double_slab_cobalt");
 		CMContent.CLEMATIS_FLOWER = addBlock(new BlockFlowerClematis());
 		CMContent.RED_CABBAGE_CROP = addBlock(new BlockRedCabbageCrop(), false);
 		CMContent.BLUE_TALL_GRASS = addBlock(new BlockBlueTallGrass(), false);
@@ -64,7 +66,6 @@ public class CMBlocks {
 
 		register();
 		setFireInfo();
-		oredictregister();
 
 	}
 
@@ -103,7 +104,7 @@ public class CMBlocks {
 
 		@Override
 		public String toString() {
-			return "block:" + this.block.getUnlocalizedName() + "; meta:" + this.meta;
+			return "block: " + this.block.getTranslationKey() + "; meta: " + this.meta;
 		}
 	}
 
@@ -164,7 +165,8 @@ public class CMBlocks {
 
 	private static <T extends Block> T addBlock(T block, CreativeTabs tab, boolean addToCreative) {
 		CMLib.registerWithItem(block);
-		CMMain.getLogger().info(block + " " + block.getUnlocalizedName().substring(5));
+		// CMMain.getLogger().info(block + " " +
+		// block.getTranslationKey().substring(5));
 		if (addToCreative)
 			block.setCreativeTab(tab);
 		return block;
@@ -191,19 +193,30 @@ public class CMBlocks {
 	}
 
 	public static Block registerWithItemSlab(Block block, BlockSlab singleSlab, BlockSlab doubleSlab, ResourceLocation name, boolean creativeTab) {
-		GameRegistry.register(block);
+		// GameRegistry.register(block);
 
 		Item item = new ItemSlab(block, singleSlab, doubleSlab).setRegistryName(name);
-		GameRegistry.register(item);
+		// GameRegistry.register(item);
 		// CMLib.registerInventoryItem(singleSlab);
 		if (creativeTab)
 			block.setCreativeTab(CMMain.cobalttabblocks);
-		CMMain.getLogger().info(block + " " + block.getUnlocalizedName().substring(5));
-		CMBlocks.blocks.add(new BlockData(item, block, 0));
+		// CMMain.getLogger().info(block + " " +
+		// block.getTranslationKey().substring(5));
+
+		CMItems.addToItemList(new ItemData(item));
+		CMBlocks.addToBlockList(new BlockData(item, block, 0));
 		return block;
 	}
 
-	public static List<BlockData> blocks = new ArrayList<BlockData>();
+	private static List<BlockData> blocks = new ArrayList<BlockData>();
+
+	public static List<BlockData> getBlockList() {
+		return blocks;
+	}
+
+	public static void addToBlockList(BlockData blockdata) {
+		getBlockList().add(blockdata);
+	}
 
 	@SideOnly(Side.CLIENT)
 	public static void initTextures() {
@@ -213,7 +226,7 @@ public class CMBlocks {
 		// ModelLoader.setCustomStateMapper(NanpaContent.leaves_jungle_two, new
 		// StateMap.Builder().ignore(BlockLeavesJungle.CHECK_DECAY).ignore(BlockLeavesJungle.DECAYABLE).build());
 
-		blocks.forEach((BlockData block) -> {
+		getBlockList().forEach((BlockData block) -> {
 			if (block.meta <= 1) {
 				CMLib.addTextures(block.item);
 			} else {
@@ -221,7 +234,12 @@ public class CMBlocks {
 				CMLib.addTextures(block.item, block.block, block.meta);
 			}
 		});
+	}
 
-		blocks.clear(); // not longer needed
+	public static void registerBlocks(IForgeRegistry<Block> registry) {
+		getBlockList().forEach((BlockData block) -> {
+			registry.registerAll(block.block);
+			//CMMain.getLogger().info(block.block);
+		});
 	}
 }

@@ -1,5 +1,7 @@
 package de.prwh.cobaltmod.world.biome;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import de.prwh.cobaltmod.core.api.CMContent;
@@ -11,7 +13,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.registries.IForgeRegistry;
 
 public class CMBiomeGenBase extends Biome {
 
@@ -32,6 +34,29 @@ public class CMBiomeGenBase extends Biome {
 		CMBiomeGenBase.biomeDec = this.decorator;
 	}
 	
+	public static List<BiomeData> biomedata = new ArrayList<BiomeData>();
+	
+	public static List<BiomeData> getBiomeList() {
+		return biomedata;
+	}
+	
+	public static void addToBiomeList(BiomeData biomedata) {
+		getBiomeList().add(biomedata);
+	}
+	
+	public static class BiomeData {
+		public Biome biome = null;
+
+		public BiomeData(Biome biome) {
+			this.biome = biome;
+		}
+
+		@Override
+		public String toString() {
+			return "biome: " + this.biome.getBiomeName();
+		}
+	}
+	
 	public static BiomeDecorator getBiomeDecorator() {
 		return biomeDec;
 	}
@@ -46,23 +71,19 @@ public class CMBiomeGenBase extends Biome {
 		biomehills = new BiomeGenCobaltHills(new Biome.BiomeProperties("Blue Hills").setBaseHeight(1.4F).setHeightVariation(0.3F)).setRegistryName("blue_hills");
 		biomecaves = new BiomeGenCobaltCaves(new Biome.BiomeProperties("Cobalt Caves")).setRegistryName("cobalt_caves");
 
-		GameRegistry.register(biomemountains);
-		GameRegistry.register(biomeforest);
-		GameRegistry.register(biomeswamp);
-		GameRegistry.register(biometall);
-		GameRegistry.register(biomehills);
-		GameRegistry.register(biomecaves);
-		
-		BiomeDictionary.addTypes(biomemountains, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HILLS);
-		BiomeDictionary.addTypes(biomeforest, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.HILLS);
-		BiomeDictionary.addTypes(biomeswamp, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.WET);
-		BiomeDictionary.addTypes(biometall, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.HILLS);
-		BiomeDictionary.addTypes(biomehills, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HILLS);
-		BiomeDictionary.addTypes(biomecaves, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.HILLS);
+		addToBiomeList(new BiomeData(biomemountains));
+		addToBiomeList(new BiomeData(biomeforest));
+		addToBiomeList(new BiomeData(biomeswamp));
+		addToBiomeList(new BiomeData(biometall));
+		addToBiomeList(new BiomeData(biomehills));
+		addToBiomeList(new BiomeData(biomecaves));
 	}
 
-	public static void registerWithBiomeDictionary() {
-
+	public static void registerBiomes(IForgeRegistry<Biome> registry) {
+		getBiomeList().forEach((BiomeData biome) -> {
+			registry.registerAll(biome.biome);
+			//CMMain.getLogger().info(biome.biome);
+		});
 	}
 
 	@Override
@@ -95,7 +116,7 @@ public class CMBiomeGenBase extends Biome {
 						}
 
 						if (j1 < i && (iblockstate == null || iblockstate.getMaterial() == Material.AIR)) {
-							if (this.getFloatTemperature(blockpos$mutableblockpos.setPos(x, j1, z)) < 0.15F) {
+							if (this.getTemperature(blockpos$mutableblockpos.setPos(x, j1, z)) < 0.15F) {
 								// iblockstate = ICE;
 							} else {
 								iblockstate = WATER;
@@ -120,5 +141,14 @@ public class CMBiomeGenBase extends Biome {
 				}
 			}
 		}
+	}
+
+	public static void initBiomeType() {
+		BiomeDictionary.addTypes(biomemountains, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HILLS);
+		BiomeDictionary.addTypes(biomeforest, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.HILLS);
+		BiomeDictionary.addTypes(biomeswamp, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.WET);
+		BiomeDictionary.addTypes(biometall, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.HILLS);
+		BiomeDictionary.addTypes(biomehills, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HILLS);
+		BiomeDictionary.addTypes(biomecaves, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.HILLS);
 	}
 }

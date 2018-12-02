@@ -14,7 +14,7 @@ public class BlockBellFlower extends BlockBush {
 	
 	public BlockBellFlower() {
 		super(Material.PLANTS);
-		this.setUnlocalizedName("bell_flower");
+		this.setTranslationKey("bell_flower");
 		this.setRegistryName("bell_flower");
 		this.setSoundType(SoundType.PLANT);
 		this.setTickRandomly(true);

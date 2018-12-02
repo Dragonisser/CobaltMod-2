@@ -19,22 +19,22 @@ public class ItemCobaltAxe extends ItemTool {
 
 	protected ItemCobaltAxe(ToolMaterial material) {
 		super(material, EFFECTIVE_ON);
-		this.damageVsEntity = material.getDamageVsEntity();
+		this.efficiency = material.getEfficiency();
 		this.attackSpeed = -3.0F;
 		
-		this.setUnlocalizedName("cobalt_axe");
+		this.setTranslationKey("cobalt_axe");
 		this.setRegistryName("cobalt_axe");
 	}
 
 	protected ItemCobaltAxe(Item.ToolMaterial material, float damage, float speed) {
 		super(material, EFFECTIVE_ON);
-		this.damageVsEntity = damage;
+		this.attackDamage = damage;
 		this.attackSpeed = speed;
 	}
 
 	public float getStrVsBlock(ItemStack stack, IBlockState state) {
 		Material material = state.getMaterial();
 		return material != Material.WOOD && material != Material.PLANTS && material != Material.VINE
-				? super.getStrVsBlock(stack, state) : this.efficiencyOnProperMaterial;
+				? super.getDestroySpeed(stack, state) : this.efficiency;
 	}
 }
