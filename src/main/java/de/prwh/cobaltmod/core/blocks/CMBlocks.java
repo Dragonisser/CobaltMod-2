@@ -35,7 +35,7 @@ public class CMBlocks {
 		CMContent.CORRUPTED_STONE = addBlock(new BlockCorruptedStone());
 		CMContent.COBALT_DIRT = addBlock(new BlockCobaltDirt());
 		CMContent.COBALT_GRASS = addBlock(new BlockCobaltGrass());
-		CMContent.COBALT_FARMLAND = addBlock(new BlockCobaltFarmLand());
+		CMContent.COBALT_FARMLAND = addBlock(new BlockCobaltFarmLand(), false);
 		CMContent.COBALT_STONE = addBlock(new BlockCobaltStone());
 		CMContent.COBALT_ORE = addBlock(new BlockCobaltOre());
 		CMContent.COBALT_BLOCK = addBlock(new BlockCobaltBlock());
@@ -46,20 +46,20 @@ public class CMBlocks {
 		CMContent.COBALT_HALF_SLAB = (BlockSlab) new BlockCobaltHalfSlab().setUnlocalizedName("half_slab_cobalt").setRegistryName("half_slab_cobalt");
 		CMContent.COBALT_DOUBLE_SLAB = (BlockSlab) new BlockCobaltDoubleSlab().setUnlocalizedName("double_slab_cobalt").setRegistryName("double_slab_cobalt");
 		CMContent.CLEMATIS_FLOWER = addBlock(new BlockFlowerClematis());
-		CMContent.RED_CABBAGE_CROP = addBlock(new BlockRedCabbageCrop());
-		CMContent.BLUE_TALL_GRASS = addBlock(new BlockBlueTallGrass());
+		CMContent.RED_CABBAGE_CROP = addBlock(new BlockRedCabbageCrop(), false);
+		CMContent.BLUE_TALL_GRASS = addBlock(new BlockBlueTallGrass(), false);
 		CMContent.BELL_FLOWER = addBlock(new BlockBellFlower());
 		CMContent.GLOW_FLOWER = addBlock(new BlockGlowFlower());
 		CMContent.COBEX_TORCH = addBlock(new BlockCobexTorch());
 
-		CMContent.PORTAL_COBALT = addBlock(new BlockPortalCobalt());
+		CMContent.PORTAL_COBALT = addBlock(new BlockPortalCobalt(), false);
 		CMContent.PORTAL_FRAME = addBlock(new BlockPortalFrame());
-		CMContent.BLUE_FIRE = addBlock(new BlockBlueFire());
+		CMContent.BLUE_FIRE = addBlock(new BlockBlueFire(), false);
 
 		CMContent.BLUE_VINE = addBlock(new BlockBlueVine());
 		CMContent.BIG_COBEX_LEAVES = addBlock(new BlockBigCobexLeaves());
 		CMContent.BIG_COBEX_SAPLING = addBlock(new BlockBigCobexSapling());
-		
+
 		CMContent.BLUEBERRY_BUSH = addBlock(new BlockBlueBerryBush());
 
 		register();
@@ -155,13 +155,18 @@ public class CMBlocks {
 	}
 
 	private static <T extends Block> T addBlock(T block) {
-		return addBlock(block, CMMain.cobalttabblocks);
+		return addBlock(block, CMMain.cobalttabblocks, true);
 	}
 
-	private static <T extends Block> T addBlock(T block, CreativeTabs tab) {
+	private static <T extends Block> T addBlock(T block, boolean addToCreative) {
+		return addBlock(block, CMMain.cobalttabblocks, addToCreative);
+	}
+
+	private static <T extends Block> T addBlock(T block, CreativeTabs tab, boolean addToCreative) {
 		CMLib.registerWithItem(block);
-		block.setCreativeTab(tab);
 		CMMain.getLogger().info(block + " " + block.getUnlocalizedName().substring(5));
+		if (addToCreative)
+			block.setCreativeTab(tab);
 		return block;
 	}
 
@@ -187,10 +192,14 @@ public class CMBlocks {
 
 	public static Block registerWithItemSlab(Block block, BlockSlab singleSlab, BlockSlab doubleSlab, ResourceLocation name, boolean creativeTab) {
 		GameRegistry.register(block);
-		GameRegistry.register(new ItemSlab(block, singleSlab, doubleSlab).setRegistryName(name));
+
+		Item item = new ItemSlab(block, singleSlab, doubleSlab).setRegistryName(name);
+		GameRegistry.register(item);
+		// CMLib.registerInventoryItem(singleSlab);
 		if (creativeTab)
 			block.setCreativeTab(CMMain.cobalttabblocks);
 		CMMain.getLogger().info(block + " " + block.getUnlocalizedName().substring(5));
+		CMBlocks.blocks.add(new BlockData(item, block, 0));
 		return block;
 	}
 
