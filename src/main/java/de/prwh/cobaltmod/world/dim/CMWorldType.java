@@ -9,8 +9,6 @@ public class CMWorldType extends WorldType {
 
 	public CMWorldType() {
 		super("Cobaltis");
-
-		System.out.println("Constructing CMWorldType");
 	}
 
 	@Override
