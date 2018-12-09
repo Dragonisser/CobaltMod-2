@@ -7,6 +7,8 @@ import de.prwh.cobaltmod.core.CMMain;
 import de.prwh.cobaltmod.core.api.CMContent;
 import de.prwh.cobaltmod.core.blocks.slabs.BlockCobaltDoubleSlab;
 import de.prwh.cobaltmod.core.blocks.slabs.BlockCobaltHalfSlab;
+import de.prwh.cobaltmod.core.blocks.slabs.BlockCobexDoubleSlab;
+import de.prwh.cobaltmod.core.blocks.slabs.BlockCobexHalfSlab;
 import de.prwh.cobaltmod.core.items.CMItems;
 import de.prwh.cobaltmod.core.items.CMItems.ItemData;
 import de.prwh.cobaltmod.core.lib.CMLib;
@@ -43,10 +45,14 @@ public class CMBlocks {
 		CMContent.COBALT_BLOCK = addBlock(new BlockCobaltBlock());
 		CMContent.COBEX_LOG = addBlock(new BlockCobexLog());
 		CMContent.COBEX_WOOD = addBlock(new BlockCobexWood());
+		CMContent.COBEX_STAIR = addBlock(new BlockCobexStair(CMContent.COBEX_WOOD.getDefaultState()));
 		CMContent.COBEX_LEAVES = addBlock(new BlockCobexLeaves());
 		CMContent.COBEX_SAPLING = addBlock(new BlockCobexSapling());
 		CMContent.COBALT_HALF_SLAB = (BlockSlab) new BlockCobaltHalfSlab().setTranslationKey("half_slab_cobalt").setRegistryName("half_slab_cobalt");
 		CMContent.COBALT_DOUBLE_SLAB = (BlockSlab) new BlockCobaltDoubleSlab().setTranslationKey("double_slab_cobalt").setRegistryName("double_slab_cobalt");
+		CMContent.COBEX_HALF_SLAB = (BlockSlab) new BlockCobexHalfSlab().setTranslationKey("half_slab_cobex").setRegistryName("half_slab_cobex");
+		CMContent.COBEX_DOUBLE_SLAB = (BlockSlab) new BlockCobexDoubleSlab().setTranslationKey("double_slab_cobex").setRegistryName("double_slab_cobex");
+		
 		CMContent.CLEMATIS_FLOWER = addBlock(new BlockFlowerClematis());
 		CMContent.RED_CABBAGE_CROP = addBlock(new BlockRedCabbageCrop(), false);
 		CMContent.BLUE_TALL_GRASS = addBlock(new BlockBlueTallGrass(), false);
@@ -116,6 +122,13 @@ public class CMBlocks {
 		registerWithItemSlab(hslab, hslab, dSlab, hslab.getRegistryName(), true);
 		registerWithItemSlab(dSlab, hslab, dSlab, dSlab.getRegistryName(), false);
 
+		hslab = CMContent.COBEX_HALF_SLAB;
+		dSlab = CMContent.COBEX_DOUBLE_SLAB;
+		
+		registerWithItemSlab(hslab, hslab, dSlab, hslab.getRegistryName(), true);
+		registerWithItemSlab(dSlab, hslab, dSlab, dSlab.getRegistryName(), false);
+		
+		
 		// leaves
 		// NLib.register(NanpaContent.leaves_jungle);
 		// Item item_leaves = new

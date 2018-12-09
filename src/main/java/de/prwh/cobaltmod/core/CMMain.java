@@ -41,7 +41,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 //Seed 4650873961059636830
 
-@Mod(modid = CMMain.MODID, name = "CobaltMod", version = CMMain.VERSION, dependencies = "after:biomesoplenty")
+@Mod(modid = CMMain.MODID, name = "Cobalt Mod", version = CMMain.VERSION, dependencies = "after:biomesoplenty")
 public class CMMain {
 
 	// CreativeTab
@@ -201,7 +201,7 @@ public class CMMain {
 		CMBiomeGenBase.init();
 
 		// Dimension
-		type_cobaltdimension = DimensionType.register("CM", "_cobalt", cobaltdimension, CMWorldProvider.class, true);
+		type_cobaltdimension = DimensionType.register("cobaldis", "_cobalt", cobaltdimension, CMWorldProvider.class, true);
 		DimensionManager.registerDimension(cobaltdimension, type_cobaltdimension);
 		//
 		//DimensionManager.registerProviderType(cobaltdimension1, WorldProviderCobaltCaves.class, true);

@@ -9,7 +9,7 @@ tile.portal_frame.name=Portal Frame
 tile.cobex_workbench.name=Cobex Wood Workbench
 tile.clean_stone.name=Stone
 tile.half_slab_cobalt.name=Cobalt Brick Slab
-tile.cobex_slab.name=Cobex Wood Slab
+tile.half_slab_cobex.name=Cobex Wood Slab
 tile.dark_water.name=DarkWater
 tile.cobalt_rune.name=Cobalt Rune
 tile.clematis_flower.name=Blue Clematis
@@ -17,11 +17,10 @@ tile.cobalt_brick.name=Cobalt Brick
 tile.cobalt_brick_stairs.name=Cobalt Brick Stairs
 tile.cobalt_stone.name=Cobalt Stone
 tile.cobex_torch.name=Cobex Torch
-tile.blueberrybushempty.name=Blue Berry Bush
-tile.blueberrybushfull.name=Blue Berry Bush
+tile.blueberry_bush.name=Blueberry Bush
 tile.altarofassociation.name=Altar of Association
 tile.ritualstone.name=Ritual Stone
-tile.cobexstair.name=Cobex Wood Stair
+tile.cobex_wood_stairs.name=Cobex Wood Stairs
 tile.bell_flower.name=Bell Flower
 tile.bouncycobalt.name=Bouncy Cobalt
 tile.cobaltfurnace_i.name=Cobalt Furnace
@@ -40,7 +39,7 @@ tile.cobalt_dirt.name=Cobalt Dirt
 tile.podium.name=Podium
 tile.cobalt_farmland.name=Farmland
 tile.big_cobex_sapling.name=Tall Cobex Sapling
-tile.big_cobex_leaves.name=Tall Cobex Leaves
+tile.big_cobex_leaves.name=Cobex Leaves
 tile.blue_tall_grass.name=Grass
 tile.corruptedstonefurnace_b.name=Corrupted Stone Furnace
 tile.corruptedstonefurnace_i.name=Corrupted Stone Furnace
@@ -127,8 +126,8 @@ item.strongholdspawner.name=Stronghold Spawner
 
 
 
-itemGroup.cobalttabitems=CobaltMod Items
-itemGroup.cobalttabblocks=CobaltMod Blocks
+itemGroup.cobalttabitems=Cobalt Mod Items
+itemGroup.cobalttabblocks=Cobalt Mod Blocks
 
 
 entity.CobaltZombie.name=Cobalt Zombie
@@ -152,6 +151,11 @@ tooltip.windaxe.third_line=Rightclick throws you in the air
 
 key.backpack.desc=Open Backpack
 key.cobaltmod.label=CobaltMod
+
+
+
+advancements.mod_cobalt.root.title=The other side
+advancements.mod_cobalt.root.description=Reach Cobaldis through its portal
 
 
 achievement.cobaltachiev=The Plague

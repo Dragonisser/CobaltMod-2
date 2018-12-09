@@ -12,11 +12,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockCobaltHalfSlab extends CMSlab {
-
-	public BlockCobaltHalfSlab() {
-		super(Material.ROCK);
-		this.setHardness(1.5F);
+public class BlockCobexHalfSlab extends CMSlab {
+	
+	public BlockCobexHalfSlab() {
+		super(Material.WOOD);
+		this.setHardness(0.7F);
 	}
 	
 	@Override
@@ -31,10 +31,10 @@ public class BlockCobaltHalfSlab extends CMSlab {
 	
 	@Nullable
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return Item.getItemFromBlock(CMContent.COBALT_HALF_SLAB);
+		return Item.getItemFromBlock(CMContent.COBEX_HALF_SLAB);
 	}
 
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-		return new ItemStack(CMContent.COBALT_HALF_SLAB);
+		return new ItemStack(CMContent.COBEX_HALF_SLAB);
 	}
 }

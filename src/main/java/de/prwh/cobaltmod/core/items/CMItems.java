@@ -43,6 +43,7 @@ public class CMItems {
 		
 		CMContent.BLUE_BERRY = addItem(new ItemBlueBerry(2, 2, false));
 		CMContent.FIRE_SHARD = addItem(new ItemFireShard());
+		CMContent.COBALT_NUGGET = addItem(new ItemCobaltNugget());
 		
 		//Stuff
 		

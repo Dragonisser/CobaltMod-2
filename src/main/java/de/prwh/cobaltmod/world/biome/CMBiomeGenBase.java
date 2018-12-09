@@ -62,7 +62,7 @@ public class CMBiomeGenBase extends Biome {
 	}
 	
 	public static void init() {
-		biomemountains = new BiomeGenCobaltMountains(new Biome.BiomeProperties("Higherlands").setBaseHeight(2.5F).setHeightVariation(0.25F))
+		biomemountains = new BiomeGenCobaltMountains(new Biome.BiomeProperties("Higherlands").setBaseHeight(3.2F).setHeightVariation(0.25F))
 				.setRegistryName("higherlands");
 		biomeforest = new BiomeGenCobexForest(new Biome.BiomeProperties("Cobex Forest").setBaseHeight(0.2F).setHeightVariation(0.2F))
 				.setRegistryName("cobex_forest");

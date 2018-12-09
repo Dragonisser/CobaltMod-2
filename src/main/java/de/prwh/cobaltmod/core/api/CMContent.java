@@ -47,7 +47,7 @@ public enum CMContent {
 	public static Block ALTAR_OF_ASSOCIATION;
 	public static Block COBEX_STAIR;
 
-	public static BlockSlab COBEX_SINGLE_SLAB;
+	public static BlockSlab COBEX_HALF_SLAB;
 	public static BlockSlab COBEX_DOUBLE_SLAB;
 
 	public static Block BLUE_FIRE;

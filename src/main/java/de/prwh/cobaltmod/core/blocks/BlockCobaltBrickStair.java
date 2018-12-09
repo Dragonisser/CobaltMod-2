@@ -13,5 +13,6 @@ public class BlockCobaltBrickStair extends BlockStairs {
 		this.setHardness(5F);
 		this.setResistance(2000F);
 		this.setSoundType(SoundType.STONE);
+		this.useNeighborBrightness = true;
 	}
 }
