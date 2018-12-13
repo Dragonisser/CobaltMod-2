@@ -154,6 +154,9 @@ key.cobaltmod.label=CobaltMod
 advancements.mod_cobalt.root.title=Die andere Seite
 advancements.mod_cobalt.root.description=Durchschreite das Portal zu Cobaldis
 
+advancements.mod_cobalt.mine_cobaltore.title=Blau wie alles andere
+advancements.mod_cobalt.mine_cobaltore.description=Baue etwas Cobalterz ab
+
 
 achievement.cobaltachiev=Die Seuche
 achievement.cobaltachiev1=Heiliges Erz

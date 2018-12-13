@@ -157,6 +157,8 @@ key.cobaltmod.label=CobaltMod
 advancements.mod_cobalt.root.title=The other side
 advancements.mod_cobalt.root.description=Reach Cobaldis through its portal
 
+advancements.mod_cobalt.mine_cobaltore.title=Blue like the rest
+advancements.mod_cobalt.mine_cobaltore.description=Mine some cobalt ore
 
 achievement.cobaltachiev=The Plague
 achievement.cobaltachiev1=Holy Ore!
