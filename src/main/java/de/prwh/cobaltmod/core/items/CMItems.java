@@ -12,6 +12,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemDoor;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class CMItems {
@@ -44,6 +45,9 @@ public class CMItems {
 		CMContent.BLUE_BERRY = addItem(new ItemBlueBerry(2, 2, false));
 		CMContent.FIRE_SHARD = addItem(new ItemFireShard());
 		CMContent.COBALT_NUGGET = addItem(new ItemCobaltNugget());
+		
+		CMContent.COBALT_DOOR_I = addItem(new ItemDoor(CMContent.COBALT_DOOR).setTranslationKey("cobalt_door").setRegistryName("cobalt_door_i"));
+		CMContent.COBEX_DOOR_I = addItem(new ItemDoor(CMContent.COBEX_DOOR).setTranslationKey("cobex_door").setRegistryName("cobex_door_i"));
 		
 		//Stuff
 		

@@ -17,6 +17,7 @@ import de.prwh.cobaltmod.core.lib.MetaBlock;
 import de.prwh.cobaltmod.core.lib.MetaBlockPlant;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -69,6 +70,9 @@ public class CMBlocks {
 		CMContent.BIG_COBEX_SAPLING = addBlock(new BlockBigCobexSapling());
 
 		CMContent.BLUEBERRY_BUSH = addBlock(new BlockBlueBerryBush());
+		
+		CMContent.COBALT_DOOR = addBlock(new BlockCobaltDoor(Material.IRON));
+		CMContent.COBEX_DOOR = addBlock(new BlockCobexDoor(Material.WOOD));
 
 		register();
 		setFireInfo();

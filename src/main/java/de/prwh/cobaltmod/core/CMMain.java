@@ -77,8 +77,8 @@ public class CMMain {
 	// public static boolean devenabled;
 	// public static boolean templeenabled;
 
-	@SidedProxy(clientSide = "de.prwh.cobaltmod.core.ClientProxyCobalt", serverSide = "de.prwh.cobaltmod.core.CommonProxyCobalt")
-	public static CommonProxyCobalt proxy;
+	@SidedProxy(clientSide = "de.prwh.cobaltmod.core.ClientProxyCobalt", serverSide = "de.prwh.cobaltmod.core.ServerProxyCobalt")
+	public static ServerProxyCobalt proxy;
 	public static final String MODID = "mod_cobalt";
 	public static final String VERSION = "2.0.3.1";
 

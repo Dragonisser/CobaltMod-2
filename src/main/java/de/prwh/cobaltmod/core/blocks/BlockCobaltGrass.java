@@ -15,6 +15,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -140,7 +141,10 @@ public class BlockCobaltGrass extends Block {
 			EntityPlayer player = (EntityPlayer) entityIn;
 			NonNullList<ItemStack> armor = player.inventory.armorInventory;
 			if (armor.get(0) != null) {
-				if (armor.get(0).getItem() == CMContent.COBALT_BOOTS) {
+				if (armor.get(0).getItem() == CMContent.COBALT_BOOTS || armor.get(0).getItem() == Items.DIAMOND_BOOTS || armor.get(0).getItem() == Items.IRON_BOOTS || armor.get(0).getItem() == Items.GOLDEN_BOOTS || armor.get(0).getItem() == Items.CHAINMAIL_BOOTS) {
+					return;
+				} else if (armor.get(0).getItem() == Items.LEATHER_BOOTS) {
+					entityIn.attackEntityFrom(DamageSource.MAGIC, 2F);
 					return;
 				}
 			}
