@@ -25,40 +25,40 @@ public enum CMContent {
 	public static Fluid DARKWATER_FLUID;
 
 	// Blocks
-	public static Block COBALT_ORE;
-	public static Block COBALT_GRASS;
-	public static Block COBALT_BLOCK;
-	public static Block COBEX_LOG;
-	public static Block COBEX_WOOD;
-	public static Block COBEX_LEAVES;
-	public static Block COBEX_SAPLING;
-	public static BlockSlab COBALT_HALF_SLAB; // X
-	public static BlockSlab COBALT_DOUBLE_SLAB; // X
-	public static Block CLEMATIS_FLOWER;
-	public static Block RED_CABBAGE_CROP;
-	public static Block COBALT_BRICK;
-	public static Block COBALT_BRICK_STAIR;
-	public static Block COBALT_STONE;
-	public static BlockPortal PORTAL_COBALT;
-	public static Block COBEX_TORCH;
+	public static Block COBALT_ORE; //
+	public static Block COBALT_GRASS; //
+	public static Block COBALT_BLOCK; //
+	public static Block COBEX_LOG; //
+	public static Block COBEX_WOOD; //
+	public static Block COBEX_LEAVES; //
+	public static Block COBEX_SAPLING; //
+	public static BlockSlab COBALT_HALF_SLAB; // 
+	public static BlockSlab COBALT_DOUBLE_SLAB; // 
+	public static Block CLEMATIS_FLOWER; //
+	public static Block RED_CABBAGE_CROP; //
+	public static Block COBALT_BRICK; //
+	public static Block COBALT_BRICK_STAIR; //
+	public static Block COBALT_STONE; //
+	public static BlockPortal PORTAL_COBALT; //
+	public static Block COBEX_TORCH; //
 
-	public static Block BLUEBERRY_BUSH;
+	public static Block BLUEBERRY_BUSH; //
 	public static Block RITUAL_STONE;
 	public static Block ALTAR_OF_ASSOCIATION;
 	public static Block COBEX_STAIR;
 
-	public static BlockSlab COBEX_HALF_SLAB;
-	public static BlockSlab COBEX_DOUBLE_SLAB;
+	public static BlockSlab COBEX_HALF_SLAB; //
+	public static BlockSlab COBEX_DOUBLE_SLAB; //
 
-	public static Block BLUE_FIRE;
-	public static Block BELL_FLOWER;
+	public static Block BLUE_FIRE; //
+	public static Block BELL_FLOWER; //
 	public static Block BOUNCYCOBALT;
 	public static Block COBALTFURNACE_IDLE;
 	public static Block COBALTFURNACE_BURNING;
-	public static Block COBEX_CHEST;
-	public static Block COBEX_DOOR;
-	public static Block COBALT_DOOR;
-	public static Block PORTAL_FRAME;
+	public static Block COBEX_CHEST; //
+	public static Block COBEX_DOOR; //
+	public static Block COBALT_DOOR; //
+	public static Block PORTAL_FRAME; //
 	public static Block COBEX_WORK_BENCH;
 	public static Block COBALT_BED;
 	public static Block DARK_WATER;
@@ -71,16 +71,16 @@ public enum CMContent {
 	public static BlockSlab CARTHUN_BRICK_SINGLE_SLAB;
 	public static BlockSlab CARTHUN_BRICK_DOUBLE_SLAB;
 
-	public static Block GLOW_FLOWER;
-	public static Block BLUE_VINE;
+	public static Block GLOW_FLOWER; //
+	public static Block BLUE_VINE; //
 	public static Block WATER_THORN;
-	public static Block CORRUPTED_STONE;
-	public static Block COBALT_DIRT;
-	public static Block COBALT_FARMLAND;
+	public static Block CORRUPTED_STONE; //
+	public static Block COBALT_DIRT; //
+	public static Block COBALT_FARMLAND; //
 	public static Block PODIUM;
-	public static Block BIG_COBEX_SAPLING;
-	public static Block BIG_COBEX_LEAVES;
-	public static Block BLUE_TALL_GRASS;
+	public static Block BIG_COBEX_SAPLING; //
+	public static Block BIG_COBEX_LEAVES; //
+	public static Block BLUE_TALL_GRASS; //
 	public static Block CORRUPTED_STONE_FURNACE_BURNING;
 	public static Block CORRUPTED_STONE_FURNACE_IDLE;
 	public static Block LOCKED_COBALT_CHEST;

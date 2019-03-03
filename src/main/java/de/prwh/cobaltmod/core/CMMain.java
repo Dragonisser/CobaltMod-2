@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import de.prwh.cobaltmod.core.api.CMContent;
 import de.prwh.cobaltmod.core.api.CMReplace;
 import de.prwh.cobaltmod.core.blocks.CMBlocks;
+import de.prwh.cobaltmod.core.entity.tileentity.TileEntityCobexChest;
 import de.prwh.cobaltmod.core.items.CMItems;
 import de.prwh.cobaltmod.handler.event.CMLivingUpdateEventHandler;
 import de.prwh.cobaltmod.handler.event.CMRainEventHandler;
@@ -219,6 +220,7 @@ public class CMMain {
 		GameRegistry.registerWorldGenerator(new WorldGeneratorDim(), 0);
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 		CMBiomeGenBase.initBiomeType();
@@ -281,8 +283,7 @@ public class CMMain {
 		// "tileentityritualstone");
 
 		// CobexChest
-		// GameRegistry.registerTileEntity(TileEntityCobexChest.class,
-		// "tileentitycobexchest");
+		GameRegistry.registerTileEntity(TileEntityCobexChest.class, CMMain.MODID + "tileentity_cobex_chest");
 
 		// Furnace
 		// GameRegistry.registerTileEntity(TileEntityCobaltFurnace.class,
