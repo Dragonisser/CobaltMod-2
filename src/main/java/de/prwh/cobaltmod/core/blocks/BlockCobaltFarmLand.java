@@ -28,7 +28,7 @@ public class BlockCobaltFarmLand extends Block {
 	protected BlockCobaltFarmLand() {
 		super(Material.GROUND);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(MOISTURE, Integer.valueOf(0)));
-		this.setTranslationKey("cobalt_farmland");
+		this.setUnlocalizedName("cobalt_farmland");
 		this.setRegistryName("cobalt_farmland");
 		this.setSoundType(SoundType.GROUND);
 		this.setTickRandomly(true);

@@ -1,4 +1,4 @@
-package de.prwh.cobaltmod.world.dim;
+package de.prwh.cobaltmod.world.dim.cobaldis;
 
 import de.prwh.cobaltmod.world.biome.CMBiomeGenBase;
 import net.minecraft.world.World;
@@ -8,9 +8,9 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
 import net.minecraft.world.gen.layer.GenLayerZoom;
 
-public class CMBiomeProvider extends BiomeProvider {
+public class BiomeProviderCobaldis extends BiomeProvider {
 
-	public CMBiomeProvider(World world) {
+	public BiomeProviderCobaldis(World world) {
 		super(world.getWorldInfo());
 		allowedBiomes.clear();
 		allowedBiomes.add(CMBiomeGenBase.biomeforest);
@@ -25,9 +25,9 @@ public class CMBiomeProvider extends BiomeProvider {
 
 	@Override
 	public GenLayer[] getModdedBiomeGenerators(WorldType worldType, long seed, GenLayer[] original) {
-		GenLayer biomes = new GenLayerBiomesCobalt(1);
+		GenLayer biomes = new GenLayerBiomesCobaldis(1);
 
-		biomes = new GenLayerBiomesCobalt(1000, biomes);
+		biomes = new GenLayerBiomesCobaldis(1000, biomes);
 		biomes = new GenLayerZoom(1000, biomes);
 		biomes = new GenLayerZoom(1001, biomes);
 		biomes = new GenLayerZoom(1002, biomes);

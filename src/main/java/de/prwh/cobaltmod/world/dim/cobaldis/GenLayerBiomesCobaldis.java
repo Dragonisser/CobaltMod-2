@@ -1,20 +1,20 @@
-package de.prwh.cobaltmod.world.dim;
+package de.prwh.cobaltmod.world.dim.cobaldis;
 
 import de.prwh.cobaltmod.world.biome.CMBiomeGenBase;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
-public class GenLayerBiomesCobalt extends GenLayer {
+public class GenLayerBiomesCobaldis extends GenLayer {
 
 	protected Biome[] allowedBiomes = { CMBiomeGenBase.biomeforest, CMBiomeGenBase.biomemountains, CMBiomeGenBase.biomehills, CMBiomeGenBase.biomeswamp, CMBiomeGenBase.biometall };
 
-	public GenLayerBiomesCobalt(long seed, GenLayer genlayer) {
+	public GenLayerBiomesCobaldis(long seed, GenLayer genlayer) {
 		super(seed);
 		this.parent = genlayer;
 	}
 
-	public GenLayerBiomesCobalt(long seed) {
+	public GenLayerBiomesCobaldis(long seed) {
 		super(seed);
 	}
 

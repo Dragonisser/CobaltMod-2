@@ -29,7 +29,7 @@ public class BlockBigCobexLeaves extends BlockLeaves {
 
 	public BlockBigCobexLeaves() {
 		super();
-		this.setTranslationKey("big_cobex_leaves");
+		this.setUnlocalizedName("big_cobex_leaves");
 		this.setRegistryName("big_cobex_leaves");
 		this.setHardness(0.2F);
 		this.setSoundType(SoundType.PLANT);
@@ -87,7 +87,7 @@ public class BlockBigCobexLeaves extends BlockLeaves {
     }
 
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer()
+    public BlockRenderLayer getBlockLayer()
     {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }

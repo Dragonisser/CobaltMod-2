@@ -210,7 +210,7 @@ public class CMLib {
 	public static void registerVariant(Block block, int meta) {
 		for (int i = 0; i < meta; i++) {
 			ItemStack it = new ItemStack(block, 1, i);
-			String name = it.getTranslationKey().substring(5);
+			String name = it.getUnlocalizedName().substring(5);
 			ModelBakery.registerItemVariants(Item.getItemFromBlock(block), new ResourceLocation(MODID + ":" + name));
 		}
 	}
@@ -227,7 +227,7 @@ public class CMLib {
 	public static void registerVariant(Item item, int meta) {
 		for (int i = 0; i < meta; i++) {
 			ItemStack it = new ItemStack(item, 1, i);
-			String name = it.getTranslationKey().substring(5);
+			String name = it.getUnlocalizedName().substring(5);
 			ModelBakery.registerItemVariants(item, new ResourceLocation(MODID + ":" + name));
 		}
 	}
@@ -244,7 +244,7 @@ public class CMLib {
 	public static void registerInventoryMetaItem(Block block, int meta) {
 		for (int i = 0; i < meta; i++) {
 			ItemStack it = new ItemStack(block, 1, i);
-			String name = it.getTranslationKey().substring(5);
+			String name = it.getUnlocalizedName().substring(5);
 			registerInventoryItem(Item.getItemFromBlock(block), new ResourceLocation(MODID, name), i);
 		}
 	}
@@ -261,7 +261,7 @@ public class CMLib {
 	public static void registerInventoryMetaItem(MetaItem item, int meta) {
 		for (int i = 0; i < meta; i++) {
 			ItemStack it = new ItemStack(item, 1, i);
-			String name = it.getTranslationKey().substring(5);
+			String name = it.getUnlocalizedName().substring(5);
 			registerInventoryItem(item, new ResourceLocation(MODID, name), i);
 		}
 	}

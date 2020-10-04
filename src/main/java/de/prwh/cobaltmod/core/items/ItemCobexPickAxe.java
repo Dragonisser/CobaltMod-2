@@ -6,7 +6,7 @@ public class ItemCobexPickAxe extends ItemPickaxe {
 
 	protected ItemCobexPickAxe(ToolMaterial material) {
 		super(material);
-		this.setTranslationKey("cobex_pickaxe");
+		this.setUnlocalizedName("cobex_pickaxe");
 		this.setRegistryName("cobex_pickaxe");
 	}
 }

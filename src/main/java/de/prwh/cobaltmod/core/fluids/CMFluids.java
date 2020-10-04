@@ -91,7 +91,7 @@ public class CMFluids {
 
 	private static <T extends Block & IFluidBlock> T registerFluidBlock(T block) {
 		block.setRegistryName("fluid." + block.getFluid().getName());
-		block.setTranslationKey(block.getFluid().getName());
+		block.setUnlocalizedName(block.getFluid().getName());
 		// block.setCreativeTab(NanpaMain.nanpatabfluids);
 		CMLib.registerWithItem(block);
 		MOD_FLUID_BLOCKS.add(block);

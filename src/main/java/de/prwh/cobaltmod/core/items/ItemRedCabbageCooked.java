@@ -6,7 +6,7 @@ public class ItemRedCabbageCooked extends ItemFood {
 
 	public ItemRedCabbageCooked(int amount, float saturation, boolean isWolfFood) {
 		super(amount, saturation, isWolfFood);
-		this.setTranslationKey("red_cabbage_cooked");
+		this.setUnlocalizedName("red_cabbage_cooked");
 		this.setRegistryName("red_cabbage_cooked");
 	}
 }

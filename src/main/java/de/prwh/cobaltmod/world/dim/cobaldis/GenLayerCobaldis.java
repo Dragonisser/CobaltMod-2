@@ -1,17 +1,17 @@
-package de.prwh.cobaltmod.world.dim;
+package de.prwh.cobaltmod.world.dim.cobaldis;
 
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
 import net.minecraft.world.gen.layer.GenLayerZoom;
 
-public abstract class GenLayerCobalt extends GenLayer {
-	public GenLayerCobalt(long seed) {
+public abstract class GenLayerCobaldis extends GenLayer {
+	public GenLayerCobaldis(long seed) {
 		super(seed);
 	}
 
 	public static GenLayer[] makeTheWorld(long seed) {
 
-		GenLayer biomes = new GenLayerBiomesCobalt(1L);
+		GenLayer biomes = new GenLayerBiomesCobaldis(1L);
 
 		// more GenLayerZoom = bigger biomes
 		biomes = new GenLayerZoom(1000L, biomes);

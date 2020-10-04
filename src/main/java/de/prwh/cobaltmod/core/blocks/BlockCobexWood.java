@@ -7,7 +7,7 @@ import net.minecraft.block.material.Material;
 public class BlockCobexWood extends Block {
 	public BlockCobexWood() {
 		super(Material.WOOD);
-		this.setTranslationKey("cobex_wood");
+		this.setUnlocalizedName("cobex_wood");
 		this.setRegistryName("cobex_wood");
 		this.setHardness(2.0F);
 		this.setSoundType(SoundType.WOOD);

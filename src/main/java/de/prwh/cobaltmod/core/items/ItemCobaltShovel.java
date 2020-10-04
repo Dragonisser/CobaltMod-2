@@ -9,7 +9,7 @@ public class ItemCobaltShovel extends ItemSpade {
 
 	public ItemCobaltShovel(ToolMaterial material) {
 		super(material);
-		this.setTranslationKey("cobalt_shovel");
+		this.setUnlocalizedName("cobalt_shovel");
 		this.setRegistryName("cobalt_shovel");
 	}
 	

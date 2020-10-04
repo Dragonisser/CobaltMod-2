@@ -8,7 +8,7 @@ public class BlockCobexStair extends BlockStairs {
 
 	protected BlockCobexStair(IBlockState modelState) {
 		super(modelState);
-		this.setTranslationKey("cobex_wood_stairs");
+		this.setUnlocalizedName("cobex_wood_stairs");
 		this.setRegistryName("cobex_wood_stairs");
 		this.setHardness(0.7F);
 		this.setResistance(0.7F);

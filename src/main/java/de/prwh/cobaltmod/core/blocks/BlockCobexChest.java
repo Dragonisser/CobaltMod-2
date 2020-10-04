@@ -9,7 +9,7 @@ public class BlockCobexChest extends BlockChest {
 
 	protected BlockCobexChest(Type chestTypeIn) {
 		super(chestTypeIn);
-		this.setTranslationKey("cobex_chest");
+		this.setUnlocalizedName("cobex_chest");
 		this.setRegistryName("cobex_chest");
 	}
 	

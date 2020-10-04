@@ -8,7 +8,7 @@ public class BlockCobaltBrickStair extends BlockStairs {
 
 	protected BlockCobaltBrickStair(IBlockState modelState) {
 		super(modelState);
-		this.setTranslationKey("cobalt_brick_stairs");
+		this.setUnlocalizedName("cobalt_brick_stairs");
 		this.setRegistryName("cobalt_brick_stairs");
 		this.setHardness(5F);
 		this.setResistance(2000F);

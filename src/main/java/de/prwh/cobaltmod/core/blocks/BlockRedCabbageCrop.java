@@ -39,7 +39,7 @@ public class BlockRedCabbageCrop extends BlockCrops {
 		this.setHardness(0.0F);
 		this.setSoundType(SoundType.PLANT);
 		this.disableStats();
-		this.setTranslationKey("red_cabbage_crop");
+		this.setUnlocalizedName("red_cabbage_crop");
 		this.setRegistryName("red_cabbage_crop");
 	}
 	

@@ -27,7 +27,7 @@ public class BlockCobexSapling extends BlockBush implements IGrowable {
 
 	public BlockCobexSapling() {
 		super(Material.PLANTS);
-		this.setTranslationKey("cobex_sapling");
+		this.setUnlocalizedName("cobex_sapling");
 		this.setRegistryName("cobex_sapling");
 		this.setHardness(0.0F);
 		this.setSoundType(SoundType.PLANT);

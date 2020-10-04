@@ -28,7 +28,7 @@ public abstract class MetaBlock extends Block {
 	protected MetaBlock(Material material, String unlocname, int metaCount) {
 		super(material);
 		setCreativeTab(CMMain.cobalttabblocks);
-		setTranslationKey(unlocname);
+		setUnlocalizedName(unlocname);
 		this.meta = metaCount;
 	}
 

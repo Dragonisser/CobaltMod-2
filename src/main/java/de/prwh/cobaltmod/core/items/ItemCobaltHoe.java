@@ -18,7 +18,7 @@ public class ItemCobaltHoe extends ItemHoe {
 
 	public ItemCobaltHoe(ToolMaterial material) {
 		super(material);
-		this.setTranslationKey("cobalt_hoe");
+		this.setUnlocalizedName("cobalt_hoe");
 		this.setRegistryName("cobalt_hoe");
 	}
 	

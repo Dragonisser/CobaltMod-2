@@ -6,7 +6,7 @@ public class ItemCobaltSword extends ItemSword {
 
 	public ItemCobaltSword(ToolMaterial material) {
 		super(material);
-		this.setTranslationKey("cobalt_sword");
+		this.setUnlocalizedName("cobalt_sword");
 		this.setRegistryName("cobalt_sword");
 	}
 }

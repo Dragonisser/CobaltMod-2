@@ -32,14 +32,16 @@ public class WorldGeneratorDim implements IWorldGenerator {
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
 
-		if (world.provider.getDimension() == 0 && !world.getWorldType().getName().equals(CMMain.COBALT_WORLD_TYPE.getName())) {
+		if (world.provider.getDimension() == 0) {
 			generateSurface(world, random, chunkX * 16, chunkZ * 16);
-		} else if (world.provider.getDimension() == CMMain.cobaltdimension || world.getWorldType().getName().equals(CMMain.COBALT_WORLD_TYPE.getName())) {
-			generateCobaltis(world, random, chunkX * 16, chunkZ * 16);
+		} else if (world.provider.getDimension() == CMMain.id_cobaldis) {
+			generateCobaldis(world, random, chunkX * 16, chunkZ * 16);
+		} else if (world.provider.getDimension() == CMMain.id_deep_caves) {
+			generateDeepCaves(world, random, chunkX * 16, chunkZ * 16);
 		}
 	}
 
-	private void generateCobaltis(World worldIn, Random rand, int x, int z) {
+	private void generateCobaldis(World worldIn, Random rand, int x, int z) {
 		int RandPosX = x + rand.nextInt(16) + 8;
 		int RandPosZ = z + rand.nextInt(16) + 8;
 		int height = worldIn.getHeight(RandPosX, RandPosZ);
@@ -118,6 +120,10 @@ public class WorldGeneratorDim implements IWorldGenerator {
 		}
 	}
 
+	private void generateDeepCaves(World worldIn, Random rand, int x, int z) {
+		
+	}
+	
 	public void generateSurface(World worldIn, Random rand, int x, int z) {
 
 		// int RandPosX = x + rand.nextInt(16) + 8;

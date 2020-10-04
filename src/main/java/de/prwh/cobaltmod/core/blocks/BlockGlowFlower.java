@@ -14,7 +14,7 @@ public class BlockGlowFlower extends BlockBush {
 	
 	public BlockGlowFlower() {
 		super(Material.PLANTS);
-		this.setTranslationKey("glow_flower");
+		this.setUnlocalizedName("glow_flower");
 		this.setRegistryName("glow_flower");
 		this.setLightLevel(0.7F);
 		this.setSoundType(SoundType.PLANT);

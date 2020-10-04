@@ -1,4 +1,4 @@
-package de.prwh.cobaltmod.world.dim;
+package de.prwh.cobaltmod.world.dim.cobaldis;
 
 import java.util.List;
 import java.util.Random;
@@ -26,7 +26,7 @@ import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.structure.MapGenScatteredFeature;
 import net.minecraft.world.gen.structure.StructureOceanMonument;
 
-public class CMChunkGenerator implements IChunkGenerator {
+public class ChunkGeneratorCobaldis implements IChunkGenerator {
 
 	private final Random rand;
 	private NoiseGeneratorOctaves minLimitPerlinNoise;
@@ -53,7 +53,7 @@ public class CMChunkGenerator implements IChunkGenerator {
 	double[] maxLimitRegion;
 	double[] depthRegion;
 
-	public CMChunkGenerator(World worldIn, String p_i46668_5_) {
+	public ChunkGeneratorCobaldis(World worldIn, String p_i46668_5_) {
 		{
 			caveGenerator = net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(caveGenerator, net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE);
 		}

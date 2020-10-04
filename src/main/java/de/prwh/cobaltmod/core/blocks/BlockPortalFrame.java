@@ -7,7 +7,7 @@ public class BlockPortalFrame extends Block {
 
 	public BlockPortalFrame() {
 		super(Material.ROCK);
-		this.setTranslationKey("portal_frame");
+		this.setUnlocalizedName("portal_frame");
 		this.setRegistryName("portal_frame");
 		this.setBlockUnbreakable();
 	}

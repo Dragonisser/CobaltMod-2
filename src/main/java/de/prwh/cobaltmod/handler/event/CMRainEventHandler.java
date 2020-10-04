@@ -21,7 +21,7 @@ public class CMRainEventHandler {
 		BlockPos pos = event.getEntity().getPosition();
 		BlockPos bloPos = world.getTopSolidOrLiquidBlock(pos);
 
-		if (event.getEntity().world.isRaining() && world.isRainingAt(bloPos) && (world.provider.getDimension() == CMMain.cobaltdimension || world.provider.getDimension() == CMMain.cobaltdimension1)) {
+		if (event.getEntity().world.isRaining() && world.isRainingAt(bloPos) && (world.provider.getDimension() == CMMain.id_cobaldis || world.provider.getDimension() == CMMain.id_deep_caves)) {
 			if (event.getEntity() instanceof EntityPlayerMP) {
 				EntityPlayerMP player = (EntityPlayerMP) event.getEntity();
 				NonNullList<ItemStack> armor = player.inventory.armorInventory;

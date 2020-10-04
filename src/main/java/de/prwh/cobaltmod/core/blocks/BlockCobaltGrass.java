@@ -31,7 +31,7 @@ public class BlockCobaltGrass extends Block {
 
 	public BlockCobaltGrass() {
 		super(Material.GRASS);
-		this.setTranslationKey("cobalt_grass");
+		this.setUnlocalizedName("cobalt_grass");
 		this.setRegistryName("cobalt_grass");
 		this.setSoundType(SoundType.PLANT);
 		this.setTickRandomly(true);

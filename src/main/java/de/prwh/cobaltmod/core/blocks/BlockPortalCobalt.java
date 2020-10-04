@@ -60,7 +60,7 @@ public class BlockPortalCobalt extends BlockPortal {
 		name = "portal_cobalt";
 		this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.X));
 		this.setTickRandomly(true);
-		this.setTranslationKey(name);
+		this.setUnlocalizedName(name);
 		this.setRegistryName(name);
 		this.setBlockUnbreakable();
 		this.setLightLevel(0.75F);
@@ -178,7 +178,7 @@ public class BlockPortalCobalt extends BlockPortal {
 	}
 
 	@Override
-	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
 		
 		if (!worldIn.isRemote && worldIn instanceof WorldServer) {
 			if (!entityIn.isRiding() && !entityIn.isBeingRidden() && entityIn.isNonBoss() && (entityIn instanceof EntityPlayerMP)) {
@@ -201,8 +201,8 @@ public class BlockPortalCobalt extends BlockPortal {
 						//System.out.println("portalCounter: " + portalCounter);
 						player.timeUntilPortal = player.getPortalCooldown();
 
-						if (player.dimension != CMMain.cobaltdimension) {
-							mcServer.getPlayerList().transferPlayerToDimension(player, CMMain.cobaltdimension, new CMTeleporter(DimensionManager.getWorld(CMMain.cobaltdimension)));
+						if (player.dimension != CMMain.id_cobaldis) {
+							mcServer.getPlayerList().transferPlayerToDimension(player, CMMain.id_cobaldis, new CMTeleporter(DimensionManager.getWorld(CMMain.id_cobaldis)));
 							player.getEntityData().setBoolean("CM_INPORTAL", false);
 						} else {
 							mcServer.getPlayerList().transferPlayerToDimension(player, 0, new CMTeleporter(DimensionManager.getWorld(0)));

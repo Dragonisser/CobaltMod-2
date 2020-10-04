@@ -21,7 +21,7 @@ public class BlockBlueTallGrass extends BlockBush {
 	
 	public BlockBlueTallGrass() {
 		super(Material.PLANTS);
-		this.setTranslationKey("blue_tall_grass");
+		this.setUnlocalizedName("blue_tall_grass");
 		this.setRegistryName("blue_tall_grass");
 		this.setSoundType(SoundType.PLANT);
 		this.setTickRandomly(true);

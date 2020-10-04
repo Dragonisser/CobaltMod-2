@@ -16,7 +16,6 @@ import de.prwh.cobaltmod.core.lib.ItemBlockMeta;
 import de.prwh.cobaltmod.core.lib.MetaBlock;
 import de.prwh.cobaltmod.core.lib.MetaBlockPlant;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -50,10 +49,10 @@ public class CMBlocks {
 		CMContent.COBEX_STAIR = addBlock(new BlockCobexStair(CMContent.COBEX_WOOD.getDefaultState()));
 		CMContent.COBEX_LEAVES = addBlock(new BlockCobexLeaves());
 		CMContent.COBEX_SAPLING = addBlock(new BlockCobexSapling());
-		CMContent.COBALT_HALF_SLAB = (BlockSlab) new BlockCobaltHalfSlab().setTranslationKey("half_slab_cobalt").setRegistryName("half_slab_cobalt");
-		CMContent.COBALT_DOUBLE_SLAB = (BlockSlab) new BlockCobaltDoubleSlab().setTranslationKey("double_slab_cobalt").setRegistryName("double_slab_cobalt");
-		CMContent.COBEX_HALF_SLAB = (BlockSlab) new BlockCobexHalfSlab().setTranslationKey("half_slab_cobex").setRegistryName("half_slab_cobex");
-		CMContent.COBEX_DOUBLE_SLAB = (BlockSlab) new BlockCobexDoubleSlab().setTranslationKey("double_slab_cobex").setRegistryName("double_slab_cobex");
+		CMContent.COBALT_HALF_SLAB = (BlockSlab) new BlockCobaltHalfSlab().setUnlocalizedName("half_slab_cobalt").setRegistryName("half_slab_cobalt");
+		CMContent.COBALT_DOUBLE_SLAB = (BlockSlab) new BlockCobaltDoubleSlab().setUnlocalizedName("double_slab_cobalt").setRegistryName("double_slab_cobalt");
+		CMContent.COBEX_HALF_SLAB = (BlockSlab) new BlockCobexHalfSlab().setUnlocalizedName("half_slab_cobex").setRegistryName("half_slab_cobex");
+		CMContent.COBEX_DOUBLE_SLAB = (BlockSlab) new BlockCobexDoubleSlab().setUnlocalizedName("double_slab_cobex").setRegistryName("double_slab_cobex");
 		
 		CMContent.CLEMATIS_FLOWER = addBlock(new BlockFlowerClematis());
 		CMContent.RED_CABBAGE_CROP = addBlock(new BlockRedCabbageCrop(), false);
@@ -75,7 +74,13 @@ public class CMBlocks {
 		CMContent.COBALT_DOOR = addBlock(new BlockCobaltDoor(Material.IRON));
 		CMContent.COBEX_DOOR = addBlock(new BlockCobexDoor(Material.WOOD));
 		
-		CMContent.COBEX_CHEST = addBlock(new BlockCobexChest(BlockChest.Type.BASIC));
+		//CMContent.COBEX_CHEST = addBlock(new BlockCobexChest(BlockChest.Type.BASIC)); //TODO: not working...
+		
+		CMContent.BLUISH_MUSHROOM = addBlock(new BlockBluishMushroom());
+		CMContent.COBEX_DEADBUSH = addBlock(new BlockCobexDeadBush());
+		CMContent.HARDENED_CORRUPTED_STONE = addBlock(new BlockHardenedCorruptedStone());
+		CMContent.PORTAL_FRAME_CAVES = addBlock(new BlockPortalFrameCaves());
+		CMContent.PORTAL_CAVES = addBlock(new BlockPortalCaves());
 
 		register();
 		setFireInfo();
@@ -117,7 +122,7 @@ public class CMBlocks {
 
 		@Override
 		public String toString() {
-			return "block: " + this.block.getTranslationKey() + "; meta: " + this.meta;
+			return "block: " + this.block.getUnlocalizedName() + "; meta: " + this.meta;
 		}
 	}
 

@@ -22,7 +22,7 @@ public class ItemCobaltAxe extends ItemTool {
 		this.efficiency = material.getEfficiency();
 		this.attackSpeed = -3.0F;
 		
-		this.setTranslationKey("cobalt_axe");
+		this.setUnlocalizedName("cobalt_axe");
 		this.setRegistryName("cobalt_axe");
 	}
 

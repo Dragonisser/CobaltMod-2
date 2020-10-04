@@ -6,7 +6,7 @@ public class ItemCobexSword extends ItemSword {
 
 	public ItemCobexSword(ToolMaterial material) {
 		super(material);
-		this.setTranslationKey("cobex_sword");
+		this.setUnlocalizedName("cobex_sword");
 		this.setRegistryName("cobex_sword");
 	}
 }

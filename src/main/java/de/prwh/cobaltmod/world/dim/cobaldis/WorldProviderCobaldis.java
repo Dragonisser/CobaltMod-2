@@ -1,21 +1,21 @@
-package de.prwh.cobaltmod.world.dim;
+package de.prwh.cobaltmod.world.dim.cobaldis;
 
 import de.prwh.cobaltmod.core.CMMain;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 
-public class CMWorldProvider extends WorldProvider {
+public class WorldProviderCobaldis extends WorldProvider {
 
 	protected void init() {
 		this.hasSkyLight = true;
-		this.biomeProvider = new CMBiomeProvider(this.world);
+		this.biomeProvider = new BiomeProviderCobaldis(this.world);
 		this.setAllowedSpawnTypes(false, false);
 	}
 
 	@Override
 	public IChunkGenerator createChunkGenerator() {
-		return new CMChunkGenerator(this.world, "");
+		return new ChunkGeneratorCobaldis(this.world, "");
 	}
 
 	@Override
@@ -30,6 +30,6 @@ public class CMWorldProvider extends WorldProvider {
 
 	@Override
 	public DimensionType getDimensionType() {
-		return CMMain.type_cobaltdimension;
+		return CMMain.type_cobaldis;
 	}
 }

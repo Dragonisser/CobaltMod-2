@@ -6,13 +6,12 @@ import org.apache.logging.log4j.Logger;
 import de.prwh.cobaltmod.core.api.CMContent;
 import de.prwh.cobaltmod.core.api.CMReplace;
 import de.prwh.cobaltmod.core.blocks.CMBlocks;
-import de.prwh.cobaltmod.core.entity.tileentity.TileEntityCobexChest;
 import de.prwh.cobaltmod.core.items.CMItems;
 import de.prwh.cobaltmod.handler.event.CMLivingUpdateEventHandler;
 import de.prwh.cobaltmod.handler.event.CMRainEventHandler;
 import de.prwh.cobaltmod.world.biome.CMBiomeGenBase;
-import de.prwh.cobaltmod.world.dim.CMWorldProvider;
-import de.prwh.cobaltmod.world.dim.CMWorldType;
+import de.prwh.cobaltmod.world.dim.cobaldis.WorldProviderCobaldis;
+import de.prwh.cobaltmod.world.dim.deep_caves.WorldProviderDeepCaves;
 import de.prwh.cobaltmod.world.gen.WorldGeneratorDim;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -21,7 +20,6 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
-import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.DimensionManager;
@@ -57,10 +55,11 @@ public class CMMain {
 	// public static ArmorMaterial CobaltBackpackArmor;
 
 	// Dimension
-	public static final WorldType COBALT_WORLD_TYPE = new CMWorldType();
-	public static DimensionType type_cobaltdimension = null;
-	public static int cobaltdimension;
-	public static int cobaltdimension1;
+	//public static final WorldType COBALT_WORLD_TYPE = new CMWorldType();
+	public static DimensionType type_cobaldis = null;
+	public static DimensionType type_deep_caves = null;
+	public static int id_cobaldis;
+	public static int id_deep_caves;
 	public static double portaltemple;
 
 	// WindAxe
@@ -108,8 +107,8 @@ public class CMMain {
 		config.load();
 
 		config.get("Dimension", "Cobalt", 20).setComment("Which ID the Dimension has. Change it if you have problems with other Mods.");
-		cobaltdimension = config.get("Dimension", "Cobalt", 20).getInt();
-		cobaltdimension1 = config.get("Dimension", "Deep Caves", 21).getInt();
+		id_cobaldis = config.get("Dimension", "Cobalt", 20).getInt();
+		id_deep_caves = config.get("Dimension", "Deep Caves", 21).getInt();
 		//
 		// portaltemple = config.get("PortalTemple", "Spawnrate",
 		// 25).getDouble();
@@ -202,8 +201,13 @@ public class CMMain {
 		CMBiomeGenBase.init();
 
 		// Dimension
-		type_cobaltdimension = DimensionType.register("cobaldis", "_cobalt", cobaltdimension, CMWorldProvider.class, true);
-		DimensionManager.registerDimension(cobaltdimension, type_cobaltdimension);
+		type_cobaldis = DimensionType.register("cobaldis", "_cobalt", id_cobaldis, WorldProviderCobaldis.class, true);
+		DimensionManager.registerDimension(id_cobaldis, type_cobaldis);
+		
+		type_deep_caves = DimensionType.register("deep_caves", "_cobalt", id_deep_caves, WorldProviderDeepCaves.class, true);
+		DimensionManager.registerDimension(id_deep_caves, type_deep_caves);
+		
+		
 		//
 		//DimensionManager.registerProviderType(cobaltdimension1, WorldProviderCobaltCaves.class, true);
 		//DimensionManager.registerDimension(cobaltdimension1,cobaltdimension1);
@@ -220,7 +224,6 @@ public class CMMain {
 		GameRegistry.registerWorldGenerator(new WorldGeneratorDim(), 0);
 	}
 
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 		CMBiomeGenBase.initBiomeType();
@@ -283,7 +286,7 @@ public class CMMain {
 		// "tileentityritualstone");
 
 		// CobexChest
-		GameRegistry.registerTileEntity(TileEntityCobexChest.class, CMMain.MODID + "tileentity_cobex_chest");
+		//GameRegistry.registerTileEntity(TileEntityCobexChest.class, CMMain.MODID + ":tileentity_cobex_chest");
 
 		// Furnace
 		// GameRegistry.registerTileEntity(TileEntityCobaltFurnace.class,

@@ -22,7 +22,7 @@ public class ItemCobexAxe extends ItemTool {
 		this.efficiency = material.getEfficiency();
 		this.attackSpeed = -3.0F;
 		
-		this.setTranslationKey("cobex_axe");
+		this.setUnlocalizedName("cobex_axe");
 		this.setRegistryName("cobex_axe");
 	}
 

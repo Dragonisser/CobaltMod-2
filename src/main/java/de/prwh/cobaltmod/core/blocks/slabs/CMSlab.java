@@ -68,9 +68,9 @@ public abstract class CMSlab extends BlockSlab {
 	/**
 	 * Returns the slab block name with the type associated with it
 	 */
-	public String getUnlocalizedName(int meta) {
-		return super.getTranslationKey();
-	}
+//	public String getUnlocalizedName(int meta) {
+//		return super.getTranslationKey();
+//	}
 
 	public IProperty<?> getVariantProperty() {
 		return VARIANT;
@@ -90,8 +90,8 @@ public abstract class CMSlab extends BlockSlab {
 		}
 
 		@Override
-		public String getTranslationKey(int meta) {
-			return super.getTranslationKey();
+		public String getUnlocalizedName(int meta) {
+			return super.getUnlocalizedName();
 		}
 	}
 
@@ -105,8 +105,8 @@ public abstract class CMSlab extends BlockSlab {
 		}
 
 		@Override
-		public String getTranslationKey(int meta) {
-			return super.getTranslationKey();
+		public String getUnlocalizedName(int meta) {
+			return super.getUnlocalizedName();
 		}
 	}
 

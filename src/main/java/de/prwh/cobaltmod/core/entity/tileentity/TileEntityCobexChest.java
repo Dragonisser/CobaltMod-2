@@ -260,7 +260,7 @@ public class TileEntityCobexChest extends TileEntityChest {
 
 		if (!this.world.isRemote && this.numPlayersUsing != 0 && (this.ticksSinceSync + i + j + k) % 200 == 0) {
 			this.numPlayersUsing = 0;
-			float f = 5.0F;
+			//float f = 5.0F;
 
 			for (EntityPlayer entityplayer : this.world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB((double) ((float) i - 5.0F), (double) ((float) j - 5.0F),
 					(double) ((float) k - 5.0F), (double) ((float) (i + 1) + 5.0F), (double) ((float) (j + 1) + 5.0F), (double) ((float) (k + 1) + 5.0F)))) {
@@ -275,7 +275,7 @@ public class TileEntityCobexChest extends TileEntityChest {
 		}
 
 		this.prevLidAngle = this.lidAngle;
-		float f1 = 0.1F;
+		//float f1 = 0.1F;
 
 		if (this.numPlayersUsing > 0 && this.lidAngle == 0.0F && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null) {
 			double d1 = (double) i + 0.5D;
@@ -305,7 +305,7 @@ public class TileEntityCobexChest extends TileEntityChest {
 				this.lidAngle = 1.0F;
 			}
 
-			float f3 = 0.5F;
+			//float f3 = 0.5F;
 
 			if (this.lidAngle < 0.5F && f2 >= 0.5F && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null) {
 				double d3 = (double) i + 0.5D;

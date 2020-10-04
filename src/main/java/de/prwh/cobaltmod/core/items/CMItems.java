@@ -26,10 +26,10 @@ public class CMItems {
 		CMContent.COBALT_AXE = addItem(new ItemCobaltAxe(CMContent.COBALT_TOOL));
 		CMContent.COBALT_HOE = addItem(new ItemCobaltHoe(CMContent.COBALT_TOOL));
 		CMContent.COBEX_STICK = addItem(new ItemCobexStick());
-		CMContent.COBALT_HELMET = addItem(new ItemArmor(CMContent.COBALT_ARMOR, 0, EntityEquipmentSlot.HEAD).setTranslationKey("cobalt_helmet").setRegistryName("cobalt_helmet"));
-		CMContent.COBALT_CHESTPLATE = addItem(new ItemArmor(CMContent.COBALT_ARMOR, 1, EntityEquipmentSlot.CHEST).setTranslationKey("cobalt_chestplate").setRegistryName("cobalt_chestplate"));
-		CMContent.COBALT_LEGGINGS = addItem(new ItemArmor(CMContent.COBALT_ARMOR, 2, EntityEquipmentSlot.LEGS).setTranslationKey("cobalt_leggings").setRegistryName("cobalt_leggings"));
-		CMContent.COBALT_BOOTS = addItem(new ItemArmor(CMContent.COBALT_ARMOR, 3, EntityEquipmentSlot.FEET).setTranslationKey("cobalt_boots").setRegistryName("cobalt_boots"));
+		CMContent.COBALT_HELMET = addItem(new ItemArmor(CMContent.COBALT_ARMOR, 0, EntityEquipmentSlot.HEAD).setUnlocalizedName("cobalt_helmet").setRegistryName("cobalt_helmet"));
+		CMContent.COBALT_CHESTPLATE = addItem(new ItemArmor(CMContent.COBALT_ARMOR, 1, EntityEquipmentSlot.CHEST).setUnlocalizedName("cobalt_chestplate").setRegistryName("cobalt_chestplate"));
+		CMContent.COBALT_LEGGINGS = addItem(new ItemArmor(CMContent.COBALT_ARMOR, 2, EntityEquipmentSlot.LEGS).setUnlocalizedName("cobalt_leggings").setRegistryName("cobalt_leggings"));
+		CMContent.COBALT_BOOTS = addItem(new ItemArmor(CMContent.COBALT_ARMOR, 3, EntityEquipmentSlot.FEET).setUnlocalizedName("cobalt_boots").setRegistryName("cobalt_boots"));
 //		CMContent.COBEX_BOW =
 //		CMContent.COBEX_ARROW = 
 		CMContent.RED_CABBAGE_SEEDS = addItem(
@@ -46,8 +46,8 @@ public class CMItems {
 		CMContent.FIRE_SHARD = addItem(new ItemFireShard());
 		CMContent.COBALT_NUGGET = addItem(new ItemCobaltNugget());
 		
-		CMContent.COBALT_DOOR_I = addItem(new ItemDoor(CMContent.COBALT_DOOR).setTranslationKey("cobalt_door").setRegistryName("cobalt_door_i"));
-		CMContent.COBEX_DOOR_I = addItem(new ItemDoor(CMContent.COBEX_DOOR).setTranslationKey("cobex_door").setRegistryName("cobex_door_i"));
+		CMContent.COBALT_DOOR_I = addItem(new ItemDoor(CMContent.COBALT_DOOR).setUnlocalizedName("cobalt_door").setRegistryName("cobalt_door_i"));
+		CMContent.COBEX_DOOR_I = addItem(new ItemDoor(CMContent.COBEX_DOOR).setUnlocalizedName("cobex_door").setRegistryName("cobex_door_i"));
 		
 		//Stuff
 		
@@ -126,12 +126,12 @@ public class CMItems {
 
 		@Override
 		public String toString() {
-			return "item: " + this.item.getTranslationKey() + "; meta: " + this.meta;
+			return "item: " + this.item.getUnlocalizedName() + "; meta: " + this.meta;
 		}
 	}
 
 	public static boolean contains(Item item, String word) {
-		return item.getTranslationKey().contains(word);
+		return item.getUnlocalizedName().contains(word);
 	}
 	
 	public static void initTextures() {

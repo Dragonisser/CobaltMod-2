@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 
 public class ItemFireShard extends Item {
 	public ItemFireShard() {
-		this.setTranslationKey("fire_shard");
+		this.setUnlocalizedName("fire_shard");
 		this.setRegistryName("fire_shard");
         this.maxStackSize = 1;
         this.setMaxDamage(64);

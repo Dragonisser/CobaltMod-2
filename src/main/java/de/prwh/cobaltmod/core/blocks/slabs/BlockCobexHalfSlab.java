@@ -25,8 +25,8 @@ public class BlockCobexHalfSlab extends CMSlab {
 	}
 
 	@Override
-	public String getTranslationKey(int meta) {
-		return super.getTranslationKey();
+	public String getUnlocalizedName(int meta) {
+		return super.getUnlocalizedName();
 	}
 	
 	@Nullable

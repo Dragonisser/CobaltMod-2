@@ -40,7 +40,7 @@ public class ItemWindAxe extends ItemTool {
 		this.efficiency = material.getEfficiency();
 		this.attackSpeed = -3.0F;
 
-		this.setTranslationKey("wind_axe");
+		this.setUnlocalizedName("wind_axe");
 		this.setRegistryName("wind_axe");
 
 		this.setMaxDamage(200);

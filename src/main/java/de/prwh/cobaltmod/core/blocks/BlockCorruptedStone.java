@@ -6,7 +6,7 @@ import net.minecraft.block.material.Material;
 public class BlockCorruptedStone extends Block {
 	public BlockCorruptedStone() {
 		super(Material.ROCK);
-		this.setTranslationKey("corrupted_stone");
+		this.setUnlocalizedName("corrupted_stone");
 		this.setRegistryName("corrupted_stone");
 		this.setHardness(1.5F);
 	}

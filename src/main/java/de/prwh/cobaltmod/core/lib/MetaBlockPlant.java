@@ -28,7 +28,7 @@ public abstract class MetaBlockPlant extends BlockBush {
 	protected MetaBlockPlant(Material material, String unlocname, int metaCount) {
 		super(material);
 		setCreativeTab(CMMain.cobalttabblocks);
-		setTranslationKey(unlocname);
+		setUnlocalizedName(unlocname);
 		this.meta = metaCount;
 	}
 

@@ -9,7 +9,7 @@ public class BlockCobaltDirt extends Block {
 		super(Material.GROUND);
 		this.setSoundType(SoundType.GROUND);
 		this.setRegistryName("cobalt_dirt");
-		this.setTranslationKey("cobalt_dirt");
+		this.setUnlocalizedName("cobalt_dirt");
 		this.setHardness(0.5F);
 	}
 }
