@@ -1,4 +1,4 @@
-package de.prwh.cobaltmod.world.dim;
+package de.prwh.cobaltmod.world.dim.cobaldis;
 
 import java.util.Random;
 
@@ -19,14 +19,14 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
-public class CMTeleporter extends Teleporter {
+public class CMTeleporterCobaldis extends Teleporter {
 
 	private final WorldServer worldServerInstance;
 	/** A private Random() function in Teleporter */
 	private final Random random;
-	private final Long2ObjectMap<CMTeleporter.PortalPosition> destinationCoordinateCache = new Long2ObjectOpenHashMap<PortalPosition>(4096);
+	private final Long2ObjectMap<CMTeleporterCobaldis.PortalPosition> destinationCoordinateCache = new Long2ObjectOpenHashMap<PortalPosition>(4096);
 
-	public CMTeleporter(WorldServer worldIn) {
+	public CMTeleporterCobaldis(WorldServer worldIn) {
 		super(worldIn);
 		this.worldServerInstance = worldIn;
 		this.random = new Random(worldIn.getSeed());
@@ -71,7 +71,7 @@ public class CMTeleporter extends Teleporter {
 		long l = ChunkPos.asLong(j, k);
 
 		if (this.destinationCoordinateCache.containsKey(l)) {
-			CMTeleporter.PortalPosition teleporter$portalposition = (CMTeleporter.PortalPosition) this.destinationCoordinateCache.get(l);
+			CMTeleporterCobaldis.PortalPosition teleporter$portalposition = (CMTeleporterCobaldis.PortalPosition) this.destinationCoordinateCache.get(l);
 			d0 = 0.0D;
 			blockpos = teleporter$portalposition;
 			teleporter$portalposition.lastUpdateTime = this.worldServerInstance.getTotalWorldTime();
@@ -105,7 +105,7 @@ public class CMTeleporter extends Teleporter {
 
 		if (d0 >= 0.0D) {
 			if (flag) {
-				this.destinationCoordinateCache.put(l, new CMTeleporter.PortalPosition(blockpos, this.worldServerInstance.getTotalWorldTime()));
+				this.destinationCoordinateCache.put(l, new CMTeleporterCobaldis.PortalPosition(blockpos, this.worldServerInstance.getTotalWorldTime()));
 			}
 
 			double d5 = (double) blockpos.getX() + 0.5D;
@@ -344,10 +344,10 @@ public class CMTeleporter extends Teleporter {
 	public void removeStalePortalLocations(long worldTime) {
 		if (worldTime % 100L == 0L) {
 			long i = worldTime - 300L;
-			ObjectIterator<CMTeleporter.PortalPosition> objectiterator = this.destinationCoordinateCache.values().iterator();
+			ObjectIterator<CMTeleporterCobaldis.PortalPosition> objectiterator = this.destinationCoordinateCache.values().iterator();
 
 			while (objectiterator.hasNext()) {
-				CMTeleporter.PortalPosition teleporter$portalposition = (CMTeleporter.PortalPosition) objectiterator.next();
+				CMTeleporterCobaldis.PortalPosition teleporter$portalposition = (CMTeleporterCobaldis.PortalPosition) objectiterator.next();
 
 				if (teleporter$portalposition == null || teleporter$portalposition.lastUpdateTime < i) {
 					objectiterator.remove();

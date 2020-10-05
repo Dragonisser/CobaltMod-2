@@ -9,7 +9,7 @@ import com.google.common.cache.LoadingCache;
 
 import de.prwh.cobaltmod.core.CMMain;
 import de.prwh.cobaltmod.core.api.CMContent;
-import de.prwh.cobaltmod.world.dim.CMTeleporter;
+import de.prwh.cobaltmod.world.dim.deep_caves.CMTeleporterDeepCaves;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPortal;
 import net.minecraft.block.material.Material;
@@ -202,10 +202,10 @@ public class BlockPortalCaves extends BlockPortal {
 						player.timeUntilPortal = player.getPortalCooldown();
 
 						if (player.dimension != CMMain.id_deep_caves) {
-							mcServer.getPlayerList().transferPlayerToDimension(player, CMMain.id_deep_caves, new CMTeleporter(DimensionManager.getWorld(CMMain.id_deep_caves)));
+							mcServer.getPlayerList().transferPlayerToDimension(player, CMMain.id_deep_caves, new CMTeleporterDeepCaves(DimensionManager.getWorld(CMMain.id_deep_caves)));
 							player.getEntityData().setBoolean("CM_INPORTAL", false);
 						} else {
-							mcServer.getPlayerList().transferPlayerToDimension(player, 0, new CMTeleporter(DimensionManager.getWorld(0)));
+							mcServer.getPlayerList().transferPlayerToDimension(player, 0, new CMTeleporterDeepCaves(DimensionManager.getWorld(0)));
 							player.getEntityData().setBoolean("CM_INPORTAL", false);
 						}
 					}

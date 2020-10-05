@@ -24,7 +24,7 @@ public class BlockBlueFire extends BlockFire {
 
 	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-		if (!(CMContent.PORTAL_COBALT).trySpawnPortal(worldIn, pos)) {
+		if (!(CMContent.PORTAL_COBALT).trySpawnPortal(worldIn, pos) && !(CMContent.PORTAL_CAVES).trySpawnPortal(worldIn, pos)) {
 			if (!worldIn.getBlockState(pos.down()).isFullCube() && !this.canNeighborCatchFire(worldIn, pos)) {
 				worldIn.setBlockToAir(pos);
 			} else {

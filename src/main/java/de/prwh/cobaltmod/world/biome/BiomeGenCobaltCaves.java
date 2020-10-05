@@ -8,8 +8,8 @@ public class BiomeGenCobaltCaves extends CMBiomeGenBase {
 		super(properties);
 		properties.setBaseBiome("Cobalt Caves");
 		properties.setRainDisabled();
-		this.topBlock = CMContent.COBALT_GRASS.getDefaultState();
-		this.fillerBlock = CMContent.COBALT_DIRT.getDefaultState();
+		this.topBlock = CMContent.CORRUPTED_STONE.getDefaultState();
+		this.fillerBlock = CMContent.HARDENED_CORRUPTED_STONE.getDefaultState();
 		this.spawnableCaveCreatureList.clear();
 		this.spawnableCreatureList.clear();
 		this.spawnableMonsterList.clear();

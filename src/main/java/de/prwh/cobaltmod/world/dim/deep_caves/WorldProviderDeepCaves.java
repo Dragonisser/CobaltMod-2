@@ -1,8 +1,6 @@
 package de.prwh.cobaltmod.world.dim.deep_caves;
 
 import de.prwh.cobaltmod.core.CMMain;
-import de.prwh.cobaltmod.world.dim.cobaldis.BiomeProviderCobaldis;
-import de.prwh.cobaltmod.world.dim.cobaldis.ChunkGeneratorCobaldis;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.gen.IChunkGenerator;
@@ -11,13 +9,13 @@ public class WorldProviderDeepCaves extends WorldProvider {
 
 	protected void init() {
 		this.hasSkyLight = true;
-		this.biomeProvider = new BiomeProviderCobaldis(this.world);
+		this.biomeProvider = new BiomeProviderDeepCaves(this.world);
 		this.setAllowedSpawnTypes(false, false);
 	}
 
 	@Override
 	public IChunkGenerator createChunkGenerator() {
-		return new ChunkGeneratorCobaldis(this.world, "");
+		return new ChunkGeneratorDeepCaves(this.world, false, this.world.getSeed());
 	}
 
 	@Override
