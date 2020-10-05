@@ -69,7 +69,7 @@ public class CMBiomeGenBase extends Biome {
 		biomeswamp = new BiomeGenCobaltSwamp(new Biome.BiomeProperties("Deep Swamp").setBaseHeight(-0.2F).setHeightVariation(0.1F)).setRegistryName("deep_swamp");
 		biometall = new BiomeGenCobaltTall(new Biome.BiomeProperties("Tall Forest").setBaseHeight(0.7F).setHeightVariation(0.2F)).setRegistryName("tall_forest");
 		biomehills = new BiomeGenCobaltHills(new Biome.BiomeProperties("Blue Hills").setBaseHeight(1.4F).setHeightVariation(0.3F)).setRegistryName("blue_hills");
-		biomecaves = new BiomeGenCobaltCaves(new Biome.BiomeProperties("Cobalt Caves")).setRegistryName("cobalt_caves");
+		biomecaves = new BiomeGenCobaltCaves(new Biome.BiomeProperties("Deep Caves")).setRegistryName("deep_caves");
 
 		addToBiomeList(new BiomeData(biomemountains));
 		addToBiomeList(new BiomeData(biomeforest));

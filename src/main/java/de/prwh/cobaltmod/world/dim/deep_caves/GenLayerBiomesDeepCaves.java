@@ -7,7 +7,7 @@ import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerBiomesDeepCaves extends GenLayer {
 
-	protected Biome[] allowedBiomes = { CMBiomeGenBase.biomeforest, CMBiomeGenBase.biomemountains, CMBiomeGenBase.biomehills, CMBiomeGenBase.biomeswamp, CMBiomeGenBase.biometall };
+	protected Biome[] allowedBiomes = {CMBiomeGenBase.biomecaves};
 
 	public GenLayerBiomesDeepCaves(long seed, GenLayer genlayer) {
 		super(seed);

@@ -6,7 +6,7 @@ public class BiomeGenCobaltCaves extends CMBiomeGenBase {
 
 	public BiomeGenCobaltCaves(BiomeProperties properties) {
 		super(properties);
-		properties.setBaseBiome("Cobalt Caves");
+		properties.setBaseBiome("Deep Caves");
 		properties.setRainDisabled();
 		this.topBlock = CMContent.CORRUPTED_STONE.getDefaultState();
 		this.fillerBlock = CMContent.HARDENED_CORRUPTED_STONE.getDefaultState();
