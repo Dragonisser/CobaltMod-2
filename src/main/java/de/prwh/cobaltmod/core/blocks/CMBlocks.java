@@ -72,11 +72,11 @@ public class CMBlocks {
 		CMContent.BLUEBERRY_BUSH = addBlock(new BlockBlueBerryBush());
 		
 		CMContent.COBALT_DOOR = addBlock(new BlockCobaltDoor(Material.IRON));
-		CMContent.COBEX_DOOR = addBlock(new BlockCobexDoor(Material.WOOD));
+		//CMContent.COBEX_DOOR = addBlock(new BlockCobexDoor(Material.WOOD));
 		
 		//CMContent.COBEX_CHEST = addBlock(new BlockCobexChest(BlockChest.Type.BASIC)); //TODO: not working...
 		
-		CMContent.BLUISH_MUSHROOM = addBlock(new BlockBluishMushroom());
+		CMContent.BLUISH_MUSHROOM = addMetaBlockPlant(new BlockBluishMushroom("bluish_mushroom"), BlockBluishMushroom.PlantVariations.values().length);
 		CMContent.COBEX_DEADBUSH = addBlock(new BlockCobexDeadBush());
 		CMContent.HARDENED_CORRUPTED_STONE = addBlock(new BlockHardenedCorruptedStone());
 		CMContent.PORTAL_FRAME_CAVES = addBlock(new BlockPortalFrameCaves());

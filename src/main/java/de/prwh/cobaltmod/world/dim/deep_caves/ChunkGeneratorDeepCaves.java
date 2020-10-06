@@ -5,10 +5,10 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import de.prwh.cobaltmod.core.api.CMContent;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -22,13 +22,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.MapGenCavesHell;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
-import net.minecraft.world.gen.feature.WorldGenBush;
-import net.minecraft.world.gen.feature.WorldGenFire;
-import net.minecraft.world.gen.feature.WorldGenGlowStone1;
-import net.minecraft.world.gen.feature.WorldGenGlowStone2;
-import net.minecraft.world.gen.feature.WorldGenHellLava;
-import net.minecraft.world.gen.feature.WorldGenMinable;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.structure.MapGenNetherBridge;
 
 public class ChunkGeneratorDeepCaves implements IChunkGenerator
@@ -53,15 +46,6 @@ public class ChunkGeneratorDeepCaves implements IChunkGenerator
     private NoiseGeneratorOctaves netherrackExculsivityNoiseGen;
     public NoiseGeneratorOctaves scaleNoise;
     public NoiseGeneratorOctaves depthNoise;
-    private final WorldGenFire fireFeature = new WorldGenFire();
-    private final WorldGenGlowStone1 lightGemGen = new WorldGenGlowStone1();
-    private final WorldGenGlowStone2 hellPortalGen = new WorldGenGlowStone2();
-    private final WorldGenerator quartzGen = new WorldGenMinable(Blocks.QUARTZ_ORE.getDefaultState(), 14, BlockMatcher.forBlock(Blocks.NETHERRACK));
-    private final WorldGenerator magmaGen = new WorldGenMinable(Blocks.MAGMA.getDefaultState(), 33, BlockMatcher.forBlock(Blocks.NETHERRACK));
-    private final WorldGenHellLava lavaTrapGen = new WorldGenHellLava(Blocks.FLOWING_LAVA, true);
-    private final WorldGenHellLava hellSpringGen = new WorldGenHellLava(Blocks.FLOWING_LAVA, false);
-    private final WorldGenBush brownMushroomFeature = new WorldGenBush(Blocks.BROWN_MUSHROOM);
-    private final WorldGenBush redMushroomFeature = new WorldGenBush(Blocks.RED_MUSHROOM);
     private MapGenNetherBridge genNetherBridge = new MapGenNetherBridge();
     private MapGenBase genNetherCaves = new MapGenCavesHell();
     double[] pnr;
@@ -100,11 +84,11 @@ public class ChunkGeneratorDeepCaves implements IChunkGenerator
 
     public void prepareHeights(int p_185936_1_, int p_185936_2_, ChunkPrimer primer)
     {
-        int i = 4;
+        //int i = 4;
         int j = this.world.getSeaLevel() / 2 + 1;
-        int k = 5;
-        int l = 17;
-        int i1 = 5;
+        //int k = 5;
+        //int l = 17;
+        //int i1 = 5;
         this.buffer = this.getHeights(this.buffer, p_185936_1_ * 4, 0, p_185936_2_ * 4, 5, 17, 5);
 
         for (int j1 = 0; j1 < 4; ++j1)
@@ -113,7 +97,7 @@ public class ChunkGeneratorDeepCaves implements IChunkGenerator
             {
                 for (int l1 = 0; l1 < 16; ++l1)
                 {
-                    double d0 = 0.125D;
+                    //double d0 = 0.125D;
                     double d1 = this.buffer[((j1 + 0) * 5 + k1 + 0) * 17 + l1 + 0];
                     double d2 = this.buffer[((j1 + 0) * 5 + k1 + 1) * 17 + l1 + 0];
                     double d3 = this.buffer[((j1 + 1) * 5 + k1 + 0) * 17 + l1 + 0];
@@ -125,7 +109,7 @@ public class ChunkGeneratorDeepCaves implements IChunkGenerator
 
                     for (int i2 = 0; i2 < 8; ++i2)
                     {
-                        double d9 = 0.25D;
+                        //double d9 = 0.25D;
                         double d10 = d1;
                         double d11 = d2;
                         double d12 = (d3 - d1) * 0.25D;
@@ -133,7 +117,7 @@ public class ChunkGeneratorDeepCaves implements IChunkGenerator
 
                         for (int j2 = 0; j2 < 4; ++j2)
                         {
-                            double d14 = 0.25D;
+                            //double d14 = 0.25D;
                             double d15 = d10;
                             double d16 = (d11 - d10) * 0.25D;
 
@@ -148,7 +132,7 @@ public class ChunkGeneratorDeepCaves implements IChunkGenerator
 
                                 if (d15 > 0.0D)
                                 {
-                                    iblockstate = NETHERRACK;
+                                    iblockstate = CMContent.HARDENED_CORRUPTED_STONE.getDefaultState();
                                 }
 
                                 int l2 = j2 + j1 * 4;
@@ -176,7 +160,7 @@ public class ChunkGeneratorDeepCaves implements IChunkGenerator
     {
         if (!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, p_185937_1_, p_185937_2_, primer, this.world)) return;
         int i = this.world.getSeaLevel() + 1;
-        double d0 = 0.03125D;
+        //double d0 = 0.03125D;
         this.slowsandNoise = this.slowsandGravelNoiseGen.generateNoiseOctaves(this.slowsandNoise, p_185937_1_ * 16, p_185937_2_ * 16, 0, 16, 16, 1, 0.03125D, 0.03125D, 1.0D);
         this.gravelNoise = this.slowsandGravelNoiseGen.generateNoiseOctaves(this.gravelNoise, p_185937_1_ * 16, 109, p_185937_2_ * 16, 16, 1, 16, 0.03125D, 1.0D, 0.03125D);
         this.depthBuffer = this.netherrackExculsivityNoiseGen.generateNoiseOctaves(this.depthBuffer, p_185937_1_ * 16, p_185937_2_ * 16, 0, 16, 16, 1, 0.0625D, 0.0625D, 0.0625D);
@@ -189,8 +173,8 @@ public class ChunkGeneratorDeepCaves implements IChunkGenerator
                 boolean flag1 = this.gravelNoise[j + k * 16] + this.rand.nextDouble() * 0.2D > 0.0D;
                 int l = (int)(this.depthBuffer[j + k * 16] / 3.0D + 3.0D + this.rand.nextDouble() * 0.25D);
                 int i1 = -1;
-                IBlockState iblockstate = NETHERRACK;
-                IBlockState iblockstate1 = NETHERRACK;
+                IBlockState iblockstate = CMContent.CORRUPTED_STONE.getDefaultState();
+                IBlockState iblockstate1 = CMContent.HARDENED_CORRUPTED_STONE.getDefaultState();
 
                 for (int j1 = 127; j1 >= 0; --j1)
                 {
@@ -200,30 +184,30 @@ public class ChunkGeneratorDeepCaves implements IChunkGenerator
 
                         if (iblockstate2.getBlock() != null && iblockstate2.getMaterial() != Material.AIR)
                         {
-                            if (iblockstate2.getBlock() == Blocks.NETHERRACK)
+                            if (iblockstate2.getBlock() == CMContent.HARDENED_CORRUPTED_STONE)
                             {
                                 if (i1 == -1)
                                 {
                                     if (l <= 0)
                                     {
                                         iblockstate = AIR;
-                                        iblockstate1 = NETHERRACK;
+                                        iblockstate1 = CMContent.HARDENED_CORRUPTED_STONE.getDefaultState();
                                     }
                                     else if (j1 >= i - 4 && j1 <= i + 1)
                                     {
-                                        iblockstate = NETHERRACK;
-                                        iblockstate1 = NETHERRACK;
+                                        iblockstate = CMContent.HARDENED_CORRUPTED_STONE.getDefaultState();
+                                        iblockstate1 = CMContent.HARDENED_CORRUPTED_STONE.getDefaultState();
 
                                         if (flag1)
                                         {
-                                            iblockstate = GRAVEL;
-                                            iblockstate1 = NETHERRACK;
+                                            //iblockstate = GRAVEL;
+                                            iblockstate1 = CMContent.HARDENED_CORRUPTED_STONE.getDefaultState();
                                         }
 
                                         if (flag)
                                         {
-                                            iblockstate = SOUL_SAND;
-                                            iblockstate1 = SOUL_SAND;
+                                            //iblockstate = SOUL_SAND;
+                                            //iblockstate1 = SOUL_SAND;
                                         }
                                     }
 
@@ -301,8 +285,8 @@ public class ChunkGeneratorDeepCaves implements IChunkGenerator
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
         if (event.getResult() == net.minecraftforge.fml.common.eventhandler.Event.Result.DENY) return event.getNoisefield();
 
-        double d0 = 684.412D;
-        double d1 = 2053.236D;
+        //double d0 = 684.412D;
+        //double d1 = 2053.236D;
         this.noiseData4 = this.scaleNoise.generateNoiseOctaves(this.noiseData4, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_, 1, p_185938_7_, 1.0D, 0.0D, 1.0D);
         this.dr = this.depthNoise.generateNoiseOctaves(this.dr, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_, 1, p_185938_7_, 100.0D, 0.0D, 100.0D);
         this.pnr = this.perlinNoise1.generateNoiseOctaves(this.pnr, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_, p_185938_6_, p_185938_7_, 8.555150000000001D, 34.2206D, 8.555150000000001D);
@@ -332,7 +316,7 @@ public class ChunkGeneratorDeepCaves implements IChunkGenerator
         {
             for (int i1 = 0; i1 < p_185938_7_; ++i1)
             {
-                double d3 = 0.0D;
+                //double d3 = 0.0D;
 
                 for (int k = 0; k < p_185938_6_; ++k)
                 {
@@ -393,25 +377,25 @@ public class ChunkGeneratorDeepCaves implements IChunkGenerator
         if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.NETHER_LAVA))
         for (int k = 0; k < 8; ++k)
         {
-            this.hellSpringGen.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(120) + 4, this.rand.nextInt(16) + 8));
+            //this.hellSpringGen.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(120) + 4, this.rand.nextInt(16) + 8));
         }
 
         if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.FIRE))
         for (int i1 = 0; i1 < this.rand.nextInt(this.rand.nextInt(10) + 1) + 1; ++i1)
         {
-            this.fireFeature.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(120) + 4, this.rand.nextInt(16) + 8));
+            //this.fireFeature.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(120) + 4, this.rand.nextInt(16) + 8));
         }
 
         if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.GLOWSTONE))
         {
         for (int j1 = 0; j1 < this.rand.nextInt(this.rand.nextInt(10) + 1); ++j1)
         {
-            this.lightGemGen.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(120) + 4, this.rand.nextInt(16) + 8));
+            //this.lightGemGen.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(120) + 4, this.rand.nextInt(16) + 8));
         }
 
         for (int k1 = 0; k1 < 10; ++k1)
         {
-            this.hellPortalGen.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
+            //this.hellPortalGen.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
         }
         }//Forge: End doGLowstone
 
@@ -422,40 +406,40 @@ public class ChunkGeneratorDeepCaves implements IChunkGenerator
         {
         if (this.rand.nextBoolean())
         {
-            this.brownMushroomFeature.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
+            //this.brownMushroomFeature.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
         }
 
         if (this.rand.nextBoolean())
         {
-            this.redMushroomFeature.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
+            //this.redMushroomFeature.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
         }
         }
 
 
-        if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(this.world, this.rand, quartzGen, blockpos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.QUARTZ))
+        //if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(this.world, this.rand, quartzGen, blockpos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.QUARTZ))
         for (int l1 = 0; l1 < 16; ++l1)
         {
-            this.quartzGen.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16), this.rand.nextInt(108) + 10, this.rand.nextInt(16)));
+            //this.quartzGen.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16), this.rand.nextInt(108) + 10, this.rand.nextInt(16)));
         }
 
-        int i2 = this.world.getSeaLevel() / 2 + 1;
+        //int i2 = this.world.getSeaLevel() / 2 + 1;
 
         if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.NETHER_MAGMA))
         for (int l = 0; l < 4; ++l)
         {
-            this.magmaGen.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16), i2 - 5 + this.rand.nextInt(10), this.rand.nextInt(16)));
+            //this.magmaGen.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16), i2 - 5 + this.rand.nextInt(10), this.rand.nextInt(16)));
         }
 
         if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.NETHER_LAVA2))
         for (int j2 = 0; j2 < 16; ++j2)
         {
-            int offset = net.minecraftforge.common.ForgeModContainer.fixVanillaCascading ? 8 : 0; // MC-117810
-            this.lavaTrapGen.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + offset, this.rand.nextInt(108) + 10, this.rand.nextInt(16) + offset));
+            //int offset = net.minecraftforge.common.ForgeModContainer.fixVanillaCascading ? 8 : 0; // MC-117810
+            //this.lavaTrapGen.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + offset, this.rand.nextInt(108) + 10, this.rand.nextInt(16) + offset));
         }
 
         biome.decorate(this.world, this.rand, new BlockPos(i, 0, j));
 
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Post(this.world, this.rand, blockpos));
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Post(this.world, this.rand, new ChunkPos(blockpos)));
 
         BlockFalling.fallInstantly = false;
     }
