@@ -201,10 +201,10 @@ public class CMMain {
 		CMBiomeGenBase.init();
 
 		// Dimension
-		type_cobaldis = DimensionType.register("cobaldis", "_cobalt", id_cobaldis, WorldProviderCobaldis.class, true);
+		type_cobaldis = DimensionType.register("cobaldis", "_cobalt", id_cobaldis, WorldProviderCobaldis.class, false);
 		DimensionManager.registerDimension(id_cobaldis, type_cobaldis);
 		
-		type_deep_caves = DimensionType.register("deep_caves", "_cobalt", id_deep_caves, WorldProviderDeepCaves.class, true);
+		type_deep_caves = DimensionType.register("deep_caves", "_cobalt", id_deep_caves, WorldProviderDeepCaves.class, false);
 		DimensionManager.registerDimension(id_deep_caves, type_deep_caves);
 		
 		

@@ -10,6 +10,7 @@ public class BiomeGenCobaltCaves extends CMBiomeGenBase {
 		properties.setRainDisabled();
 		this.topBlock = CMContent.CORRUPTED_STONE.getDefaultState();
 		this.fillerBlock = CMContent.HARDENED_CORRUPTED_STONE.getDefaultState();
+		this.decorator.flowersPerChunk = 4;
 		this.spawnableCaveCreatureList.clear();
 		this.spawnableCreatureList.clear();
 		this.spawnableMonsterList.clear();

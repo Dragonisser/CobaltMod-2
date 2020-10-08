@@ -200,9 +200,16 @@ public class BlockPortalCaves extends BlockPortal {
 						portalCounter = i;
 						//System.out.println("portalCounter: " + portalCounter);
 						player.timeUntilPortal = player.getPortalCooldown();
-
-						if (player.dimension != CMMain.id_deep_caves) {
-							mcServer.getPlayerList().transferPlayerToDimension(player, CMMain.id_deep_caves, new CMTeleporterDeepCaves(DimensionManager.getWorld(CMMain.id_deep_caves)));
+						int dimensionId = CMMain.id_deep_caves;
+						
+						if (player.dimension != dimensionId) {
+							/*
+							 * Dimensions that auto unload crashes client because they are null 
+							 * Thats why im doing that init here
+							 * #JustMinecraftThings
+							 */
+							DimensionManager.initDimension(dimensionId);
+							mcServer.getPlayerList().transferPlayerToDimension(player, dimensionId, new CMTeleporterDeepCaves(DimensionManager.getWorld(dimensionId)));
 							player.getEntityData().setBoolean("CM_INPORTAL", false);
 						} else {
 							mcServer.getPlayerList().transferPlayerToDimension(player, 0, new CMTeleporterDeepCaves(DimensionManager.getWorld(0)));

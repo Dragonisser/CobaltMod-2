@@ -149,6 +149,6 @@ public class CMBiomeGenBase extends Biome {
 		BiomeDictionary.addTypes(biomeswamp, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.WET);
 		BiomeDictionary.addTypes(biometall, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.HILLS);
 		BiomeDictionary.addTypes(biomehills, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HILLS);
-		BiomeDictionary.addTypes(biomecaves, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.HILLS);
+		BiomeDictionary.addTypes(biomecaves, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.WET);
 	}
 }

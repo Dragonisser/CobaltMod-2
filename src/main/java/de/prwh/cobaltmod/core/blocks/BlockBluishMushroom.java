@@ -34,9 +34,10 @@ public class BlockBluishMushroom extends MetaBlockPlant {
 	}
 
 	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-		state = worldIn.getBlockState(pos.down());
-		return state.getBlock() == CMContent.COBALT_DIRT || state.getBlock() == CMContent.COBALT_GRASS || state.getBlock() == CMContent.CORRUPTED_STONE
-				|| state.getBlock() == CMContent.HARDENED_CORRUPTED_STONE;
+		IBlockState stateDown = worldIn.getBlockState(pos.down());
+		//System.out.println(stateDown);
+		return stateDown.getBlock() == CMContent.COBALT_DIRT || stateDown.getBlock() == CMContent.COBALT_GRASS || stateDown.getBlock() == CMContent.CORRUPTED_STONE
+				|| stateDown.getBlock() == CMContent.HARDENED_CORRUPTED_STONE;
 	}
 
 	@Override

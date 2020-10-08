@@ -17,7 +17,6 @@ import de.prwh.cobaltmod.core.lib.MetaBlock;
 import de.prwh.cobaltmod.core.lib.MetaBlockPlant;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
-import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -71,7 +70,7 @@ public class CMBlocks {
 
 		CMContent.BLUEBERRY_BUSH = addBlock(new BlockBlueBerryBush());
 		
-		CMContent.COBALT_DOOR = addBlock(new BlockCobaltDoor(Material.IRON));
+		//CMContent.COBALT_DOOR = addBlock(new BlockCobaltDoor(Material.IRON));
 		//CMContent.COBEX_DOOR = addBlock(new BlockCobexDoor(Material.WOOD));
 		
 		//CMContent.COBEX_CHEST = addBlock(new BlockCobexChest(BlockChest.Type.BASIC)); //TODO: not working...
@@ -80,7 +79,7 @@ public class CMBlocks {
 		CMContent.COBEX_DEADBUSH = addBlock(new BlockCobexDeadBush());
 		CMContent.HARDENED_CORRUPTED_STONE = addBlock(new BlockHardenedCorruptedStone());
 		CMContent.PORTAL_FRAME_CAVES = addBlock(new BlockPortalFrameCaves());
-		CMContent.PORTAL_CAVES = addBlock(new BlockPortalCaves());
+		CMContent.PORTAL_CAVES = addBlock(new BlockPortalCaves(), false);
 
 		register();
 		setFireInfo();
@@ -207,7 +206,6 @@ public class CMBlocks {
 		return CMLib.registerWithItem(block, meta);
 	}
 
-	@SuppressWarnings("unused")
 	private static <T extends MetaBlockPlant> T addMetaBlockPlant(T block, int meta) {
 		return addMetaBlockPlant(block, new ItemBlockMeta(block), meta);
 	}

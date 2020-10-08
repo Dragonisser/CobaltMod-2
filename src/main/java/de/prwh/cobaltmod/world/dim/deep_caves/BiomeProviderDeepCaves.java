@@ -17,6 +17,7 @@ public class BiomeProviderDeepCaves extends BiomeProvider {
 
 		getBiomesToSpawnIn().clear();
 		getBiomesToSpawnIn().add(CMBiomeGenBase.biomecaves);
+		getBiomesToSpawnIn().add(CMBiomeGenBase.biomecaves);
 	}
 
 	@Override

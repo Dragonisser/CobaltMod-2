@@ -122,6 +122,35 @@ public class WorldGeneratorDim implements IWorldGenerator {
 
 	private void generateDeepCaves(World worldIn, Random rand, int x, int z) {
 		
+		int RandPosX = x + rand.nextInt(16) + 8;
+		int RandPosZ = z + rand.nextInt(16) + 8;
+		int height = rand.nextInt(128);
+		BlockPos pos = new BlockPos(RandPosX, height, RandPosZ);
+		this.chunkPos = new BlockPos(RandPosX, 0, RandPosZ);
+		Biome biome = worldIn.getBiome(pos);
+		
+		for (int l2 = 0; l2 < CMBiomeGenBase.getBiomeDecorator().flowersPerChunk; ++l2) { // How often it tries to spawn in a chunk - default:2
+			if (height > 0) {
+				int rand_height = rand.nextInt(height);
+				BlockPos blockpos1 = this.chunkPos.add(x, rand_height, z);
+				BlockFlower.EnumFlowerType blockflower$enumflowertype = biome.pickRandomFlower(rand, blockpos1);
+				BlockFlower blockflower = blockflower$enumflowertype.getBlockType().getBlock();
+
+				if (blockflower.getDefaultState().getMaterial() != Material.AIR) {
+					double d1 = Math.random();
+					
+					if (d1 < 0.33) {
+						
+					} else if (d1 > 0.43 && d1 < 0.66) {
+						
+					} else if (d1 > 0.35 && d1 < 0.55) {
+						
+					} else {
+						
+					}
+				}
+			}
+		}
 	}
 	
 	public void generateSurface(World worldIn, Random rand, int x, int z) {

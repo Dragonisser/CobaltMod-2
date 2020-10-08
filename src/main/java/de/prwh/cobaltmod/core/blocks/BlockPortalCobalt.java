@@ -201,8 +201,15 @@ public class BlockPortalCobalt extends BlockPortal {
 						//System.out.println("portalCounter: " + portalCounter);
 						player.timeUntilPortal = player.getPortalCooldown();
 
-						if (player.dimension != CMMain.id_cobaldis) {
-							mcServer.getPlayerList().transferPlayerToDimension(player, CMMain.id_cobaldis, new CMTeleporterCobaldis(DimensionManager.getWorld(CMMain.id_cobaldis)));
+						int dimensionId = CMMain.id_cobaldis;
+						if (player.dimension != dimensionId) {
+							/*
+							 * Dimensions that auto unload crashes client because they are null 
+							 * Thats why im doing that init here
+							 * #JustMinecraftThings
+							 */
+							DimensionManager.initDimension(dimensionId);
+							mcServer.getPlayerList().transferPlayerToDimension(player, dimensionId, new CMTeleporterCobaldis(DimensionManager.getWorld(dimensionId)));
 							player.getEntityData().setBoolean("CM_INPORTAL", false);
 						} else {
 							mcServer.getPlayerList().transferPlayerToDimension(player, 0, new CMTeleporterCobaldis(DimensionManager.getWorld(0)));

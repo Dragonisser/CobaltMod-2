@@ -3,9 +3,9 @@ package de.prwh.cobaltmod.world.dim.deep_caves;
 import java.util.List;
 import java.util.Random;
 
-import javax.annotation.Nullable;
-
 import de.prwh.cobaltmod.core.api.CMContent;
+import de.prwh.cobaltmod.core.blocks.BlockBluishMushroom;
+import de.prwh.cobaltmod.world.gen.feature.WorldGenBluishMushrooms;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -22,16 +22,12 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.MapGenCavesHell;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
-import net.minecraft.world.gen.structure.MapGenNetherBridge;
 
 public class ChunkGeneratorDeepCaves implements IChunkGenerator
 {
     protected static final IBlockState AIR = Blocks.AIR.getDefaultState();
-    protected static final IBlockState NETHERRACK = Blocks.NETHERRACK.getDefaultState();
     protected static final IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
     protected static final IBlockState LAVA = Blocks.LAVA.getDefaultState();
-    protected static final IBlockState GRAVEL = Blocks.GRAVEL.getDefaultState();
-    protected static final IBlockState SOUL_SAND = Blocks.SOUL_SAND.getDefaultState();
     private final World world;
     private final boolean generateStructures;
     private final Random rand;
@@ -46,8 +42,9 @@ public class ChunkGeneratorDeepCaves implements IChunkGenerator
     private NoiseGeneratorOctaves netherrackExculsivityNoiseGen;
     public NoiseGeneratorOctaves scaleNoise;
     public NoiseGeneratorOctaves depthNoise;
-    private MapGenNetherBridge genNetherBridge = new MapGenNetherBridge();
+    //private MapGenNetherBridge genNetherBridge = new MapGenNetherBridge();
     private MapGenBase genNetherCaves = new MapGenCavesHell();
+    private final WorldGenBluishMushrooms mushroomFeature = new WorldGenBluishMushrooms((BlockBluishMushroom) CMContent.BLUISH_MUSHROOM);
     double[] pnr;
     double[] ar;
     double[] br;
@@ -78,7 +75,7 @@ public class ChunkGeneratorDeepCaves implements IChunkGenerator
         this.netherrackExculsivityNoiseGen = ctx.getPerlin3();
         this.scaleNoise = ctx.getScale();
         this.depthNoise = ctx.getDepth();
-        this.genNetherBridge = (MapGenNetherBridge)net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(genNetherBridge, net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_BRIDGE);
+        //this.genNetherBridge = (MapGenNetherBridge)net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(genNetherBridge, net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_BRIDGE);
         this.genNetherCaves = net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(genNetherCaves, net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_CAVE);
     }
 
@@ -258,7 +255,7 @@ public class ChunkGeneratorDeepCaves implements IChunkGenerator
 
         if (this.generateStructures)
         {
-            this.genNetherBridge.generate(this.world, x, z, chunkprimer);
+            //this.genNetherBridge.generate(this.world, x, z, chunkprimer);
         }
 
         Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
@@ -372,7 +369,7 @@ public class ChunkGeneratorDeepCaves implements IChunkGenerator
         BlockPos blockpos = new BlockPos(i, 0, j);
         Biome biome = this.world.getBiome(blockpos.add(16, 0, 16));
         ChunkPos chunkpos = new ChunkPos(x, z);
-        this.genNetherBridge.generateStructure(this.world, this.rand, chunkpos);
+        //this.genNetherBridge.generateStructure(this.world, this.rand, chunkpos);
 
         if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.NETHER_LAVA))
         for (int k = 0; k < 8; ++k)
@@ -404,15 +401,15 @@ public class ChunkGeneratorDeepCaves implements IChunkGenerator
 
         if (net.minecraftforge.event.terraingen.TerrainGen.decorate(this.world, this.rand, chunkpos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.SHROOM))
         {
-        if (this.rand.nextBoolean())
-        {
-            //this.brownMushroomFeature.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
-        }
-
-        if (this.rand.nextBoolean())
-        {
-            //this.redMushroomFeature.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
-        }
+	        if (this.rand.nextBoolean())
+	        {
+	            //this.brownMushroomFeature.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
+	        }
+	
+	        if (this.rand.nextBoolean())
+	        {
+	            this.mushroomFeature.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
+	        }
         }
 
 
@@ -453,34 +450,47 @@ public class ChunkGeneratorDeepCaves implements IChunkGenerator
     {
         if (creatureType == EnumCreatureType.MONSTER)
         {
-            if (this.genNetherBridge.isInsideStructure(pos))
-            {
-                return this.genNetherBridge.getSpawnList();
-            }
-
-            if (this.genNetherBridge.isPositionInStructure(this.world, pos) && this.world.getBlockState(pos.down()).getBlock() == Blocks.NETHER_BRICK)
-            {
-                return this.genNetherBridge.getSpawnList();
-            }
+//            if (this.genNetherBridge.isInsideStructure(pos))
+//            {
+//                return this.genNetherBridge.getSpawnList();
+//            }
+//
+//            if (this.genNetherBridge.isPositionInStructure(this.world, pos) && this.world.getBlockState(pos.down()).getBlock() == Blocks.NETHER_BRICK)
+//            {
+//                return this.genNetherBridge.getSpawnList();
+//            }
         }
 
         Biome biome = this.world.getBiome(pos);
         return biome.getSpawnableList(creatureType);
     }
 
-    @Nullable
-    public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored)
-    {
-        return "Fortress".equals(structureName) && this.genNetherBridge != null ? this.genNetherBridge.getNearestStructurePos(worldIn, position, findUnexplored) : null;
-    }
-
-    public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos)
-    {
-        return "Fortress".equals(structureName) && this.genNetherBridge != null ? this.genNetherBridge.isInsideStructure(pos) : false;
-    }
+//    @Nullable
+//    public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored)
+//    {
+//        return "Fortress".equals(structureName) && this.genNetherBridge != null ? this.genNetherBridge.getNearestStructurePos(worldIn, position, findUnexplored) : null;
+//    }
+//
+//    public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos)
+//    {
+//        return "Fortress".equals(structureName) && this.genNetherBridge != null ? this.genNetherBridge.isInsideStructure(pos) : false;
+//    }
 
     public void recreateStructures(Chunk chunkIn, int x, int z)
     {
-        this.genNetherBridge.generate(this.world, x, z, (ChunkPrimer)null);
+//        this.genNetherBridge.generate(this.world, x, z, (ChunkPrimer)null);
     }
+
+	@Override
+	public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position,
+			boolean findUnexplored) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

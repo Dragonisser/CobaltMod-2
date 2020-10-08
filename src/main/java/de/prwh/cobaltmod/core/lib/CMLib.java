@@ -367,7 +367,7 @@ public class CMLib {
 	 */
 	@SideOnly(Side.CLIENT)
 	public static void registerInventoryItem(Item item, ResourceLocation resourceLocation, int meta) {
-		//CMMain.getLogger().info(item.getTranslationKey() + " " + resourceLocation + " " + meta);
+		//CMMain.getLogger().info(item.getUnlocalizedName() + " " + resourceLocation + " " + meta);
 		
 		ModelResourceLocation model = new ModelResourceLocation(resourceLocation, "inventory");
 		ModelLoader.setCustomModelResourceLocation(item, meta, model);
