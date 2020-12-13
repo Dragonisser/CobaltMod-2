@@ -8,6 +8,7 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -25,6 +26,11 @@ public class BlockBlueTallGrass extends BlockBush {
 		this.setRegistryName("blue_tall_grass");
 		this.setSoundType(SoundType.PLANT);
 		this.setTickRandomly(true);
+	}
+	
+	@Override
+	public CreativeTabs getCreativeTabToDisplayOn() {
+		return null;
 	}
 	
 	public Block.EnumOffsetType getOffsetType()

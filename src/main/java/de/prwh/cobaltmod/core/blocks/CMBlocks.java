@@ -80,6 +80,7 @@ public class CMBlocks {
 		CMContent.HARDENED_CORRUPTED_STONE = addBlock(new BlockHardenedCorruptedStone());
 		CMContent.PORTAL_FRAME_CAVES = addBlock(new BlockPortalFrameCaves());
 		CMContent.PORTAL_CAVES = addBlock(new BlockPortalCaves(), false);
+		CMContent.WATER_THORN = addBlock(new BlockWaterThorn());
 
 		register();
 		setFireInfo();
@@ -189,10 +190,10 @@ public class CMBlocks {
 
 	private static <T extends Block> T addBlock(T block, CreativeTabs tab, boolean addToCreative) {
 		CMLib.registerWithItem(block);
-		// CMMain.getLogger().info(block + " " +
-		// block.getTranslationKey().substring(5));
-		if (addToCreative)
+		if (addToCreative) {
 			block.setCreativeTab(tab);
+		}
+			
 		return block;
 	}
 

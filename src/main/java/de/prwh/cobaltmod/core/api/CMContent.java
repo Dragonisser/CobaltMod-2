@@ -73,7 +73,7 @@ public enum CMContent {
 
 	public static Block GLOW_FLOWER; //
 	public static Block BLUE_VINE; //
-	public static Block WATER_THORN;
+	public static Block WATER_THORN; //
 	public static Block CORRUPTED_STONE; //
 	public static Block COBALT_DIRT; //
 	public static Block COBALT_FARMLAND; //
@@ -151,4 +151,5 @@ public enum CMContent {
 	public static Item BLUE_WOOL;
 	public static Item SPEED_COBALT_BOOTS;
 	public static Item CHEST_KEY;
+	public static Item WATER_THORN_I;
 }

@@ -29,7 +29,7 @@ public class CMItems {
 		CMContent.COBALT_CHESTPLATE = addItem(new ItemArmor(CMContent.COBALT_ARMOR, 1, EntityEquipmentSlot.CHEST).setUnlocalizedName("cobalt_chestplate").setRegistryName("cobalt_chestplate"));
 		CMContent.COBALT_LEGGINGS = addItem(new ItemArmor(CMContent.COBALT_ARMOR, 2, EntityEquipmentSlot.LEGS).setUnlocalizedName("cobalt_leggings").setRegistryName("cobalt_leggings"));
 		CMContent.COBALT_BOOTS = addItem(new ItemArmor(CMContent.COBALT_ARMOR, 3, EntityEquipmentSlot.FEET).setUnlocalizedName("cobalt_boots").setRegistryName("cobalt_boots"));
-//		CMContent.COBEX_BOW =
+		CMContent.COBEX_BOW = addItem(new ItemCobexBow());
 //		CMContent.COBEX_ARROW = 
 		CMContent.RED_CABBAGE_SEEDS = addItem(
 				new ItemRedCabbageSeeds(CMContent.RED_CABBAGE_CROP, CMContent.COBALT_FARMLAND));
@@ -47,6 +47,8 @@ public class CMItems {
 		
 		//CMContent.COBALT_DOOR_I = addItem(new ItemDoor(CMContent.COBALT_DOOR).setUnlocalizedName("cobalt_door").setRegistryName("cobalt_door_i"));
 		//CMContent.COBEX_DOOR_I = addItem(new ItemDoor(CMContent.COBEX_DOOR).setUnlocalizedName("cobex_door").setRegistryName("cobex_door_i"));
+		
+		CMContent.WATER_THORN_I = addItem(new ItemWaterThorn());
 		
 		//Stuff
 		
