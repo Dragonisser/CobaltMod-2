@@ -39,7 +39,7 @@ public enum CMContent {
 	public static Block COBALT_BRICK; //
 	public static Block COBALT_BRICK_STAIR; //
 	public static Block COBALT_STONE; //
-	public static BlockPortal PORTAL_COBALT; //
+	public static BlockPortal PORTAL_COBALDIS; //
 	public static Block COBEX_TORCH; //
 
 	public static Block BLUEBERRY_BUSH; //

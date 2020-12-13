@@ -46,13 +46,20 @@ tile.corruptedstonefurnace_i.name=Korrupter Steinofen
 tile.cobaltchest.name=Cobaltkiste
 tile.lockedcobaltchest.name=Verschlossene Cobaltkiste
 
-
 tile.red_cabbagecrop.name=Rotkohlpflanze
 tile.cobaltbed.name=Cobaltbett
 tile.blue_fire.name=Blaues Feuer
 tile.cobexdoor.name=Cobexholztür
 tile.cobaltdoor.name=Cobalttür
-tile.portal_cobalt.name=Cobaltportal
+tile.portal_cobaldis.name=Cobaldis portal
+tile.portal_frame.name=Portalrahmen
+
+tile.bluish_mushroom_small.name=Bläulicher Pilz
+tile.bluish_mushroom_big.name=Bläulicher Pilz
+tile.cobex_deadbush.name=Toter Busch
+tile.hardened_corrupted_stone.name=Gehärteter korrumpierter Stein
+tile.portal_frame_caves.name=Portalrahmen
+tile.portal_caves.name=Tiefe Höhlen Portal
 
 
 item.fire_shard.name=Feuerscherbe
@@ -104,6 +111,7 @@ item.red_cabbage.name=Rotkohl
 item.red_cabbage_cooked.name=Gekochter Rotkohl
 item.red_cabbage_juice.name=Rotkohlsaft
 item.red_cabbage_seeds.name=Rotkohlsamen
+item.waterthorn.name=Wasserdornen
 item.carthuningot.name=Carthunbarren
 item.crushed_carthunore.name=Zerstoßenes Carthunerz
 item.purified_crushed_carthunore.name=Gereinigtes Zerstoßenes Carthunerz

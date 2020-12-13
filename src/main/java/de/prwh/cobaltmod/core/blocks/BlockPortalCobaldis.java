@@ -41,7 +41,7 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockPortalCobalt extends BlockPortal {
+public class BlockPortalCobaldis extends BlockPortal {
 
 	public static String name;
 	public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.<EnumFacing.Axis>create("axis", EnumFacing.Axis.class, new EnumFacing.Axis[] { EnumFacing.Axis.X, EnumFacing.Axis.Z });
@@ -54,10 +54,10 @@ public class BlockPortalCobalt extends BlockPortal {
 	private static Field lastPortalVec;
 	private static Field teleportDirection;
 
-	public BlockPortalCobalt() {
+	public BlockPortalCobaldis() {
 		super();
 
-		name = "portal_cobalt";
+		name = "portal_cobaldis";
 		this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.X));
 		this.setTickRandomly(true);
 		this.setUnlocalizedName(name);
@@ -99,13 +99,13 @@ public class BlockPortalCobalt extends BlockPortal {
 
 	@Override
 	public boolean trySpawnPortal(World worldIn, BlockPos pos) {
-		BlockPortalCobalt.Size blockportal$size = new BlockPortalCobalt.Size(worldIn, pos, EnumFacing.Axis.X);
+		BlockPortalCobaldis.Size blockportal$size = new BlockPortalCobaldis.Size(worldIn, pos, EnumFacing.Axis.X);
 
 		if (blockportal$size.isValid() && blockportal$size.portalBlockCount == 0) {
 			blockportal$size.placePortalBlocks();
 			return true;
 		} else {
-			BlockPortalCobalt.Size blockportal$size1 = new BlockPortalCobalt.Size(worldIn, pos, EnumFacing.Axis.Z);
+			BlockPortalCobaldis.Size blockportal$size1 = new BlockPortalCobaldis.Size(worldIn, pos, EnumFacing.Axis.Z);
 
 			if (blockportal$size1.isValid() && blockportal$size1.portalBlockCount == 0) {
 				blockportal$size1.placePortalBlocks();
@@ -126,13 +126,13 @@ public class BlockPortalCobalt extends BlockPortal {
 		EnumFacing.Axis enumfacing$axis = (EnumFacing.Axis) state.getValue(AXIS);
 
 		if (enumfacing$axis == EnumFacing.Axis.X) {
-			BlockPortalCobalt.Size blockportal$size = new BlockPortalCobalt.Size(worldIn, pos, EnumFacing.Axis.X);
+			BlockPortalCobaldis.Size blockportal$size = new BlockPortalCobaldis.Size(worldIn, pos, EnumFacing.Axis.X);
 
 			if (!blockportal$size.isValid() || blockportal$size.portalBlockCount < blockportal$size.width * blockportal$size.height) {
 				worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
 			}
 		} else if (enumfacing$axis == EnumFacing.Axis.Z) {
-			BlockPortalCobalt.Size blockportal$size1 = new BlockPortalCobalt.Size(worldIn, pos, EnumFacing.Axis.Z);
+			BlockPortalCobaldis.Size blockportal$size1 = new BlockPortalCobaldis.Size(worldIn, pos, EnumFacing.Axis.Z);
 
 			if (!blockportal$size1.isValid() || blockportal$size1.portalBlockCount < blockportal$size1.width * blockportal$size1.height) {
 				worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
@@ -319,7 +319,7 @@ public class BlockPortalCobalt extends BlockPortal {
 
 	@Nullable
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	/**
@@ -400,12 +400,12 @@ public class BlockPortalCobalt extends BlockPortal {
 
 	public BlockPattern.PatternHelper createPatternHelper(World worldIn, BlockPos p_181089_2_) {
 		EnumFacing.Axis enumfacing$axis = EnumFacing.Axis.Z;
-		BlockPortalCobalt.Size blockportal$size = new BlockPortalCobalt.Size(worldIn, p_181089_2_, EnumFacing.Axis.X);
+		BlockPortalCobaldis.Size blockportal$size = new BlockPortalCobaldis.Size(worldIn, p_181089_2_, EnumFacing.Axis.X);
 		LoadingCache<BlockPos, BlockWorldState> loadingcache = BlockPattern.createLoadingCache(worldIn, true);
 
 		if (!blockportal$size.isValid()) {
 			enumfacing$axis = EnumFacing.Axis.X;
-			blockportal$size = new BlockPortalCobalt.Size(worldIn, p_181089_2_, EnumFacing.Axis.Z);
+			blockportal$size = new BlockPortalCobaldis.Size(worldIn, p_181089_2_, EnumFacing.Axis.Z);
 		}
 
 		if (!blockportal$size.isValid()) {
@@ -524,7 +524,7 @@ public class BlockPortalCobalt extends BlockPortal {
 						break label24;
 					}
 
-					if (block == CMContent.PORTAL_COBALT) {
+					if (block == CMContent.PORTAL_COBALDIS) {
 						++this.portalBlockCount;
 					}
 
@@ -563,7 +563,7 @@ public class BlockPortalCobalt extends BlockPortal {
 
 		@SuppressWarnings("deprecation")
 		protected boolean isEmptyBlock(Block blockIn) {
-			return blockIn.getMaterial(null) == Material.AIR || blockIn == CMContent.BLUE_FIRE || blockIn == CMContent.PORTAL_COBALT;
+			return blockIn.getMaterial(null) == Material.AIR || blockIn == CMContent.BLUE_FIRE || blockIn == CMContent.PORTAL_COBALDIS;
 		}
 
 		public boolean isValid() {
@@ -575,7 +575,7 @@ public class BlockPortalCobalt extends BlockPortal {
 				BlockPos blockpos = this.bottomLeft.offset(this.rightDir, i);
 
 				for (int j = 0; j < this.height; ++j) {
-					this.world.setBlockState(blockpos.up(j), CMContent.PORTAL_COBALT.getDefaultState().withProperty(BlockPortalCobalt.AXIS, this.axis), 2);
+					this.world.setBlockState(blockpos.up(j), CMContent.PORTAL_COBALDIS.getDefaultState().withProperty(BlockPortalCobaldis.AXIS, this.axis), 2);
 				}
 			}
 		}

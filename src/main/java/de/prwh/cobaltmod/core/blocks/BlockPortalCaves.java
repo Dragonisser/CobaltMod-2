@@ -319,7 +319,7 @@ public class BlockPortalCaves extends BlockPortal {
 
 	@Nullable
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	/**

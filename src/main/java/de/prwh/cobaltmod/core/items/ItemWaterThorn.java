@@ -24,7 +24,7 @@ public class ItemWaterThorn extends Item
 {
     public ItemWaterThorn()
     {
-		this.setUnlocalizedName("waterthorn_i");
+		this.setUnlocalizedName("waterthorn");
 		this.setRegistryName("waterthorn_i");
     }
 

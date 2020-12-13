@@ -5,7 +5,6 @@ tile.cobex_log.name=Cobex Wood
 tile.cobex_wood.name=Cobex Wood Planks
 tile.cobex_leaves.name=Cobex Leaves
 tile.cobex_sapling.name=Cobex Sapling
-tile.portal_frame.name=Portal Frame
 tile.cobex_workbench.name=Cobex Wood Workbench
 tile.clean_stone.name=Stone
 tile.half_slab_cobalt.name=Cobalt Brick Slab
@@ -46,13 +45,20 @@ tile.corruptedstonefurnace_i.name=Corrupted Stone Furnace
 tile.cobaltchest.name=Cobalt Chest
 tile.lockedcobaltchest.name=Locked Cobalt Chest
 
-
 tile.red_cabbage_crop.name=Red Cabbage Crop
 tile.cobaltbed.name=Cobalt Bed
 tile.blue_fire.name=Blue Fire
 tile.cobexdoor.name=Cobex Wood Door
 tile.cobaltdoor.name=Cobalt Door
-tile.portal_cobalt.name=Cobalt Portal
+tile.portal_frame.name=Portal Frame
+tile.portal_cobaldis.name=Cobaldis Portal
+
+tile.bluish_mushroom_small.name=Bluish Mushroom
+tile.bluish_mushroom_big.name=Bluish Mushroom
+tile.cobex_deadbush.name=Dead Bush
+tile.hardened_corrupted_stone.name=Hardened Corrupted Stone
+tile.portal_frame_caves.name=Portal Frame
+tile.portal_caves.name=Deep Caves Portal
 
 
 item.fire_shard.name=Fire Shard
@@ -104,6 +110,7 @@ item.red_cabbage.name=Red Cabbage
 item.red_cabbage_cooked.name=Cooked Red Cabbage
 item.red_cabbage_juice.name=Red Cabbage Juice
 item.red_cabbage_seeds.name=Red Cabbage Seeds
+item.waterthorn.name=Water Thorn
 item.carthuningot.name=Carthun Ingot
 item.crushed_carthunore.name=Crushed Carthun ore
 item.purified_crushed_carthunore.name=Purified Crushed Carthun Ore

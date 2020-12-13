@@ -3,7 +3,7 @@ package de.prwh.cobaltmod.world.dim.cobaldis;
 import java.util.Random;
 
 import de.prwh.cobaltmod.core.api.CMContent;
-import de.prwh.cobaltmod.core.blocks.BlockPortalCobalt;
+import de.prwh.cobaltmod.core.blocks.BlockPortalCobaldis;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
@@ -86,8 +86,8 @@ public class CMTeleporterCobaldis extends Teleporter {
 					for (BlockPos blockpos1 = blockpos3.add(i1, this.worldServerInstance.getActualHeight() - 1 - blockpos3.getY(), j1); blockpos1.getY() >= 0; blockpos1 = blockpos2) {
 						blockpos2 = blockpos1.down();
 
-						if (this.worldServerInstance.getBlockState(blockpos1).getBlock() == CMContent.PORTAL_COBALT) {
-							for (blockpos2 = blockpos1.down(); this.worldServerInstance.getBlockState(blockpos2).getBlock() == CMContent.PORTAL_COBALT; blockpos2 = blockpos2.down()) {
+						if (this.worldServerInstance.getBlockState(blockpos1).getBlock() == CMContent.PORTAL_COBALDIS) {
+							for (blockpos2 = blockpos1.down(); this.worldServerInstance.getBlockState(blockpos2).getBlock() == CMContent.PORTAL_COBALDIS; blockpos2 = blockpos2.down()) {
 								blockpos1 = blockpos2;
 							}
 
@@ -110,7 +110,7 @@ public class CMTeleporterCobaldis extends Teleporter {
 
 			double d5 = (double) blockpos.getX() + 0.5D;
 			double d7 = (double) blockpos.getZ() + 0.5D;
-			BlockPattern.PatternHelper blockpattern$patternhelper = CMContent.PORTAL_COBALT.createPatternHelper(this.worldServerInstance, blockpos);
+			BlockPattern.PatternHelper blockpattern$patternhelper = CMContent.PORTAL_COBALDIS.createPatternHelper(this.worldServerInstance, blockpos);
 			boolean flag1 = blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE;
 			double d2 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? (double) blockpattern$patternhelper.getFrontTopLeft().getZ()
 					: (double) blockpattern$patternhelper.getFrontTopLeft().getX();
@@ -310,7 +310,7 @@ public class CMTeleporterCobaldis extends Teleporter {
 			}
 		}
 
-		IBlockState iblockstate = CMContent.PORTAL_COBALT.getDefaultState().withProperty(BlockPortalCobalt.AXIS, l6 == 0 ? EnumFacing.Axis.Z : EnumFacing.Axis.X);
+		IBlockState iblockstate = CMContent.PORTAL_COBALDIS.getDefaultState().withProperty(BlockPortalCobaldis.AXIS, l6 == 0 ? EnumFacing.Axis.Z : EnumFacing.Axis.X);
 
 		for (int i8 = 0; i8 < 4; ++i8) {
 			for (int l8 = 0; l8 < 4; ++l8) {

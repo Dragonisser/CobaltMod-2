@@ -60,7 +60,7 @@ public class CMBlocks {
 		CMContent.GLOW_FLOWER = addBlock(new BlockGlowFlower());
 		CMContent.COBEX_TORCH = addBlock(new BlockCobexTorch());
 
-		CMContent.PORTAL_COBALT = addBlock(new BlockPortalCobalt(), false);
+		CMContent.PORTAL_COBALDIS = addBlock(new BlockPortalCobaldis(), false);
 		CMContent.PORTAL_FRAME = addBlock(new BlockPortalFrame());
 		CMContent.BLUE_FIRE = addBlock(new BlockBlueFire(), false);
 
