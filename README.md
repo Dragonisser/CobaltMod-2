@@ -2,7 +2,7 @@
 
 ### Info
 
-This is yet another rewrite of this mod. Instead of using MinecraftForge it's going to rely on Quilt
+The rewrite of the original mod made with MinecraftForge
 
 
 ### Description
